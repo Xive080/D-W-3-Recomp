@@ -1,6 +1,10 @@
 # Project Architecture & Reverse-Engineering Status
 ### Documentación Técnica e Informe de Estado (Bilingüe / Bilingual)
 
+> **Nota / Note:**
+> **ES:** El juego es jugable, pero habrá actualizaciones hasta terminar la lista.
+> **EN:** The game is playable, but updates will continue until the list is completed.
+
 ---
 
 ## 🛠️ 1. Platform Infrastructure / Infraestructura de Plataforma
