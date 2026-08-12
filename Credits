@@ -1,0 +1,55 @@
+# Créditos / Credits
+
+> **ES:** Port nativo de PC de Digimon World 2003. Este fichero se lee desde el
+> propio lanzador, así que para añadir a alguien basta con editarlo aquí.
+> **EN:** Native PC port of Digimon World 2003. The launcher reads this file, so
+> adding someone only takes an edit here.
+
+---
+
+## Port nativo de PC / Native PC port
+
+- **X** — dirección del proyecto, ingeniería inversa y desarrollo
+
+---
+
+## Juego original / Original game
+
+**Digimon World 2003** (2002)
+
+- **Bandai** — publicación / publisher
+- **BEC** — desarrollo / development
+- **Akiyoshi Hongo**, **Toei Animation** — Digimon
+
+Todos los derechos del juego original y de sus personajes pertenecen a sus
+dueños. Este port no distribuye ningún dato del juego: cada jugador los extrae
+de su propio disco.
+
+*All rights to the original game and its characters belong to their owners. This
+port distributes no game data: each player extracts it from their own disc.*
+
+---
+
+## Se apoya en / Built on
+
+- **psxrecomp** — recompilador estático de PlayStation
+  (github.com/mstan/psxrecomp)
+- **ddw3** — decompilación de referencia de Digimon World 3, de markisha64.
+  Usada como pista y como oráculo, nunca como fuente
+- **SDL2** — ventana, sonido, mando y descargas
+- **Dear ImGui** — interfaz
+- **stb_image** — lectura de imágenes
+- **tinyfiledialogs** — selector de ficheros del sistema
+
+---
+
+## Gracias a / Thanks to
+
+<!-- Añade aquí a quien haya ayudado, una línea por persona:
+     - **Nombre** — en qué ayudó                                              -->
+
+---
+
+## El proyecto / The project
+
+github.com/Xive080/D-W-3-Recomp
