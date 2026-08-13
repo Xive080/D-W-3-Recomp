@@ -8,5 +8,5 @@ Native PC port · Port nativo de PC. All versions released 13 August 2026 · Tod
 | **1.0.4** | **Re-release of 1.0.3.** Version number bumped and republished. Nothing in the game changed. | **Republicación de la 1.0.3.** Se subió el número de versión y se volvió a publicar. E[...]
 | **1.0.3** | **Fixed: changing the language did nothing.**<br>• The game read the 39 KB language *table* instead of the three-line file holding the player's actual choice, so not a single text file[...]
 | **1.0.2** | **Fixed: a fresh install ran at 37 fps instead of 59.**<br>• The engine resolved its config paths against the config file's own folder instead of the installation root, so it could not[...]
-| **1.0.1** | **The Brazilian Portuguese translation is complete.**<br>• 10,046 bytes of translation were being cut off: the Portuguese texts were being served through the Spanish slot, so wherever Spanis[...]
+| **1.0.1** | **The Brazilian Portuguese translation is complete.**<br>• 10,046 bytes of translation were being cut off: the Portuguese texts were served through the Spanish slot, so wherever Spanis[...]
 | **1.0.0** | **First public release.** A native PC port: the MIPS processor is statically recompiled into the executable, not emulated. The GPU, SPU, CD drive, DMA and timers are still emulated; the [...]
