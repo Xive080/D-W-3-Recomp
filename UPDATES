@@ -2,6 +2,12 @@
 
 Native PC port · Port nativo de PC. All versions released 13 August 2026 · Todas las versiones salieron el 13 de agosto de 2026.
 
+## 1.0.5 - 13/08/2026
+
+Esta linea es la que lee el lanzador para saber que hay version nueva: busca el
+primer titulo de dos almohadillas que empiece por un numero. Al publicar una
+version, se cambia el numero de aqui y se anade su fila a la tabla.
+
 | Version | English | Español |
 |:--|:--|:--|
 | **1.0.5** | **The settings menu now actually saves.**<br>• Anything changed in Settings — resolution, renderer, filter, load speed — looked like it worked and then reverted on the next launch.[...]
