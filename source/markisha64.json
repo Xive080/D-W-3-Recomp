@@ -1,0 +1,653 @@
+{
+  "formato": 2,
+  "nombre": "markisha64",
+  "autor": "markisha64",
+  "descripcion": "Patches for Digimon World 2003, straight from their authors' repositories (MIT)",
+  "mods": [
+    {
+      "id": "FastText",
+      "nombre": "Fast Text",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/Dmw2003FastText",
+      "descripcion": "Built-in X turbo for textboxes",
+      "tipo": "juego",
+      "categoria": "ui",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/Dmw2003FastText/4326be74675549464e314e359083f596fb604a16/patcher.json",
+          "sha256": "ab3bf0488987105ee7a8d879cb3950690675b04e45267869675b4a283e45a725",
+          "bytes": 214
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/Dmw2003FastText/4326be74675549464e314e359083f596fb604a16/README.md",
+          "sha256": "98e488da156fa7122275ffd0744cb6bcbb56d244c306091493d0ae26bfdd2602",
+          "bytes": 319
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/Dmw2003FastText/4326be74675549464e314e359083f596fb604a16/LICENSE.md",
+          "sha256": "d9b7b059053d42fe27485b6db0b09ea9fa9fb71e4cb8ad99a0d7dfa27bf773b4",
+          "bytes": 1059
+        }
+      ]
+    },
+    {
+      "id": "NTSC",
+      "nombre": "NTSC",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw2003NTSC",
+      "descripcion": "Runs the PAL version at 60 fps",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003NTSC/66b1e8717aff067a9754c9841689a010e0f24715/patcher.json",
+          "sha256": "836e2ea2f60558a3b6b3ef850b5a8965f5497e2e7a070de3263ad17ef8d57654",
+          "bytes": 109
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003NTSC/66b1e8717aff067a9754c9841689a010e0f24715/README.md",
+          "sha256": "1ce44aeb228b2d6a98568edfe712e4b69c638c02081e2e3a87f6cb23bdc19290",
+          "bytes": 1263
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003NTSC/66b1e8717aff067a9754c9841689a010e0f24715/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FixedFields",
+      "nombre": "Fixed Fields",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw2003fixed_fields",
+      "descripcion": "Fixes all field moves using Thunder Field",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003fixed_fields/32fd05572ca524c5065adcffe37483e3026b9365/patcher.json",
+          "sha256": "17934e587cf0f90e1887a2865380ea3ad6f903cfda8f16b10cf7d213c778b4a1",
+          "bytes": 114
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003fixed_fields/32fd05572ca524c5065adcffe37483e3026b9365/README.md",
+          "sha256": "be4d31a8b27b553af532d487b0326eb38c63c69327a8e62c4ed7dad66d6ea628",
+          "bytes": 463
+        },
+        {
+          "ruta": "LICENSE",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003fixed_fields/32fd05572ca524c5065adcffe37483e3026b9365/LICENSE",
+          "sha256": "c44f757c73009bb39d710ce065d4eca9b887e31f8d8edd18dc89ec87ddc1e713",
+          "bytes": 1070
+        }
+      ]
+    },
+    {
+      "id": "ImprovedHPProxy",
+      "nombre": "Improved HP Proxy",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw2003improved_hp_proxy",
+      "descripcion": "HP Proxy cuts damage by 10 or 20 percent, not a flat amount",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003improved_hp_proxy/7f3752fd951f9305d509fa853e4eb1f1d2661192/patcher.json",
+          "sha256": "0256355ed03d103dbd71f771c7afd9d7ce5490bfb463345395b679dc6f0e1c22",
+          "bytes": 282
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003improved_hp_proxy/7f3752fd951f9305d509fa853e4eb1f1d2661192/README.md",
+          "sha256": "657e57cfd923baf4fd0ecf038fcef8a073bd55056b88a409222d587f9cbf1845",
+          "bytes": 570
+        },
+        {
+          "ruta": "LICENSE",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003improved_hp_proxy/7f3752fd951f9305d509fa853e4eb1f1d2661192/LICENSE",
+          "sha256": "c44f757c73009bb39d710ce065d4eca9b887e31f8d8edd18dc89ec87ddc1e713",
+          "bytes": 1070
+        }
+      ]
+    },
+    {
+      "id": "UncappedDigivolutionExp",
+      "nombre": "Uncapped Digivolution EXP",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw2003uncapped_dv_exp",
+      "descripcion": "Removes the cap on digivolution experience",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003uncapped_dv_exp/1f4b6ddf7fe9e75fcf59627ce8fd74907a06ee4a/patcher.json",
+          "sha256": "862f12cc324d0bcb26a53232369076e8d4c1eb271e8ade46583e36360ae2c069",
+          "bytes": 118
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003uncapped_dv_exp/1f4b6ddf7fe9e75fcf59627ce8fd74907a06ee4a/README.md",
+          "sha256": "f5867155f2a9141043a72954744d275d233732f4ffd76c669e839884b2020927",
+          "bytes": 337
+        },
+        {
+          "ruta": "LICENSE",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw2003uncapped_dv_exp/1f4b6ddf7fe9e75fcf59627ce8fd74907a06ee4a/LICENSE",
+          "sha256": "b128b324248e82fc1b3e37ea38ab5469854ddeba26d82a85b93878f4fa6a7de4",
+          "bytes": 1070
+        }
+      ]
+    },
+    {
+      "id": "APSepikMask",
+      "nombre": "AP Sepik Mask",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_ap_sepik_mask",
+      "descripcion": "Finishes the Sepik Mask quest by just talking to Gatomon (for Archipelago)",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patch.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_ap_sepik_mask/60c11b565ac638642fe2a6eaafa89f54e75159b0/patch.json",
+          "sha256": "34a4f83864121a4d9fcf5ae63af5eae44a9018b792c674eacb318217756eeda6",
+          "bytes": 123
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_ap_sepik_mask/60c11b565ac638642fe2a6eaafa89f54e75159b0/README.md",
+          "sha256": "0dabf378824ff9f3ac12eec454612b595c37514acf06c91ede7198d4893c5e9c",
+          "bytes": 796
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_ap_sepik_mask/60c11b565ac638642fe2a6eaafa89f54e75159b0/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "CardBattleDisable",
+      "nombre": "Card Battle Disable",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_card_battle_disable",
+      "descripcion": "Disables card battles",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_card_battle_disable/cef1f0fea860b949e0a4a6232121e4b50d5e1a57/patcher.json",
+          "sha256": "c0e79dc98c312675e067bf9c3198447abc2c1911e20a055ddcfb0bb6a291e77a",
+          "bytes": 117
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_card_battle_disable/cef1f0fea860b949e0a4a6232121e4b50d5e1a57/README.md",
+          "sha256": "fe50753dd02c4b8623f7be380a7e99bcf5aa58ee2c2c5797892f2da577e16baf",
+          "bytes": 419
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_card_battle_disable/cef1f0fea860b949e0a4a6232121e4b50d5e1a57/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "DisableScriptItems",
+      "nombre": "Disable Script Items",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_disable_script_items",
+      "descripcion": "Disables script item and BITS pickups",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_disable_script_items/aeb685b63da6f27d0df8c13edfa58d58a82b7b79/patcher.json",
+          "sha256": "afc3c49810285a77229775d991e1eb1f9383c02f8561e12aee041e68eb5fb2b9",
+          "bytes": 117
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_disable_script_items/aeb685b63da6f27d0df8c13edfa58d58a82b7b79/README.md",
+          "sha256": "d7fb0c2763cb8acdeb2b7dfe1772be8f7164036f1347a43d6166f63833f782db",
+          "bytes": 323
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_disable_script_items/aeb685b63da6f27d0df8c13edfa58d58a82b7b79/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "DRIUnlock",
+      "nombre": "DRI Unlock",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_dri_unlock",
+      "descripcion": "DRI unlock",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patch.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_dri_unlock/edd34faf8cc76b859b9371c777c1879256c48c16/patch.json",
+          "sha256": "ba4f8db27dc389d0f8b976c7d5d16ac11ad660f95909dd487c7dc734651d16a0",
+          "bytes": 11021
+        },
+        {
+          "ruta": "objects.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_dri_unlock/edd34faf8cc76b859b9371c777c1879256c48c16/objects.json",
+          "sha256": "8117e3a771ae7c408b73e7e1d94d68f28753aff317b4d2435c5dd58aeebd393c",
+          "bytes": 10786041
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_dri_unlock/edd34faf8cc76b859b9371c777c1879256c48c16/README.md",
+          "sha256": "843fd9b27f8fcf035c927890f251628cc34114b572cc5ddd20ecf94f9656a3f4",
+          "bytes": 289
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_dri_unlock/edd34faf8cc76b859b9371c777c1879256c48c16/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FastAdminCenter",
+      "nombre": "Fast Admin Center",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_fast_admin_center",
+      "descripcion": "Skips the Staff Pass quest",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_admin_center/c616fdca4b54bcebf79b38e4617019869f2222dc/patcher.json",
+          "sha256": "bf72f38744275a7163d7187d876208a4973310e942c0f722e5a49e750b356f9f",
+          "bytes": 219
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_admin_center/c616fdca4b54bcebf79b38e4617019869f2222dc/README.md",
+          "sha256": "a643dbd4b98c75d649f3845c7e2a9ad4a7c36a457c55f2a45f6da7aa992210d1",
+          "bytes": 296
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_admin_center/c616fdca4b54bcebf79b38e4617019869f2222dc/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FastBaronmon",
+      "nombre": "Fast Baronmon",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_fast_baronmon",
+      "descripcion": "Skips the trip to Pheonix Bay for the TNT Chip",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_baronmon/1e404fad2b98f25e7b18a96fe11183ea39d6c4c2/patcher.json",
+          "sha256": "0dbdf431d1abdbe4797d4bb3aa45ac29da1e6ec7f3c0cc5bc259e7ebbd78cfcb",
+          "bytes": 150
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_baronmon/1e404fad2b98f25e7b18a96fe11183ea39d6c4c2/README.md",
+          "sha256": "45e8a603adee6e2ab9b9f275ca10c256b4398b36d0c4bb0b608f574114f70fd5",
+          "bytes": 292
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_baronmon/1e404fad2b98f25e7b18a96fe11183ea39d6c4c2/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FastSepikmon",
+      "nombre": "Fast Sepikmon",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_fast_sepikmon",
+      "descripcion": "Skips the Sepikmon quest in Jungle Grave",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_sepikmon/36a6913ede7a9005845fe33ad9b0533dd9dd37a1/patcher.json",
+          "sha256": "d2ee477ef9d457337539dd860feb251586d07331fc690fbad1da8a3db6124be3",
+          "bytes": 114
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_sepikmon/36a6913ede7a9005845fe33ad9b0533dd9dd37a1/README.md",
+          "sha256": "8a3085b6c1f815b2ae969775265dfe00d5682ec1161fbc20c473c90a1b2680a3",
+          "bytes": 461
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_sepikmon/36a6913ede7a9005845fe33ad9b0533dd9dd37a1/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FastStart",
+      "nombre": "Fast Start",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_fast_start",
+      "descripcion": "Skips intro and startup sequences",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_start/03650928ba42c91b9bb9f1288c60b2e27d903868/patcher.json",
+          "sha256": "0b15f073b4fe57a1778d12cb6e90f9e291835ef451e9f178e78da334db6ad9ca",
+          "bytes": 300
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_start/03650928ba42c91b9bb9f1288c60b2e27d903868/README.md",
+          "sha256": "088de904a5ede99b3052ca89c4a09e6ea74225858171c852e9a682b4e6ac75a3",
+          "bytes": 322
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fast_start/03650928ba42c91b9bb9f1288c60b2e27d903868/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FishingKickingDisable",
+      "nombre": "Fishing Kicking Disable",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_fishing_kicking_disable",
+      "descripcion": "Disables fishing and kicking",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fishing_kicking_disable/30c0de5bc74b9a2afe15d1e53737c5fec067b281/patcher.json",
+          "sha256": "e97b098ec8ce731e002867e8dbaf46c5105fea6079e9fe42abb493fddb5b9d49",
+          "bytes": 126
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fishing_kicking_disable/30c0de5bc74b9a2afe15d1e53737c5fec067b281/README.md",
+          "sha256": "fbd4447c8a6c2898826337faef45844e97eb44d0c27783ec3d2408a21f1176f0",
+          "bytes": 335
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_fishing_kicking_disable/30c0de5bc74b9a2afe15d1e53737c5fec067b281/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FolderBagCutsceneSkip",
+      "nombre": "Folder Bag Cutscene Skip",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_folder_bag_cutscene_skip",
+      "descripcion": "Skips the folder bag cutscene",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_folder_bag_cutscene_skip/779d5332e2b55a976d3315de69caa3cf86bbfe44/patcher.json",
+          "sha256": "38fda14714259df0c4fadcecf831b57e3bc0d36ad1fbdeaa7dff37651e82c3cc",
+          "bytes": 114
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_folder_bag_cutscene_skip/779d5332e2b55a976d3315de69caa3cf86bbfe44/README.md",
+          "sha256": "95182c5048d22ee7481da90873c0a9473e5487d972203e0ed69526d06d695110",
+          "bytes": 358
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_folder_bag_cutscene_skip/779d5332e2b55a976d3315de69caa3cf86bbfe44/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "ForcedEncountersDisable",
+      "nombre": "Forced Encounters Disable",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_forced_encounters_disable",
+      "descripcion": "Disables forced encounters",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_forced_encounters_disable/602276c85feef77f7cce4982676cbbbd05d07df1/patcher.json",
+          "sha256": "88f5a4ed50a91ab72b732eacba4226748cc379ce104584cbc09adbf60af72923",
+          "bytes": 118
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_forced_encounters_disable/602276c85feef77f7cce4982676cbbbd05d07df1/README.md",
+          "sha256": "27183d5b5f12d8fe6df390b6d5293743f93284cdc6f60a02358f83f37011946d",
+          "bytes": 363
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_forced_encounters_disable/602276c85feef77f7cce4982676cbbbd05d07df1/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "NoCounterCrest",
+      "nombre": "No Counter Crest",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_no_cc",
+      "descripcion": "Removes Tuskmon's Counter Crest drop",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_no_cc/38c086cfe586b67c743137c521fa64020cae7069/patcher.json",
+          "sha256": "71427a041fd0b6046d4de075a0f11da4b475432859813a75c70a5e3b1b13c50b",
+          "bytes": 114
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_no_cc/38c086cfe586b67c743137c521fa64020cae7069/README.md",
+          "sha256": "67ca4aa3d93cfddf29d3ee96fc496f01551778ee1a83cf9e1e634914155e9888",
+          "bytes": 319
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_no_cc/38c086cfe586b67c743137c521fa64020cae7069/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "NoRunningAway",
+      "nombre": "No Running Away",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_no_running_away",
+      "descripcion": "Escaping from battle always fails",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_no_running_away/6b564d083a6d4c28b75b646926b4c5b009985c8a/patcher.json",
+          "sha256": "456514c75474f217f0808ffc47e81d6fb2c55c146feada2f7e47a72c762313a2",
+          "bytes": 122
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_no_running_away/6b564d083a6d4c28b75b646926b4c5b009985c8a/README.md",
+          "sha256": "ae2132204181c9ba95b955953c7288f0e889df48984731952f5a48469cefe6d4",
+          "bytes": 491
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_no_running_away/6b564d083a6d4c28b75b646926b4c5b009985c8a/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "PostGameUnlock",
+      "nombre": "Post Game Unlock",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_post_game_unlock",
+      "descripcion": "Unlocks post game fights without legendary weapons",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_post_game_unlock/12a707938ec86d58410e4dc04dc0f879d0cedcbe/patcher.json",
+          "sha256": "579f5e42b746bbec380b6ca20c270e2665efdf9893725f76c1f520d4c4f9061d",
+          "bytes": 113
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_post_game_unlock/12a707938ec86d58410e4dc04dc0f879d0cedcbe/README.md",
+          "sha256": "66522bb06787f312b0009b1e28f35e6b45554cbd36bf298e1ace929ecb397bc4",
+          "bytes": 394
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_post_game_unlock/12a707938ec86d58410e4dc04dc0f879d0cedcbe/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "RandomEncountersDisable",
+      "nombre": "Random Encounters Disable",
+      "version": "1.0",
+      "autor": "markisha64",
+      "enlace": "https://github.com/markisha64/dmw_2003_random_encounters_disable",
+      "descripcion": "Disables random encounters",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_random_encounters_disable/a1beef62704bb3ed55e381abd81936873614c818/patcher.json",
+          "sha256": "a3fdbd6150e7379b3eccc687fed83439857e48923b8c9a453ef9244ad7985c76",
+          "bytes": 105
+        },
+        {
+          "ruta": "README.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_random_encounters_disable/a1beef62704bb3ed55e381abd81936873614c818/README.md",
+          "sha256": "b26b1affdfb5faed1ea230e6b1ba980cd43f9c00b933a551c9d7206ca834a6e2",
+          "bytes": 336
+        },
+        {
+          "ruta": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_random_encounters_disable/a1beef62704bb3ed55e381abd81936873614c818/LICENSE.md",
+          "sha256": "878865a2cd51cc8b03736f6f7d0755472e2f336d43b6887a09e3b5e2024e514c",
+          "bytes": 1066
+        }
+      ]
+    },
+    {
+      "id": "FastTravel",
+      "nombre": "Fast Travel",
+      "version": "1.0",
+      "autor": "Flawe",
+      "enlace": "https://github.com/markisha64/dmw_2003_patcher/tree/main/patches/fast_travel",
+      "descripcion": "Adds fast travel",
+      "tipo": "juego",
+      "categoria": "funciones",
+      "juego": "DMW3",
+      "ficheros": [
+        {
+          "ruta": "patcher.json",
+          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_patcher/main/patches/fast_travel/patcher.json",
+          "sha256": "79c8c652e297afa191581037103b0c737e4992772004f2ce5f9d5f60c07b70f5",
+          "bytes": 5298
+        }
+      ]
+    }
+  ]
+}
