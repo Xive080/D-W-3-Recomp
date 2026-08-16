@@ -1,22 +1,22 @@
 {
-  "formato": 2,
-  "nombre": "Flawe",
-  "autor": "markisha64",
-  "descripcion": "Patches for Digimon World 2003, straight from their authors' repositories (MIT)",
+  "format": 2,
+  "name": "Flawe",
+  "author": "markisha64",
+  "description": "Patches for Digimon World 2003, straight from their authors' repositories (MIT)",
   "mods": [
     {
       "id": "FastTravel",
-      "nombre": "Fast Travel",
+      "name": "Fast Travel",
       "version": "1.0",
-      "autor": "Flawe",
-      "enlace": "https://github.com/markisha64/dmw_2003_patcher/tree/main/patches/fast_travel",
-      "descripcion": "Adds fast travel",
-      "tipo": "juego",
-      "categoria": "funciones",
-      "juego": "DMW3",
-      "ficheros": [
+      "author": "Flawe",
+      "link": "https://github.com/markisha64/dmw_2003_patcher/tree/main/patches/fast_travel",
+      "description": "Adds fast travel",
+      "type": "game",
+      "category": "gameplay",
+      "game": "DMW3",
+      "files": [
         {
-          "ruta": "patcher.json",
+          "path": "patcher.json",
           "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_patcher/main/patches/fast_travel/patcher.json",
           "sha256": "79c8c652e297afa191581037103b0c737e4992772004f2ce5f9d5f60c07b70f5",
           "bytes": 5298

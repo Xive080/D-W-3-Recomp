@@ -1,28 +1,28 @@
 {
-  "formato": 2,
-  "nombre": "Xive080",
-  "autor": "Xive080",
-  "descripcion": "Mods de Xive080 para el port nativo de PC",
+  "format": 2,
+  "name": "Xive080",
+  "author": "Xive080",
+  "description": "Xive080's mods for the native PC port",
   "mods": [
     {
       "id": "TimeStrangerUI",
-      "nombre": "Time Stranger UI",
+      "name": "Time Stranger UI",
       "version": "1.1",
-      "autor": "Xive",
-      "enlace": "",
-      "descripcion": "UI Time Stranger 8-Bits",
-      "tipo": "juego",
-      "categoria": "ui",
-      "juego": "DMW3",
-      "ficheros": [
+      "author": "Xive",
+      "link": "",
+      "description": "UI Time Stranger 8-Bits",
+      "type": "game",
+      "category": "ui",
+      "game": "DMW3",
+      "files": [
         {
-          "ruta": "foto.png",
+          "path": "foto.png",
           "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/TimeStrangerUI/foto.png",
           "sha256": "fe989cacb001e99f8e86e3b237c16e605c66b8613dfd0992aa36045613c907af",
           "bytes": 461383
         },
         {
-          "ruta": "mod.ini",
+          "path": "mod.ini",
           "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/TimeStrangerUI/mod.ini",
           "sha256": "6f0d176578f2eb38dafa45e03d769fe18a03ed1af4ff3b1ceba04eb9b8915f13",
           "bytes": 408
