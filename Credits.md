@@ -45,6 +45,7 @@ port distributes no game data: each player extracts it from their own disc.*
 
 ## Gracias a / Thanks to
 
+     - **@flawe** — Fast travel Patch  
      - **@markisha64** — dmw3-randomizer y DW3_patches                       
      - **JulioGawl** — Digimon World 2003 EXP Changer (DigiLab) y traducción PT               
      - **shaunofthedead** — Análisis de la UI de Batalla / UI Battle research           
