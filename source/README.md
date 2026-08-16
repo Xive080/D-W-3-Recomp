@@ -4,10 +4,17 @@ Paste one of these addresses into the launcher — **MODS → SOURCES → + ADD
 SOURCE FROM CLIPBOARD** — and its mods show up with a DOWNLOAD button, and an
 UPDATE button whenever a newer version is published.
 
-| Source | Address |
-|---|---|
-| Xive080 — this port's own mods | `https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080.json` |
-| markisha64's patches | `https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64.json` |
+**One source per author.** Whose a mod is and where its file happens to sit are
+two different questions, and only the first one belongs in a source's name.
+
+| Source | Whose | Address |
+|---|---|---|
+| Xive080 | Xive080 | `…/source/xive080.json` |
+| markisha64 | markisha64 — 20 patches | `…/source/markisha64.json` |
+| Flawe | Flawe — Fast Travel | `…/source/flawe.json` |
+
+Full addresses start with
+`https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/`.
 
 ---
 
@@ -57,11 +64,24 @@ work inside our folder would be worse than leaving it out.
 
 ---
 
+## flawe.json
+
+**Fast Travel**, by **Flawe**. One patch.
+
+Its file lives inside markisha64's patcher repository — it is a plain folder
+there rather than a submodule — so that is where the source points. That is a
+fact about where the file sits, not about whose patch it is, which is why it
+gets its own source instead of riding along in markisha64's.
+
+---
+
 ## markisha64.json
 
-A mirror of the 21 patches from [markisha64/dmw_2003_patcher][p] (MIT). It
-**re-hosts nothing** — every file is fetched from markisha64's own repositories,
-pinned to an exact commit. This file is only the index.
+A mirror of the 20 patches from [markisha64/dmw_2003_patcher][p] that are
+**his** (MIT). Fast Travel is listed separately above, as Flawe's.
+
+It **re-hosts nothing** — every file is fetched from markisha64's own
+repositories, pinned to an exact commit. This file is only the index.
 
 [p]: https://github.com/markisha64/dmw_2003_patcher
 
