@@ -13,16 +13,18 @@ UPDATE button whenever a newer version is published.
 
 ## xive080.json
 
-The mods that belong to this port. Unlike the mirror below, these files **are**
+The mods shipped with this port. Unlike the mirror below, these files **are**
 hosted here, under `source/xive080/`.
 
-| Mod | What it is | Whose idea |
-|---|---|---|
-| **DigiLab** | A launcher tab for editing the EXP, digivolution EXP and BITS every enemy drops | [JulioGawl][jg] |
-| **DigiRandom** | A launcher tab that randomizes the game — encounters, shops, digivolutions, starting party, scaling | port of [markisha64's randomizer][rz] (MIT) |
-| **Time Stranger UI** | An 8-bit reskin of the game's interface | Xive |
+**Publishing them is not authorship.** Two of the three are other people's work,
+and the launcher shows each mod's real author on its own row:
 
-[jg]: #digilab
+| Mod | What it is | Whose it is |
+|---|---|---|
+| **DigiLab** | A launcher tab for editing the EXP, digivolution EXP and BITS every enemy drops | **JulioGawl** — his idea and his enemy table |
+| **DigiRandom** | A launcher tab that randomizes the game — encounters, shops, digivolutions, starting party, scaling | **markisha64** — a port of [his randomizer][rz] (MIT) |
+| **Time Stranger UI** | An 8-bit reskin of the game's interface | **Xive** — the only one of the three that is ours |
+
 [rz]: https://github.com/markisha64/dmw3-randomizer
 
 **DigiLab and DigiRandom add a tab to the launcher**; they change nothing in the

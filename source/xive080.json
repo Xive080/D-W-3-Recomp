@@ -1,15 +1,15 @@
 {
   "formato": 2,
-  "nombre": "Xive080",
+  "nombre": "D-W-3-Recomp",
   "autor": "Xive080",
-  "descripcion": "Mods del port nativo de PC",
+  "descripcion": "Mods for the native PC port - each one credited to whoever made it",
   "mods": [
     {
       "id": "DigiLab",
       "nombre": "DigiLab",
       "version": "1.0",
       "autor": "JulioGawl",
-      "enlace": "https://github.com/",
+      "enlace": "",
       "descripcion": "Edit the EXP, digivolution EXP and BITS every enemy drops",
       "tipo": "lanzador",
       "categoria": "lanzador",
@@ -30,8 +30,8 @@
         {
           "ruta": "mod.ini",
           "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiLab/mod.ini",
-          "sha256": "f2eba3ea414f20b727ce09007a9ff229c5c382783b13efc21cd0330252f214f4",
-          "bytes": 273
+          "sha256": "06feca3644ffe8becce11608df17792eeb5c94f124bd442b4f3cab340da1928e",
+          "bytes": 251
         },
         {
           "ruta": "patcher.json",
