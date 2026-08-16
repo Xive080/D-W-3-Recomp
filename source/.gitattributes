@@ -1,0 +1,14 @@
+# AQUI NO SE TOCA NI UN BYTE.
+#
+# El lanzador comprueba el sha256 de cada fichero antes de escribirlo en el
+# disco de un jugador. Git, por su cuenta, convierte los finales de linea al
+# guardar y al sacar — y eso cambia el tamano y la huella.
+#
+# Paso de verdad el 16 de agosto de 2026, en la primera publicacion: el indice
+# anunciaba 9.559 bytes para digilab.tsv y GitHub servia 9.222. Ningun mod se
+# podia instalar, y el sintoma era "no coincide con su huella", que apunta al
+# sitio equivocado.
+#
+# `-text` le dice a Git que estos ficheros son intocables, como si fueran
+# binarios. Es lo que tienen que ser: lo que se mide aqui es lo que se sirve.
+* -text
