@@ -1,89 +1,9 @@
 {
   "formato": 2,
-  "nombre": "D-W-3-Recomp",
+  "nombre": "Xive080",
   "autor": "Xive080",
-  "descripcion": "Mods for the native PC port - each one credited to whoever made it",
+  "descripcion": "Mods de Xive080 para el port nativo de PC",
   "mods": [
-    {
-      "id": "DigiLab",
-      "nombre": "DigiLab",
-      "version": "1.0",
-      "autor": "JulioGawl",
-      "enlace": "",
-      "descripcion": "Edit the EXP, digivolution EXP and BITS every enemy drops",
-      "tipo": "lanzador",
-      "categoria": "lanzador",
-      "juego": "DMW3",
-      "ficheros": [
-        {
-          "ruta": "CREDITS.md",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiLab/CREDITS.md",
-          "sha256": "e85d47c81aacb0facc581f26e5c1d0e328b33741a397f7b4429229849e0f52eb",
-          "bytes": 690
-        },
-        {
-          "ruta": "digilab.tsv",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiLab/digilab.tsv",
-          "sha256": "d2eec13fe5c320fc3af7bd06542a8412413361235d3b197abee3bb0832e0a92a",
-          "bytes": 9559
-        },
-        {
-          "ruta": "mod.ini",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiLab/mod.ini",
-          "sha256": "06feca3644ffe8becce11608df17792eeb5c94f124bd442b4f3cab340da1928e",
-          "bytes": 251
-        },
-        {
-          "ruta": "patcher.json",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiLab/patcher.json",
-          "sha256": "cc8c5d26f05948ff0d2b349526b8f9098d7ddc34124e02640ce173f652af92e7",
-          "bytes": 19
-        },
-        {
-          "ruta": "README.md",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiLab/README.md",
-          "sha256": "c057de804bc749e2824542b9a0c6f2f894eedb357d43334e659c696efbac1f2a",
-          "bytes": 841
-        }
-      ]
-    },
-    {
-      "id": "DigiRandom",
-      "nombre": "DigiRandom",
-      "version": "1.0",
-      "autor": "markisha64",
-      "enlace": "https://github.com/markisha64/dmw3-randomizer",
-      "descripcion": "Randomize the game - port of markisha64's DMW3 Randomizer",
-      "tipo": "lanzador",
-      "categoria": "lanzador",
-      "juego": "DMW3",
-      "ficheros": [
-        {
-          "ruta": "LICENSE.md",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiRandom/LICENSE.md",
-          "sha256": "4a1be1e8a767bc7fdc6dd1edc903a8b4b209b6de442ce8ba855370750bbf2fb5",
-          "bytes": 1840
-        },
-        {
-          "ruta": "mod.ini",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiRandom/mod.ini",
-          "sha256": "f062b3fea1d4c204790e5356d2105935cd412c7c549a5ea510bd9e67b52c3ed9",
-          "bytes": 311
-        },
-        {
-          "ruta": "patcher.json",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiRandom/patcher.json",
-          "sha256": "cc8c5d26f05948ff0d2b349526b8f9098d7ddc34124e02640ce173f652af92e7",
-          "bytes": 19
-        },
-        {
-          "ruta": "README.md",
-          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/DigiRandom/README.md",
-          "sha256": "3ad4890086db8cc1b72b1f17fbebbcd26cf53a802fc50a88b5b1d790597be9dd",
-          "bytes": 935
-        }
-      ]
-    },
     {
       "id": "TimeStrangerUI",
       "nombre": "Time Stranger UI",

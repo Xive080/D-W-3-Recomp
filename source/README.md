@@ -13,19 +13,22 @@ UPDATE button whenever a newer version is published.
 
 ## xive080.json
 
-The mods shipped with this port. Unlike the mirror below, these files **are**
-hosted here, under `source/xive080/`.
+Xive080's own mods. These files **are** hosted here, under `source/xive080/`.
 
-**Publishing them is not authorship.** Two of the three are other people's work,
-and the launcher shows each mod's real author on its own row:
+| Mod | What it is |
+|---|---|
+| **Time Stranger UI** | An 8-bit reskin of the game's interface |
 
-| Mod | What it is | Whose it is |
-|---|---|---|
-| **DigiLab** | A launcher tab for editing the EXP, digivolution EXP and BITS every enemy drops | **JulioGawl** — his idea and his enemy table |
-| **DigiRandom** | A launcher tab that randomizes the game — encounters, shops, digivolutions, starting party, scaling | **markisha64** — a port of [his randomizer][rz] (MIT) |
-| **Time Stranger UI** | An 8-bit reskin of the game's interface | **Xive** — the only one of the three that is ours |
+### One source per author, on purpose
 
-[rz]: https://github.com/markisha64/dmw3-randomizer
+This repository publishes what belongs to it. It briefly also carried **DigiLab**
+(JulioGawl's) and **DigiRandom** (a port of markisha64's randomizer, MIT), and
+they were taken back out: hosting someone else's work under this name reads like
+a claim on it, however the rows are labelled.
+
+Those two are launcher tabs that ship with the port itself, so a player already
+has them — they don't need a source to arrive. When they do get one, it will be
+their author's, or a separate one that carries their name and not this one.
 
 **DigiLab and DigiRandom add a tab to the launcher**; they change nothing in the
 game by themselves. Installing one makes its tab appear, switching it off makes
