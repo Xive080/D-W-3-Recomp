@@ -2,6 +2,27 @@
   "format": 1,
   "_comment": "Edit this file to change what the launcher suggests. No rebuild, no release, nobody has to update anything: the launcher fetches it every time the MODS tab is opened. Keys are in English so anyone can edit it.",
 
+  "_about_featured": "Mods shown at the top of the MODS tab. The label is free text and NOT a measured number: nothing here counts downloads, because the files are served by GitHub and nobody keeps a tally. Write what you mean — 'Recommended', 'Most used', 'Pick of the week' — rather than a figure that looks measured and isn't. `id` must match the mod's folder name.",
+
+  "featured": [
+    {
+      "id": "NTSC",
+      "name": "NTSC",
+      "author": "markisha64",
+      "label": "Most used",
+      "description": "Runs the PAL version at 60 fps. Pair it with Music tempo → PAL 50Hz in Settings.",
+      "source": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64.json"
+    },
+    {
+      "id": "FastTravel",
+      "name": "Fast Travel",
+      "author": "Flawe",
+      "label": "Recommended",
+      "description": "Warp between areas from the map — this game has a lot of backtracking",
+      "source": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe.json"
+    }
+  ],
+
   "sources": [
     {
       "name": "markisha64",
