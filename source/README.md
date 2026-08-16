@@ -6,7 +6,49 @@ UPDATE button whenever a newer version is published.
 
 | Source | Address |
 |---|---|
+| Xive080 — this port's own mods | `https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080.json` |
 | markisha64's patches | `https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64.json` |
+
+---
+
+## xive080.json
+
+The mods that belong to this port. Unlike the mirror below, these files **are**
+hosted here, under `source/xive080/`.
+
+| Mod | What it is | Whose idea |
+|---|---|---|
+| **DigiLab** | A launcher tab for editing the EXP, digivolution EXP and BITS every enemy drops | [JulioGawl][jg] |
+| **DigiRandom** | A launcher tab that randomizes the game — encounters, shops, digivolutions, starting party, scaling | port of [markisha64's randomizer][rz] (MIT) |
+| **Time Stranger UI** | An 8-bit reskin of the game's interface | Xive |
+
+[jg]: #digilab
+[rz]: https://github.com/markisha64/dmw3-randomizer
+
+**DigiLab and DigiRandom add a tab to the launcher**; they change nothing in the
+game by themselves. Installing one makes its tab appear, switching it off makes
+it disappear. DigiRandom's runs land in `MODS/` as separate mods, one per seed,
+each born switched off.
+
+### DigiLab
+
+From JulioGawl's *Ferramenta Digimon World 2003 — Alterar DVEXP, EXP e BITS*.
+The idea and the enemy table are his; the tab is a reimplementation that edits
+the loose data file instead of a disc image, always computing from the original
+values so multiplying twice doesn't compound.
+
+His tool was shared without a stated licence. If he would rather this were
+removed, renamed or licensed differently, that is his call.
+
+### DigiRandom
+
+A port of markisha64's randomizer, MIT. Same options, same algorithm, same seed
+→ same run. The only difference is where it applies: his tool rebuilds the disc
+image, this one writes a mod, so a run can be switched off and kept.
+
+His repository's `LICENSE.md` carries GitHub's template copyright line unedited,
+so it is linked rather than copied — putting *"Copyright GitHub Inc."* on his
+work inside our folder would be worse than leaving it out.
 
 ---
 
