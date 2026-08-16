@@ -12,6 +12,13 @@ two different questions, and only the first one belongs in a source's name.
 | Xive080 | Xive080 | `…/source/xive080.json` |
 | markisha64 | markisha64 — 20 patches | `…/source/markisha64.json` |
 | Flawe | Flawe — Fast Travel | `…/source/flawe.json` |
+| JulioGawl | JulioGawl — DigiLab | `…/source/juliogawl.json` |
+| Jeanheck | Jeanheck — Digivice | `…/source/jeanheck.json` |
+
+The launcher also reads `suggested.json`, which is what it offers under
+**SUGGESTED** in the SOURCES view and **FEATURED** at the top of the mod list.
+Editing that one file changes what gets suggested — no rebuild, no release,
+nobody has to update anything.
 
 Full addresses start with
 `https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/`.
@@ -28,14 +35,19 @@ Xive080's own mods. These files **are** hosted here, under `source/xive080/`.
 
 ### One source per author, on purpose
 
-This repository publishes what belongs to it. It briefly also carried **DigiLab**
-(JulioGawl's) and **DigiRandom** (a port of markisha64's randomizer, MIT), and
-they were taken back out: hosting someone else's work under this name reads like
-a claim on it, however the rows are labelled.
+This repository publishes what belongs to it, and everything else gets **its own
+source under its author's name**: `juliogawl.json`, `jeanheck.json`,
+`flawe.json`, `markisha64.json`.
 
-Those two are launcher tabs that ship with the port itself, so a player already
-has them — they don't need a source to arrive. When they do get one, it will be
-their author's, or a separate one that carries their name and not this one.
+The files are hosted here because they have nowhere else to live yet — DigiLab
+and Digivice ship with the port, and their authors have no source of their own.
+That is a hosting arrangement, not a claim: each one carries its author's name,
+its own credits and its own licence, and the moment any of them wants to publish
+their own, the address becomes theirs and this copy goes away.
+
+What was wrong before, and got fixed: all of it sat in `xive080.json`, under one
+name. Whose a mod is and where its file happens to sit are different questions,
+and only the first one belongs in a source's name.
 
 **DigiLab and DigiRandom add a tab to the launcher**; they change nothing in the
 game by themselves. Installing one makes its tab appear, switching it off makes

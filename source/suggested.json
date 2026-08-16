@@ -35,6 +35,18 @@
       "description": "Fast Travel - warp between areas from the map"
     },
     {
+      "name": "JulioGawl",
+      "author": "JulioGawl",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl.json",
+      "description": "DigiLab - a launcher tab to edit the EXP, digivolution EXP and BITS every enemy drops"
+    },
+    {
+      "name": "Jeanheck",
+      "author": "Jeanheck",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/jeanheck.json",
+      "description": "Digivice - a companion screen for your party, quests and evolution trees"
+    },
+    {
       "name": "Xive080",
       "author": "Xive080",
       "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080.json",

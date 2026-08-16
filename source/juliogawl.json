@@ -1,0 +1,51 @@
+{
+  "format": 2,
+  "name": "JulioGawl",
+  "author": "JulioGawl",
+  "description": "DigiLab - edit what every enemy drops",
+  "mods": [
+    {
+      "id": "DigiLab",
+      "name": "DigiLab",
+      "version": "1.0",
+      "author": "JulioGawl",
+      "link": "",
+      "description": "Edit the EXP, digivolution EXP and BITS every enemy drops",
+      "type": "launcher",
+      "category": "launcher",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "CREDITS.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl/DigiLab/CREDITS.md",
+          "sha256": "e85d47c81aacb0facc581f26e5c1d0e328b33741a397f7b4429229849e0f52eb",
+          "bytes": 690
+        },
+        {
+          "path": "digilab.tsv",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl/DigiLab/digilab.tsv",
+          "sha256": "d2eec13fe5c320fc3af7bd06542a8412413361235d3b197abee3bb0832e0a92a",
+          "bytes": 9559
+        },
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl/DigiLab/mod.ini",
+          "sha256": "06feca3644ffe8becce11608df17792eeb5c94f124bd442b4f3cab340da1928e",
+          "bytes": 251
+        },
+        {
+          "path": "patcher.json",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl/DigiLab/patcher.json",
+          "sha256": "cc8c5d26f05948ff0d2b349526b8f9098d7ddc34124e02640ce173f652af92e7",
+          "bytes": 19
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl/DigiLab/README.md",
+          "sha256": "c057de804bc749e2824542b9a0c6f2f894eedb357d43334e659c696efbac1f2a",
+          "bytes": 841
+        }
+      ]
+    }
+  ]
+}

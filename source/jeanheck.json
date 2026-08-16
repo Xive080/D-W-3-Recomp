@@ -1,0 +1,45 @@
+{
+  "format": 2,
+  "name": "Jeanheck",
+  "author": "Jeanheck",
+  "description": "Digivice - a companion screen for your party and quests",
+  "mods": [
+    {
+      "id": "Digivice",
+      "name": "Digivice",
+      "version": "1.0",
+      "author": "Jeanheck",
+      "link": "https://github.com/jeanheck",
+      "description": "Digivice is a real-time, 3DS-style companion screen for Digimon World 2003 on Duckstation that automatically tracks your party's EXP, quest progress, evolution trees, map details, and hidden events right beside your game.",
+      "type": "game",
+      "category": "ui",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "autor.jpg",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/jeanheck/Digivice/autor.jpg",
+          "sha256": "838457a3c5204d966c3e000435f8c490b3b5c996387fd7e51b46a24d20fb5e5f",
+          "bytes": 10215
+        },
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/jeanheck/Digivice/mod.ini",
+          "sha256": "d5a249e353d4ea1f3ee472337ee4ea89e18425e94c384219506a66e89d7fd0b0",
+          "bytes": 405
+        },
+        {
+          "path": "patcher.json",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/jeanheck/Digivice/patcher.json",
+          "sha256": "cc8c5d26f05948ff0d2b349526b8f9098d7ddc34124e02640ce173f652af92e7",
+          "bytes": 19
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/jeanheck/Digivice/README.md",
+          "sha256": "1b6a39210a8a3d1535d01cdf0ca1d365547f140e0afad5a115c20967641067bd",
+          "bytes": 662
+        }
+      ]
+    }
+  ]
+}
