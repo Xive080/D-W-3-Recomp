@@ -2,7 +2,7 @@
 
 Native PC port · Port nativo de PC. All versions released 13 August 2026 · Todas las versiones salieron el 13 de agosto de 2026.
 
-## 1.0.8 - 14/08/2026
+## 1.1.0 - 14/08/2026
 
 | Version | English | Español |
 |:--|:--|:--|
