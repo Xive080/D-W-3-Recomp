@@ -7,8 +7,6 @@
 
 ---
 
-**📜 Registro de cambios / Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
-
 ## 🛠️ 1. Platform Infrastructure / Infraestructura de Plataforma
 
 | System / Sistema | Status / Estado | Implementation Details & Context / Detalles de Implementación |
