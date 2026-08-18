@@ -2,8 +2,45 @@
   "format": 2,
   "name": "markisha64",
   "author": "markisha64",
-  "description": "Patches for Digimon World 2003, straight from their authors' repositories (MIT)",
+  "description": "Patches for Digimon World 2003 from markisha64's repositories (MIT), plus DigiRandom - our port of his randomizer, published with the same licence",
   "mods": [
+    {
+      "id": "DigiRandom",
+      "name": "DigiRandom",
+      "version": "1.0",
+      "author": "markisha64",
+      "link": "https://github.com/markisha64/dmw3-randomizer",
+      "description": "Randomize the game - port of markisha64's DMW3 Randomizer (MIT)",
+      "type": "launcher",
+      "category": "launcher",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64/DigiRandom/LICENSE.md",
+          "sha256": "d9b7b059053d42fe27485b6db0b09ea9fa9fb71e4cb8ad99a0d7dfa27bf773b4",
+          "bytes": 1059
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64/DigiRandom/README.md",
+          "sha256": "3ad4890086db8cc1b72b1f17fbebbcd26cf53a802fc50a88b5b1d790597be9dd",
+          "bytes": 935
+        },
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64/DigiRandom/mod.ini",
+          "sha256": "f062b3fea1d4c204790e5356d2105935cd412c7c549a5ea510bd9e67b52c3ed9",
+          "bytes": 311
+        },
+        {
+          "path": "patcher.json",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64/DigiRandom/patcher.json",
+          "sha256": "cc8c5d26f05948ff0d2b349526b8f9098d7ddc34124e02640ce173f652af92e7",
+          "bytes": 19
+        }
+      ]
+    },
     {
       "id": "FastText",
       "name": "Fast Text",
