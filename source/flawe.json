@@ -1,8 +1,8 @@
 {
   "format": 2,
   "name": "Flawe",
-  "author": "markisha64",
-  "description": "Patches for Digimon World 2003, straight from their authors' repositories (MIT)",
+  "author": "Flawe",
+  "description": "Flawe's quality of life patches for Digimon World 2003, published with his permission",
   "mods": [
     {
       "id": "FastTravel",
