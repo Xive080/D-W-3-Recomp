@@ -1,0 +1,12 @@
+{
+ "changes": [
+  {
+   "path": "Config/SLES_039.36",
+   "patch": "UEFUQ0gA088AARYDXQgAA/E5BAN/cgABRkVPRg=="
+  },
+  {
+   "path": "PRO/STFGTREP.PRO",
+   "patch": "UEFUQ0gAGC8AARYAHTAAAmGSACm3AAEWAC4gAAI7kkVPRg=="
+  }
+ ]
+}
