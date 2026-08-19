@@ -2,24 +2,134 @@
   "format": 2,
   "name": "Flawe",
   "author": "Flawe",
-  "description": "Flawe's quality of life patches for Digimon World 2003, published with his permission",
+  "description": "Flawe's quality of life hacks for Digimon World 2003, ported with his permission",
   "mods": [
     {
       "id": "FastTravel",
       "name": "Fast Travel",
-      "version": "1.0",
+      "version": "2.0",
       "author": "Flawe",
-      "link": "https://github.com/markisha64/dmw_2003_patcher/tree/main/patches/fast_travel",
-      "description": "Adds fast travel",
+      "link": "https://www.romhacking.net/hacks/8763/",
+      "description": "Travel to any area you have already visited, from the map. X on the map to pick, Square to switch server maps.",
       "type": "game",
       "category": "gameplay",
       "game": "DMW3",
       "files": [
         {
+          "path": "disc_map.add.tsv",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/FastTravel/disc_map.add.tsv",
+          "sha256": "aed98c3e0795728a9707501aaaba6450ae18c927998f9be38d2b35876dd51540",
+          "bytes": 48
+        },
+        {
+          "path": "files/STSTATUS.PRO",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/FastTravel/files/STSTATUS.PRO",
+          "sha256": "aab111677441e592c3f2f391c21c23e88ac57a63b2258a499681ef30634c2696",
+          "bytes": 111176
+        },
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/FastTravel/mod.ini",
+          "sha256": "6895f7144869e5be460fd93db67c66f3d6667ca25cf248ef272c68f77fb0717c",
+          "bytes": 230
+        },
+        {
           "path": "patcher.json",
-          "url": "https://raw.githubusercontent.com/markisha64/dmw_2003_patcher/main/patches/fast_travel/patcher.json",
-          "sha256": "79c8c652e297afa191581037103b0c737e4992772004f2ce5f9d5f60c07b70f5",
-          "bytes": 5298
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/FastTravel/patcher.json",
+          "sha256": "0bb3cddb713ec7abd1385d695d9e3871669cad85183dce91a283db3f86ba3536",
+          "bytes": 115
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/FastTravel/README.md",
+          "sha256": "8c71f13d79593ca93c328e28e88b75675a7c94a775583c0cc8fb2f33fd24d425",
+          "bytes": 1409
+        }
+      ]
+    },
+    {
+      "id": "BattleSpeedUp",
+      "name": "Battle Speed-Up",
+      "version": "2.0",
+      "author": "Flawe",
+      "link": "https://www.romhacking.net/hacks/8763/",
+      "description": "Cuts the filler text boxes in battle and auto-closes the rest, so fights take far less time.",
+      "type": "game",
+      "category": "gameplay",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "disc_map.add.tsv",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/BattleSpeedUp/disc_map.add.tsv",
+          "sha256": "6acbeda6f7efa7f110e96135c577c54cd61ed64cd7b882eb0f19e8d11c78d6c0",
+          "bytes": 48
+        },
+        {
+          "path": "files/FIGHTST2.PRO",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/BattleSpeedUp/files/FIGHTST2.PRO",
+          "sha256": "5ca23b4493e6d28354ddeace600985f57eee96101541035ae117cf957d2e2c2f",
+          "bytes": 143088
+        },
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/BattleSpeedUp/mod.ini",
+          "sha256": "cf9fc540cfcf40ea5a15bb7bb8d98fbd6ee1d2050213ba5ee9e7de95719eef2f",
+          "bytes": 243
+        },
+        {
+          "path": "patcher.json",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/BattleSpeedUp/patcher.json",
+          "sha256": "6230d74aa5177583166aa00efd741e51274bc1a19de9ed0afaf198f8c93d1e08",
+          "bytes": 230
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/BattleSpeedUp/README.md",
+          "sha256": "43492ff4171cc8c3848407e9dc111ab3ef5ebd3ed21cba9900a4c63594b38e6e",
+          "bytes": 1106
+        }
+      ]
+    },
+    {
+      "id": "Walkthrough",
+      "name": "In-game Walkthrough",
+      "version": "2.0",
+      "author": "Flawe",
+      "link": "https://www.romhacking.net/hacks/8763/",
+      "description": "Tells you where to go and what to do next, from the main menu. Main story only. Credits: Flawe, markisha64 (quest system) and EmeraldPhoenix (guide).",
+      "type": "game",
+      "category": "gameplay",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "disc_map.add.tsv",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/Walkthrough/disc_map.add.tsv",
+          "sha256": "acf72be6033bcc5f22c99b8e6f35b259eed392b5a8b7e2efe647c2d931279a3f",
+          "bytes": 47
+        },
+        {
+          "path": "files/ESSTATUS.BIN",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/Walkthrough/files/ESSTATUS.BIN",
+          "sha256": "32dafe0831b1a1feed09c53d4c437178e16dc1e5612ce79686989112acb02fda",
+          "bytes": 42710
+        },
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/Walkthrough/mod.ini",
+          "sha256": "2dbedb7fd9ad463c98b16ab81d086e5a95d3708f74850ff42e82353f20202011",
+          "bytes": 242
+        },
+        {
+          "path": "patcher.json",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/Walkthrough/patcher.json",
+          "sha256": "ea3972e137df56546ed4faa95cf205336dd21a2acbafd26061a2b966f34846f8",
+          "bytes": 551
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe/Walkthrough/README.md",
+          "sha256": "bbad32142695c86d03a9348e2a076019393c61b30594b311443be17247ef4d45",
+          "bytes": 980
         }
       ]
     }
