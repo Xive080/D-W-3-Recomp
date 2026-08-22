@@ -1,0 +1,39 @@
+{
+  "format": 2,
+  "name": "RichardPacco",
+  "author": "RichardPacco",
+  "description": "Exp Share - every form of your party earns EXP",
+  "mods": [
+    {
+      "id": "ExpShare",
+      "name": "Exp Share",
+      "version": "1.0",
+      "author": "RichardPacco",
+      "link": "https://github.com/RichardPacco/DMW2003-Exp-Share",
+      "description": "Adds an Exp Share row to the pause menu: off, main forms only, or every form. Digivolutions earn EXP without fighting, and the split is recounted so the totals stay right.",
+      "type": "game",
+      "category": "gameplay",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/richardpacco/ExpShare/mod.ini",
+          "sha256": "dfca8c19083e4587664d2bbf6680d34d92989897f5a8f6f546bc142b391b805e",
+          "bytes": 367
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/richardpacco/ExpShare/README.md",
+          "sha256": "6de2dab18fe948551c00b5b6a7bfdd0557ae4cde79900a8775b102e05e67d781",
+          "bytes": 2595
+        },
+        {
+          "path": "autor.jpg",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/richardpacco/ExpShare/autor.jpg",
+          "sha256": "1242ec81bed5781acfc9b58b6c70d167e842298291d0c2eaff717919ea98f44f",
+          "bytes": 2982
+        }
+      ]
+    }
+  ]
+}
