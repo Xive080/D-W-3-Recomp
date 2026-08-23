@@ -2,14 +2,14 @@
   "format": 2,
   "name": "MestreBD",
   "author": "MestreBD",
-  "description": "ReColor - Amaterasu, a field sprite recolour",
+  "description": "ReColor - Amaterasu, a colour swap for the cast",
   "mods": [
     {
       "id": "ReColorAmaterasu",
       "name": "ReColor - Amaterasu",
       "version": "1.0",
       "author": "MestreBD",
-      "description": "Recolours the field sprites of the three partners and every playable Digimon, plus the Digimon Online and satellite NPCs. 28 sprite sheets, nothing else touched.",
+      "description": "Recolours the three main characters (Junior, Ivy and Teddy), the eight playable Digimon, and the two support Digimon, Submarimon and Digmon.",
       "type": "game",
       "category": "visual",
       "game": "DMW3",
@@ -17,14 +17,14 @@
         {
           "path": "mod.ini",
           "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd/ReColorAmaterasu/mod.ini",
-          "sha256": "e2470f5d8e5d7a7daa31dac7f76ad45d954e80c62569df178f519730d1c222bf",
-          "bytes": 381
+          "sha256": "8d82c5c252d01d8e2bb70c7d46896b342e6c60cb7898ec27d2dcab9b8498dad4",
+          "bytes": 360
         },
         {
           "path": "README.md",
           "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd/ReColorAmaterasu/README.md",
-          "sha256": "96000284982dabec3da3ac2ddee411a5c1a2438190b429cd6245404d56117224",
-          "bytes": 1294
+          "sha256": "ea933577d5b18bdeeac33f621a89de9c39444822d8d72983ee8313c19a93facc",
+          "bytes": 1460
         },
         {
           "path": "patcher.json",
