@@ -47,7 +47,10 @@ port distributes no game data: each player extracts it from their own disc.*
 
      - **@flawe** — Fast travel Patch  
      - **@markisha64** — dmw3-randomizer y DW3_patches                       
-     - **JulioGawl** — Digimon World 2003 EXP Changer (DigiLab) y traducción PT               
+     - **JulioGawl** — Digimon World 2003 EXP Changer (DigiLab) y traducción PT
+     - **Jeanheck** — Digivice
+     - **RichardPacco** — Exp Share
+     - **MestreBD** — Recolor Pack (ReColor - Amaterasu)               
      - **shaunofthedead** — Análisis de la UI de Batalla / UI Battle research           
      - **Gledson999** — Traducción PT / PT Translation   
      - **Leonam** — Herramientas de traducción PT / PT Translation Tools  
