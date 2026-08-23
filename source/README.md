@@ -15,6 +15,7 @@ two different questions, and only the first one belongs in a source's name.
 | JulioGawl | JulioGawl — DigiLab | `…/source/juliogawl.json` |
 | Jeanheck | Jeanheck — Digivice | `…/source/jeanheck.json` |
 | RichardPacco | RichardPacco — Exp Share | `…/source/richardpacco.json` |
+| MestreBD | MestreBD — ReColor - Amaterasu | `…/source/mestrebd.json` |
 
 The launcher also reads `suggested.json`, which is what it offers under
 **SUGGESTED** in the SOURCES view and **FEATURED** at the top of the mod list.
@@ -38,7 +39,8 @@ Xive080's own mods. These files **are** hosted here, under `source/xive080/`.
 
 This repository publishes what belongs to it, and everything else gets **its own
 source under its author's name**: `juliogawl.json`, `jeanheck.json`,
-`flawe.json`, `markisha64.json`, `richardpacco.json`.
+`flawe.json`, `markisha64.json`, `richardpacco.json`,
+`mestrebd.json`.
 
 The files are hosted here because they have nowhere else to live yet — DigiLab
 and Digivice ship with the port, and their authors have no source of their own.
