@@ -1,0 +1,44 @@
+{
+  "format": 2,
+  "name": "MestreBD",
+  "author": "MestreBD",
+  "description": "ReColor - Amaterasu, a field sprite recolour",
+  "mods": [
+    {
+      "id": "ReColorAmaterasu",
+      "name": "ReColor - Amaterasu",
+      "version": "1.0",
+      "author": "MestreBD",
+      "description": "Recolours the field sprites of the three partners and every playable Digimon, plus the Digimon Online and satellite NPCs. 28 sprite sheets, nothing else touched.",
+      "type": "game",
+      "category": "visual",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd/ReColorAmaterasu/mod.ini",
+          "sha256": "ea77c73990ad606fe41120db0ec9d5f14c937f81d858d0ae37ea7349b9e59e35",
+          "bytes": 299
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd/ReColorAmaterasu/README.md",
+          "sha256": "96000284982dabec3da3ac2ddee411a5c1a2438190b429cd6245404d56117224",
+          "bytes": 1294
+        },
+        {
+          "path": "patcher.json",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd/ReColorAmaterasu/patcher.json",
+          "sha256": "5b73085d04fe929f0b9f09085cd88025c880e0ee77af004ad6895c7aaddae85c",
+          "bytes": 967532
+        },
+        {
+          "path": "foto.jpg",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd/ReColorAmaterasu/foto.jpg",
+          "sha256": "fb2c48f28a0ba6db2ef47886bf393f3faa7bf925ca0f5a8bfc613e9a59abfe62",
+          "bytes": 133290
+        }
+      ]
+    }
+  ]
+}
