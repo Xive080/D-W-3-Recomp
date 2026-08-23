@@ -9,20 +9,25 @@ MestreBD's; this folder only carries the differences.
 
 ## What it changes
 
-28 sprite sheets under `FIELD/SPRT/`, and nothing else:
+Colours only, across 28 sprite sheets under `FIELD/SPRT/`:
 
-- the three partners and their alternate sets
-- the playable Digimon: Agumon, Veemon, Guilmon, Renamon, Patamon, Kotemon,
-  Kumamon, Monmon and the rest
-- the Digimon Online / satellite NPCs
+- the three main characters: **Junior, Ivy and Teddy**
+- the **eight playable Digimon**
+- the two support Digimon, **Submarimon and Digmon**
 
-These are the **field** sprites, the ones you see walking around a zone. Battle
-models and portraits are untouched.
+Nothing else is touched: no stats, no text, no layouts.
 
 Every file keeps its original size, so the changes ship as IPS patches applied
 at startup and undone when the mod is switched off — the port restores the
 stock files before applying whatever is enabled, so turning it off really
 reverts it.
+
+## One of a pack
+
+This is one edition of MestreBD's **Recolor Pack**. Every edition recolours the
+same sprite sheets, so they declare `grupo = recolor` in their mod.ini: turning
+one on turns the others off, and you never end up with two half-applied on top
+of each other.
 
 ## What it does NOT change
 
