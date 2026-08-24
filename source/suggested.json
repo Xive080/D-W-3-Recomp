@@ -47,6 +47,18 @@
       "description": "Digivice - a companion screen for your party, quests and evolution trees"
     },
     {
+      "name": "RichardPacco",
+      "author": "RichardPacco",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/richardpacco.json",
+      "description": "Exp Share - digivolutions earn EXP without fighting, switched from the pause menu"
+    },
+    {
+      "name": "MestreBD",
+      "author": "MestreBD",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd.json",
+      "description": "ReColor - Amaterasu: recolours the three main characters, the eight playable Digimon and the two support ones"
+    },
+    {
       "name": "Xive080",
       "author": "Xive080",
       "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080.json",
