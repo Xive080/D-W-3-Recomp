@@ -1,9 +1,7 @@
 {
   "format": 1,
   "_comment": "Edit this file to change what the launcher suggests. No rebuild, no release, nobody has to update anything: the launcher fetches it every time the MODS tab is opened. Keys are in English so anyone can edit it.",
-
   "_about_featured": "Mods shown at the top of the MODS tab. No badge and no number, on purpose: nothing here counts downloads, because the files are served by GitHub and nobody keeps a tally. A label saying 'most downloaded' would be an opinion dressed as a statistic. The information is that they are on this list at all. 'id' must match the mod's folder name.",
-
   "featured": [
     {
       "id": "NTSC",
@@ -20,49 +18,48 @@
       "source": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe.json"
     }
   ],
-
   "sources": [
-    {
-      "name": "markisha64",
-      "author": "markisha64",
-      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64.json",
-      "description": "21 patches: NTSC 60 fps, fast text, skips, encounter and battle tweaks"
-    },
     {
       "name": "Flawe",
       "author": "Flawe",
       "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/flawe.json",
-      "description": "Fast Travel - warp between areas from the map"
-    },
-    {
-      "name": "JulioGawl",
-      "author": "JulioGawl",
-      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl.json",
-      "description": "DigiLab - a launcher tab to edit the EXP, digivolution EXP and BITS every enemy drops"
+      "description": "Flawe's quality of life hacks for Digimon World 2003, ported with his permission"
     },
     {
       "name": "Jeanheck",
       "author": "Jeanheck",
       "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/jeanheck.json",
-      "description": "Digivice - a companion screen for your party, quests and evolution trees"
+      "description": "Digivice - a companion screen for your party and quests"
     },
     {
-      "name": "RichardPacco",
-      "author": "RichardPacco",
-      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/richardpacco.json",
-      "description": "Exp Share - digivolutions earn EXP without fighting, switched from the pause menu"
+      "name": "JulioGawl",
+      "author": "JulioGawl",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/juliogawl.json",
+      "description": "DigiLab - edit what every enemy drops"
+    },
+    {
+      "name": "markisha64",
+      "author": "markisha64",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/markisha64.json",
+      "description": "Patches for Digimon World 2003 from markisha64's repositories (MIT), plus DigiRandom - our port of his randomizer, published with the same licence"
     },
     {
       "name": "MestreBD",
       "author": "MestreBD",
       "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/mestrebd.json",
-      "description": "ReColor - Amaterasu: recolours the three main characters, the eight playable Digimon and the two support ones"
+      "description": "ReColor - Amaterasu, a colour swap for the cast"
+    },
+    {
+      "name": "RichardPacco",
+      "author": "RichardPacco",
+      "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/richardpacco.json",
+      "description": "Exp Share - every form of your party earns EXP"
     },
     {
       "name": "Xive080",
       "author": "Xive080",
       "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080.json",
-      "description": "This port's own mods"
+      "description": "Xive080's mods for the native PC port"
     }
   ]
 }
