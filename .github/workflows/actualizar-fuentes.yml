@@ -1,0 +1,124 @@
+name: Actualizar las fuentes sugeridas
+
+# QUE HACE
+# ========
+# Cada vez que se anade o se cambia un JSON de autor en source/, este trabajo
+# vuelve a escribir source/suggested.json con TODOS los que haya. Asi no hay que
+# acordarse de dar de alta a nadie a mano: se sube su .json y ya sale en el
+# lanzador.
+#
+# POR QUE ASI Y NO LISTANDO LA CARPETA DESDE EL LANZADOR
+# =====================================================
+# Listar el directorio en vivo obliga a llamar a la API de GitHub, que sin
+# identificarse admite 60 peticiones por hora Y POR IP. Quien este detras de un
+# router compartido -- una universidad, un movil, un locutorio -- se quedaria sin
+# mods de vez en cuando y sin ningun motivo visible. Y ademas habria que sacar
+# version del lanzador para que todos lo tuvieran.
+#
+# Regenerando el fichero aqui: sin limites, servido por la CDN de GitHub como
+# hasta ahora, y funciona para todo el que ya lo tenga instalado sin tocar nada.
+#
+# LO QUE SE CONSERVA
+# ==================
+# El bloque "featured" y los comentarios se copian tal cual del fichero que ya
+# hay: son decisiones editoriales de una persona, no algo que se deduzca de la
+# carpeta. Lo unico que se regenera es la lista "sources".
+
+on:
+  # Lo normal: en cuanto se sube un .json de autor, sale al momento.
+  push:
+    branches: [main]
+    paths:
+      - 'source/*.json'
+      - '.github/workflows/actualizar-fuentes.yml'
+
+  # Y una repasada cada dos semanas, los dias 1 y 15. No hace falta para el
+  # camino normal -- lo de arriba ya lo cubre -- pero recoge lo que se haya
+  # editado por fuera de un push a main: un fichero cambiado desde la web, una
+  # fusion que no toco source/, o un trabajo que fallara aquel dia. Si no hay
+  # nada que cambiar no escribe ni un commit, asi que no cuesta nada.
+  #
+  # AVISO DE GITHUB: los trabajos programados se APAGAN SOLOS si el repositorio
+  # pasa 60 dias sin actividad. Se vuelven a encender desde la pestana Actions.
+  # Por eso esto es una red y no el mecanismo principal.
+  schedule:
+    - cron: '0 5 1,15 * *'
+
+  # Y a mano, cuando se quiera, desde la pestana Actions.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruir suggested.json desde source/*.json
+        run: |
+          python3 - <<'PY'
+          import json, os, glob
+
+          CARPETA = "source"
+          DESTINO = os.path.join(CARPETA, "suggested.json")
+          CRUDO = ("https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/"
+                   "refs/heads/main/source/")
+
+          # Lo que ya habia: se conserva todo menos la lista de fuentes.
+          with open(DESTINO, encoding="utf-8") as f:
+              antes = json.load(f)
+
+          fuentes = []
+          for ruta in sorted(glob.glob(os.path.join(CARPETA, "*.json"))):
+              nombre_fichero = os.path.basename(ruta)
+              if nombre_fichero == "suggested.json":
+                  continue
+              try:
+                  with open(ruta, encoding="utf-8") as f:
+                      d = json.load(f)
+              except Exception as e:
+                  print("AVISO: %s no es JSON valido, lo salto (%s)"
+                        % (nombre_fichero, e))
+                  continue
+              if not isinstance(d, dict) or "mods" not in d:
+                  print("AVISO: %s no parece una fuente de mods, lo salto"
+                        % nombre_fichero)
+                  continue
+              nombre = d.get("name") or os.path.splitext(nombre_fichero)[0]
+              fuentes.append({
+                  "name": nombre,
+                  "author": d.get("author", nombre),
+                  "url": CRUDO + nombre_fichero,
+                  "description": d.get("description", ""),
+              })
+
+          # El propio port va el ultimo: es de la casa, no una aportacion.
+          fuentes.sort(key=lambda s: (s["name"].lower() == "xive080",
+                                      s["name"].lower()))
+
+          if fuentes == antes.get("sources"):
+              print("sin cambios: las %d fuentes ya estaban" % len(fuentes))
+              raise SystemExit(0)
+
+          antes["sources"] = fuentes
+          with open(DESTINO, "w", encoding="utf-8", newline="\n") as f:
+              json.dump(antes, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+          print("escritas %d fuentes:" % len(fuentes))
+          for s in fuentes:
+              print("   -", s["name"])
+          PY
+
+      - name: Publicarlo si ha cambiado
+        run: |
+          if git diff --quiet -- source/suggested.json; then
+            echo "nada que publicar"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add source/suggested.json
+          git commit -m "suggested.json regenerado desde source/*.json"
+          git push
