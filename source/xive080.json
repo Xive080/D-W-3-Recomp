@@ -28,6 +28,25 @@
           "bytes": 408
         }
       ]
+    },
+    {
+      "id": "PortMcd",
+      "name": "Port .mcd",
+      "version": "1.0",
+      "author": "Xive",
+      "link": "",
+      "description": "Trae tu partida de un emulador, de una tarjeta real o de una version anterior. Anade una pestana al lanzador; no parchea el juego.",
+      "type": "launcher",
+      "category": "launcher",
+      "game": "DMW3",
+      "files": [
+        {
+          "path": "mod.ini",
+          "url": "https://raw.githubusercontent.com/Xive080/D-W-3-Recomp/refs/heads/main/source/xive080/PortMcd/mod.ini",
+          "sha256": "fcf33f6b5e66f775abb269d8f2a16fb29ffd0cdaa6d5fd7f561af2d8d569dc0a",
+          "bytes": 370
+        }
+      ]
     }
   ]
 }
