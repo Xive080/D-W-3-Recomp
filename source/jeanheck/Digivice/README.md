@@ -14,4 +14,4 @@ del juego, va compilado en el port. La carpeta existe para que aparezca en el
 panel MODS y se pueda apagar como cualquier otro.
 
 Apagado, el port se comporta como si no existiera: no sale su fila en el menu de
-pausa y SELECT no hace nada.
+pausa
