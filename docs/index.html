@@ -179,6 +179,55 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 }
 .cerrar:hover{color:#0C57C4;text-decoration:underline}
 
+/* ── pantalla de idioma: la primera, como en el juego ─────────────────── */
+#entrada{
+  position:fixed;inset:0;z-index:30;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(16px,3vw,26px);padding:28px 20px;text-align:center;
+  background:rgba(4,7,15,.94);
+  transition:opacity .4s ease, visibility .4s;
+}
+#entrada.fuera{opacity:0;visibility:hidden}
+#entrada .marca{
+  font-family:var(--pixel);font-size:clamp(13px,3.4vw,22px);color:var(--cian);
+  text-shadow:0 3px 0 #000;letter-spacing:.04em;
+  opacity:0;animation:entra .5s ease .1s forwards;
+}
+#entrada .rotulo{
+  font-family:var(--pixel);font-size:11px;color:var(--gris);letter-spacing:.12em;
+  opacity:0;animation:entra .4s ease .5s forwards;
+}
+.banderas{
+  display:grid;gap:10px;width:100%;max-width:640px;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+}
+.banderas button{
+  display:flex;align-items:center;gap:11px;
+  background:rgba(7,12,34,.9);border:2px solid var(--borde-2);
+  color:var(--blanco);font-family:var(--pixel);font-size:10px;line-height:1.4;
+  padding:11px 12px;cursor:pointer;text-align:left;
+  opacity:0;animation:entra .35s ease forwards;
+  transition:border-color .1s steps(2),background .1s steps(2),transform .1s steps(2);
+}
+.banderas button:nth-child(1){animation-delay:.75s}
+.banderas button:nth-child(2){animation-delay:.85s}
+.banderas button:nth-child(3){animation-delay:.95s}
+.banderas button:nth-child(4){animation-delay:1.05s}
+.banderas button:nth-child(5){animation-delay:1.15s}
+.banderas button:nth-child(6){animation-delay:1.25s}
+.banderas button:nth-child(7){animation-delay:1.35s}
+.banderas button:hover,.banderas button:focus-visible{
+  border-color:var(--cian);background:rgba(47,107,238,.18);transform:translateY(-2px);
+}
+.banderas svg{
+  width:36px;height:24px;flex:none;display:block;
+  border:2px solid #000;box-shadow:0 0 0 1px #4A6FA8;
+}
+.banderas .cod{margin-left:auto;color:var(--gris);font-size:9px}
+@media (prefers-reduced-motion:reduce){
+  #entrada .marca,#entrada .rotulo,.banderas button{opacity:1;animation:none}
+}
+
 /* ── pantalla de entrada: el aviso legal ──────────────────────────────── */
 #aviso{
   position:fixed;inset:0;z-index:20;
@@ -228,7 +277,13 @@ footer a{color:var(--oro)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
-<div id="aviso" role="dialog" aria-modal="true">
+<div id="entrada" role="dialog" aria-modal="true" aria-label="Language">
+  <div class="marca">OpenWorld2003</div>
+  <div class="rotulo">LANGUAGE / IDIOMA</div>
+  <div class="banderas" id="banderas"></div>
+</div>
+
+<div id="aviso" role="dialog" aria-modal="true" hidden>
   <div class="marca">OpenWorld2003</div>
   <p></p><p></p><p></p><p></p>
   <div class="raya"></div>
@@ -264,6 +319,25 @@ var CIFRAS = [
   {c:"nucleo", h:225, d:1073}
 ];
 var CLAVES_DUDA = ["jugar","tarda","bloques","graficos"];
+
+var BANDERAS = {
+  es:"<rect width='24' height='16' fill='#C60B1E'/><rect y='4' width='24' height='8' fill='#FFC400'/>",
+  en:"<rect width='24' height='16' fill='#00247D'/><path d='M0 0 L24 16 M24 0 L0 16' stroke='#FFF' stroke-width='4'/><path d='M0 0 L24 16 M24 0 L0 16' stroke='#CF142B' stroke-width='2'/><path d='M12 0 V16 M0 8 H24' stroke='#FFF' stroke-width='6'/><path d='M12 0 V16 M0 8 H24' stroke='#CF142B' stroke-width='3'/>",
+  fr:"<rect width='8' height='16' fill='#0055A4'/><rect x='8' width='8' height='16' fill='#FFF'/><rect x='16' width='8' height='16' fill='#EF4135'/>",
+  de:"<rect width='24' height='16' fill='#000'/><rect y='5.33' width='24' height='5.34' fill='#DD0000'/><rect y='10.67' width='24' height='5.33' fill='#FFCE00'/>",
+  it:"<rect width='8' height='16' fill='#008C45'/><rect x='8' width='8' height='16' fill='#F4F5F0'/><rect x='16' width='8' height='16' fill='#CD212A'/>",
+  ja:"<rect width='24' height='16' fill='#FFF'/><circle cx='12' cy='8' r='4.6' fill='#BC002D'/>",
+  pt:"<rect width='24' height='16' fill='#DA291C'/><rect width='9.6' height='16' fill='#046A38'/><circle cx='9.6' cy='8' r='3.4' fill='none' stroke='#FFE900' stroke-width='1.4'/><circle cx='9.6' cy='8' r='1.7' fill='#DA291C' stroke='#FFF' stroke-width='.8'/>"
+};
+var NOMBRE_IDIOMA = {
+  es:"Español",
+  en:"English",
+  fr:"Français",
+  de:"Deutsch",
+  it:"Italiano",
+  ja:"日本語",
+  pt:"Português"
+};
 
 var IDIOMAS = [
   {id:"es", lang:"es", et:"ESP"},
@@ -459,6 +533,8 @@ pt:{
   var dial = document.getElementById("dialogo");
   var barra = document.getElementById("idiomas");
   var aviso = document.getElementById("aviso");
+  var entrada = document.getElementById("entrada");
+  var rejilla = document.getElementById("banderas");
   var pantalla = "sistemas", sel = 0, idi = "es", abierto = null;
 
   /* si el navegador esta en uno de los idiomas del juego, se abre en ese */
@@ -576,6 +652,8 @@ pt:{
   }
 
   document.addEventListener("keydown", function(e){
+    /* mientras se elige idioma, el teclado no toca el menu de detras */
+    if (!entrada.hasAttribute("hidden") && !entrada.classList.contains("fuera")) return;
     if (pasa()){ e.preventDefault(); return; }
     var n = filas().length;
     if (e.key === "ArrowDown"){ sel = (sel + 1) % n; marca(); e.preventDefault(); }
@@ -587,7 +665,36 @@ pt:{
     else if (e.key === "Escape") cierra();
   });
 
+  function svgBandera(id){
+    return '<svg viewBox="0 0 24 16" width="36" height="24" aria-hidden="true" ' +
+           'xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">' +
+           BANDERAS[id] + '</svg>';
+  }
+
+  function pintaEntrada(){
+    rejilla.innerHTML = "";
+    IDIOMAS.forEach(function(l){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("lang", l.lang);
+      b.innerHTML = svgBandera(l.id) +
+        '<span class="nom"></span><span class="cod"></span>';
+      b.querySelector(".nom").textContent = NOMBRE_IDIOMA[l.id];
+      b.querySelector(".cod").textContent = l.et;
+      b.addEventListener("click", function(){ eligeIdioma(l.id); });
+      rejilla.appendChild(b);
+    });
+  }
+
+  function eligeIdioma(id){
+    cambia(id);
+    entrada.classList.add("fuera");
+    setTimeout(function(){ entrada.setAttribute("hidden", ""); }, 420);
+    aviso.removeAttribute("hidden");   /* asi arrancan sus animaciones */
+  }
+
   function pasa(){
+    if (!entrada.hasAttribute("hidden") && !entrada.classList.contains("fuera")) return false;
     if (aviso.classList.contains("fuera")) return false;
     aviso.classList.add("fuera");
     setTimeout(function(){ aviso.setAttribute("hidden", ""); }, 520);
@@ -595,6 +702,7 @@ pt:{
   }
   aviso.addEventListener("click", pasa);
 
+  pintaEntrada();
   cambia(idi);
 })();
 </script>
