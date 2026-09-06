@@ -123,7 +123,7 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 
 /* ── el cuadro de dialogo: tal como sale en el juego ──────────────────── */
 .dialogo{
-  display:none;position:relative;
+  display:none;position:relative;transform-origin:top center;
   width:auto;
   margin:16px 6px 14px;
   padding:22px 20px 34px;
@@ -141,6 +141,11 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 @keyframes abre{
   from{transform:scaleY(.15);opacity:.3}
   to{transform:scaleY(1);opacity:1}
+}
+.dialogo.cerrando{display:block;animation:cierra .16s steps(4) forwards;pointer-events:none}
+@keyframes cierra{
+  from{transform:scaleY(1);opacity:1}
+  to{transform:scaleY(.15);opacity:0}
 }
 /* la pestaña con el nombre, encajada en el borde de arriba */
 .dialogo .quien{
@@ -560,6 +565,7 @@ pt:{
 
   function pinta(){
     var t = tt();
+    if (cerrando) apaga();
     if (dial.parentNode === menu) document.body.appendChild(dial);
     menu.innerHTML = '<div class="titulo">' +
       (pantalla === "sistemas" ? t.partes : t.dudas) + '</div>';
@@ -585,10 +591,10 @@ pt:{
 
   function elige(){
     var x = filas()[sel];
-    if (x.ir){ pantalla = x.ir; sel = 0; cierra(); pinta(); return; }
+    if (x.ir){ pantalla = x.ir; sel = 0; cierra(true); pinta(); return; }
     /* si ya estaba abierta esa misma fila, se cierra */
     if (abierto && abierto.p === pantalla && abierto.i === sel){ cierra(); return; }
-    cierra();
+    cierra(true);
     abierto = {p:pantalla, i:sel};
     abre(x);
   }
@@ -605,6 +611,8 @@ pt:{
     }
     html += '<button class="cerrar" type="button">▸ ' + t.cerrar + '</button>';
     html += '<span class="sigue" aria-hidden="true"></span>';
+    if (cerrando){ clearTimeout(cerrando); cerrando = null; }
+    dial.classList.remove("cerrando");
     dial.innerHTML = html;
     var b = menu.querySelectorAll(".fila")[sel];
     if (b){
@@ -615,12 +623,27 @@ pt:{
     dial.querySelector(".cerrar").addEventListener("click", cierra);
   }
 
-  function cierra(){
+  var cerrando = null;
+
+  function cierra(inmediato){
+    if (!dial.classList.contains("abierto") && !dial.classList.contains("cerrando")) {
+      abierto = null;
+      return;
+    }
     abierto = null;
-    dial.classList.remove("abierto");
-    dial.innerHTML = "";
+    if (cerrando){ clearTimeout(cerrando); cerrando = null; }
     var m = menu.querySelector(".fila.hablando");
     if (m) m.classList.remove("hablando");
+    if (inmediato){ apaga(); return; }
+    dial.classList.remove("abierto");
+    dial.classList.add("cerrando");
+    cerrando = setTimeout(apaga, 170);
+  }
+
+  function apaga(){
+    cerrando = null;
+    dial.classList.remove("abierto", "cerrando");
+    dial.innerHTML = "";
     document.body.appendChild(dial);
   }
 
