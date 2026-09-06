@@ -118,6 +118,8 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 .fila .nom{flex:1}
 .fila .val{color:var(--oro);font-size:.85em;white-space:nowrap}
 .fila.hecho .val{color:var(--verde)}
+.fila.enlace .nom{color:var(--oro)}
+.fila.enlace .val{color:var(--oro)}
 /* la fila abierta se queda marcada mientras habla */
 .fila.hablando{color:var(--cian);background:rgba(47,107,238,.16);border-bottom-color:transparent}
 
@@ -178,6 +180,17 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 .tiras i{flex:1;height:12px;background:#AEC4E4;border:1px solid #33528F}
 .tiras i.on{background:#1B6FE0;border-color:#0C3B85}
 .tiras i.on.ok{background:#17A05E;border-color:#0A5231}
+.dialogo .ir{margin-top:16px}
+.dialogo .boton{
+  display:inline-block;font-family:var(--pixel);font-size:10px;line-height:1;
+  color:#FFF;background:#1B4DBE;border:2px solid var(--tinta);
+  padding:11px 13px;text-decoration:none;
+  box-shadow:0 3px 0 #0A2A6E;
+}
+.dialogo .boton:hover{background:#2A63DC;transform:translateY(-1px)}
+.dialogo .lista{margin:14px 0 0;padding-left:20px}
+.dialogo .lista li{margin:5px 0}
+.dialogo .lista a{color:#0C57C4}
 .cerrar{
   margin:14px 0 0;font-family:var(--pixel);font-size:10px;
   color:#33528F;background:none;border:0;cursor:pointer;padding:6px 0;
@@ -325,6 +338,16 @@ var CIFRAS = [
   {c:"pantallas", h:44, d:303},
   {c:"nucleo", h:225, d:1073}
 ];
+/* Dos filas de enlace, antes de los sistemas. La direccion va aqui. */
+var ENLACES = [
+  {c:"discord", url:"https://discord.gg/YWSJ5YkCM"},
+  {c:"proyectos", lista:[
+    {n:"markisha64 / ddw3", u:"https://github.com/markisha64/ddw3"},
+    {n:"markisha64 / dmw_2003_patcher", u:"https://github.com/markisha64/dmw_2003_patcher"},
+    {n:"mateusgiordani / ddw3-decomp-expanded", u:"https://github.com/mateusgiordani/ddw3-decomp-expanded"}
+  ]}
+];
+
 var CLAVES_DUDA = ["jugar","tarda","bloques","graficos"];
 
 var BANDERAS = {
@@ -364,6 +387,10 @@ es:{
   partes:"PROYECTO", dudas:"DUDAS", verDudas:"DUDAS", volver:"VOLVER",
   cerrar:"CERRAR", completo:"COMPLETO", idioma:"IDIOMA",
   pie:"Sin emulador, sin BIOS y sin disco. Ya se juega.", enlace:"Código y avances",
+  e:{
+    discord:{n:"DISCORD", t:["Grupo de Discord del port. Ahí se avisa de cada avance, se resuelven dudas y se recogen fallos."], boton:"Entrar en el Discord"},
+    proyectos:{n:"OTROS PROYECTOS", t:["Otros proyectos de fans que abren juegos antiguos, incluidos los de Digimon en los que nos apoyamos."], boton:"Ver los proyectos"}
+  },
   s:{
     guardado:{n:"GUARDADO", t:["<b>Terminado.</b> La partida se guarda en ficheros normales de PC, no en una tarjeta de memoria de consola.","Cargarla tarda <b>0,21 segundos</b> en vez de 18,7, y el contenido sale idéntico al original."]},
     arranque:{n:"ARRANQUE", t:["<b>Terminado.</b> El juego abre sin la BIOS de la consola: no hace falta ningún fichero de Sony."]},
@@ -389,6 +416,10 @@ en:{
   partes:"PROJECT", dudas:"QUESTIONS", verDudas:"QUESTIONS", volver:"BACK",
   cerrar:"CLOSE", completo:"COMPLETE", idioma:"LANGUAGE",
   pie:"No emulator, no BIOS, no disc. Already playable.", enlace:"Code and progress",
+  e:{
+    discord:{n:"DISCORD", t:["The port’s Discord group. Every step forward is announced there, questions get answered and bugs get collected."], boton:"Join the Discord"},
+    proyectos:{n:"OTHER PROJECTS", t:["Other fan projects opening up old games, including the Digimon ones we lean on."], boton:"See the projects"}
+  },
   s:{
     guardado:{n:"SAVING", t:["<b>Done.</b> The game saves to ordinary PC files, not to a console memory card.","Loading takes <b>0.21 seconds</b> instead of 18.7, and the contents come out identical to the original."]},
     arranque:{n:"BOOT", t:["<b>Done.</b> The game starts without the console BIOS: no Sony file is needed."]},
@@ -414,6 +445,10 @@ fr:{
   partes:"PROJET", dudas:"QUESTIONS", verDudas:"QUESTIONS", volver:"RETOUR",
   cerrar:"FERMER", completo:"COMPLET", idioma:"LANGUE",
   pie:"Sans émulateur, sans BIOS, sans disque. Déjà jouable.", enlace:"Code et avancement",
+  e:{
+    discord:{n:"DISCORD", t:["Le groupe Discord du port. Chaque avancée y est annoncée, les questions y trouvent réponse et les bugs y sont recensés."], boton:"Rejoindre le Discord"},
+    proyectos:{n:"AUTRES PROJETS", t:["D’autres projets de fans qui ouvrent de vieux jeux, dont ceux de Digimon sur lesquels nous nous appuyons."], boton:"Voir les projets"}
+  },
   s:{
     guardado:{n:"SAUVEGARDE", t:["<b>Terminé.</b> La partie est enregistrée dans des fichiers PC ordinaires, pas sur une carte mémoire de console.","Le chargement prend <b>0,21 seconde</b> au lieu de 18,7, et le contenu est identique à l'original."]},
     arranque:{n:"DEMARRAGE", t:["<b>Terminé.</b> Le jeu démarre sans le BIOS de la console : aucun fichier de Sony n'est nécessaire."]},
@@ -439,6 +474,10 @@ de:{
   partes:"PROJEKT", dudas:"FRAGEN", verDudas:"FRAGEN", volver:"ZURUECK",
   cerrar:"SCHLIESSEN", completo:"FERTIG", idioma:"SPRACHE",
   pie:"Ohne Emulator, ohne BIOS, ohne Disc. Schon spielbar.", enlace:"Code und Fortschritt",
+  e:{
+    discord:{n:"DISCORD", t:["Die Discord-Gruppe des Ports. Dort wird jeder Fortschritt angekündigt, Fragen beantwortet und Fehler gesammelt."], boton:"Dem Discord beitreten"},
+    proyectos:{n:"ANDERE PROJEKTE", t:["Andere Fanprojekte, die alte Spiele öffnen, darunter die Digimon-Projekte, auf die wir uns stützen."], boton:"Projekte ansehen"}
+  },
   s:{
     guardado:{n:"SPEICHERN", t:["<b>Fertig.</b> Der Spielstand liegt in normalen PC-Dateien, nicht auf einer Memory Card.","Das Laden dauert <b>0,21 Sekunden</b> statt 18,7, und der Inhalt ist identisch mit dem Original."]},
     arranque:{n:"START", t:["<b>Fertig.</b> Das Spiel startet ohne das BIOS der Konsole: keine Datei von Sony nötig."]},
@@ -464,6 +503,10 @@ it:{
   partes:"PROGETTO", dudas:"DOMANDE", verDudas:"DOMANDE", volver:"INDIETRO",
   cerrar:"CHIUDI", completo:"COMPLETO", idioma:"LINGUA",
   pie:"Senza emulatore, senza BIOS, senza disco. Si gioca già.", enlace:"Codice e avanzamento",
+  e:{
+    discord:{n:"DISCORD", t:["Il gruppo Discord del port. Lì si annuncia ogni passo avanti, si risponde ai dubbi e si raccolgono i problemi."], boton:"Entra nel Discord"},
+    proyectos:{n:"ALTRI PROGETTI", t:["Altri progetti di fan che aprono giochi vecchi, compresi quelli di Digimon su cui ci appoggiamo."], boton:"Vedi i progetti"}
+  },
   s:{
     guardado:{n:"SALVATAGGIO", t:["<b>Finito.</b> La partita si salva in normali file di PC, non su una memory card.","Caricarla richiede <b>0,21 secondi</b> invece di 18,7, e il contenuto è identico all'originale."]},
     arranque:{n:"AVVIO", t:["<b>Finito.</b> Il gioco parte senza il BIOS della console: non serve nessun file di Sony."]},
@@ -489,6 +532,10 @@ ja:{
   partes:"プロジェクト", dudas:"よくある質問", verDudas:"よくある質問", volver:"もどる",
   cerrar:"とじる", completo:"完了", idioma:"言語",
   pie:"エミュレータもBIOSもディスクも不要。すでに遊べます。", enlace:"コードと進捗",
+  e:{
+    discord:{n:"DISCORD", t:["この移植のDiscordグループです。進捗の告知、質問への回答、不具合の受付をしています。"], boton:"Discordに参加"},
+    proyectos:{n:"ほかのプロジェクト", t:["古いゲームを解き明かすほかのファンプロジェクト。参考にしているデジモン関連のものも含みます。"], boton:"プロジェクトを見る"}
+  },
   s:{
     guardado:{n:"セーブ", t:["<b>完了。</b>セーブデータはメモリーカードではなく、普通のPCファイルに保存されます。","読み込みは18.7秒ではなく<b>0.21秒</b>。中身は原作と完全に同じです。"]},
     arranque:{n:"起動", t:["<b>完了。</b>本体のBIOSなしで起動します。ソニーのファイルは一切必要ありません。"]},
@@ -514,6 +561,10 @@ pt:{
   partes:"PROJETO", dudas:"PERGUNTAS", verDudas:"PERGUNTAS", volver:"VOLTAR",
   cerrar:"FECHAR", completo:"COMPLETO", idioma:"IDIOMA",
   pie:"Sem emulador, sem BIOS e sem disco. Já dá para jogar.", enlace:"Código e progresso",
+  e:{
+    discord:{n:"DISCORD", t:["Grupo de Discord do port. É lá que cada avanço é anunciado, as dúvidas são respondidas e os erros são recolhidos."], boton:"Entrar no Discord"},
+    proyectos:{n:"OUTROS PROJETOS", t:["Outros projetos de fãs que abrem jogos antigos, incluindo os de Digimon em que nos apoiamos."], boton:"Ver os projetos"}
+  },
   s:{
     guardado:{n:"SALVAR", t:["<b>Pronto.</b> O jogo salva em arquivos normais de PC, não em um cartão de memória de console.","Carregar leva <b>0,21 segundo</b> em vez de 18,7, e o conteúdo sai idêntico ao original."]},
     arranque:{n:"INICIALIZAÇÃO", t:["<b>Pronto.</b> O jogo abre sem a BIOS do console: nenhum arquivo da Sony é necessário."]},
@@ -554,10 +605,13 @@ pt:{
   function filas(){
     var t = tt();
     if (pantalla === "sistemas")
-      return CIFRAS.map(function(s){
+      return ENLACES.map(function(l){
+        var x = t.e[l.c];
+        return {n:x.n, val:"▸", txt:x.t, enlace:l, boton:x.boton};
+      }).concat(CIFRAS.map(function(s){
         var p = Math.round(s.h / s.d * 100), x = t.s[s.c];
         return {n:x.n, val:(s.ok ? "100%" : p + "%"), ok:s.ok, txt:x.t, h:s.h, d:s.d};
-      }).concat([{n:t.verDudas, val:"▸", ir:"dudas"}]);
+      })).concat([{n:t.verDudas, val:"▸", ir:"dudas"}]);
     return CLAVES_DUDA.map(function(c){
       var x = t.d[c]; return {n:x.n, val:"", txt:x.t};
     }).concat([{n:t.volver, val:"◂", ir:"sistemas"}]);
@@ -572,7 +626,7 @@ pt:{
     filas().forEach(function(x, i){
       var b = document.createElement("button");
       b.type = "button";
-      b.className = "fila" + (x.ok ? " hecho" : "") + (i === sel ? " sel" : "");
+      b.className = "fila" + (x.ok ? " hecho" : "") + (x.enlace ? " enlace" : "") + (i === sel ? " sel" : "");
       b.innerHTML = '<span class="flecha" aria-hidden="true"></span>' +
         '<span class="nom"></span><span class="val"></span>';
       b.querySelector(".nom").textContent = x.n;
@@ -602,6 +656,17 @@ pt:{
   function abre(x){
     var t = tt(), html = '<div class="quien">' + x.n + '</div>';
     html += x.txt.map(function(s){ return "<p>" + s + "</p>"; }).join("");
+    if (x.enlace){
+      var e = x.enlace;
+      if (e.url){
+        html += '<p class="ir"><a class="boton" target="_blank" rel="noopener" href="' +
+                e.url + '">' + x.boton + ' ▸</a></p>';
+      } else if (e.lista){
+        html += '<ul class="lista">' + e.lista.map(function(o){
+          return '<li><a target="_blank" rel="noopener" href="' + o.u + '">' + o.n + '</a></li>';
+        }).join("") + '</ul>';
+      }
+    }
     if (x.d){
       var p = Math.round(x.h / x.d * 100), n = Math.max(1, Math.round(p / 100 * 16)), s = "";
       for (var i = 0; i < 16; i++)
@@ -740,7 +805,10 @@ pt:{
   aviso.addEventListener("click", pasa);
 
   /* pulsar el propio cuadro lo cierra, como al pasar un dialogo del juego */
-  dial.addEventListener("click", function(){ cierra(); });
+  dial.addEventListener("click", function(e){
+    if (e.target.closest && e.target.closest("a")) return;
+    cierra();
+  });
 
   pintaEntrada();
   cambia(idi);
