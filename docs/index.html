@@ -116,7 +116,8 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 .fila:hover,.fila:focus-visible,.fila.sel{color:var(--cian);background:rgba(47,107,238,.10)}
 .fila:hover .flecha,.fila:focus-visible .flecha,.fila.sel .flecha{transform:translateY(-50%) scaleX(1)}
 .fila .nom{flex:1}
-.fila .val{color:var(--oro);font-size:.85em;white-space:nowrap}
+.fila .val{color:var(--oro);font-size:.85em;white-space:nowrap;
+  transition:color .2s ease}
 .fila.hecho .val{color:var(--verde)}
 .fila.enlace .nom{color:var(--oro)}
 .fila.enlace .val{color:var(--oro)}
@@ -312,7 +313,7 @@ footer a{color:var(--oro)}
 
 <div class="arriba">
   <h1>OpenWorld2003<b id="sub">Digimon World 3 en tu PC</b></h1>
-  <div class="chapa">14%</div>
+  <div class="chapa" id="chapa">14,5%</div>
 </div>
 
 <nav class="idiomas" id="idiomas" aria-label="Idioma"></nav>
@@ -603,6 +604,13 @@ pt:{
 
   function tt(){ return T[idi]; }
 
+  /* Del rojo al verde segun lo lleno que este. 0% rojo, 100% verde.
+     Se pasa por naranja y amarillo, que es como se lee de un vistazo. */
+  function color(p){
+    var t = Math.max(0, Math.min(100, p)) / 100;
+    return "hsl(" + Math.round(t * 132) + ",78%," + (52 - t * 6) + "%)";
+  }
+
   function fila_enlace(c){
     var l, x = tt().e[c];
     for (var i = 0; i < ENLACES.length; i++) if (ENLACES[i].c === c) l = ENLACES[i];
@@ -614,7 +622,8 @@ pt:{
     if (pantalla === "sistemas")
       return [fila_enlace("discord")].concat(CIFRAS.map(function(s){
         var p = Math.round(s.h / s.d * 100), x = t.s[s.c];
-        return {n:x.n, val:(s.ok ? "100%" : p + "%"), ok:s.ok, txt:x.t, h:s.h, d:s.d};
+        return {n:x.n, val:(s.ok ? "100%" : p + "%"), ok:s.ok, txt:x.t,
+                h:s.h, d:s.d, pct:(s.ok ? 100 : p)};
       })).concat([{n:t.verDudas, val:"▸", ir:"dudas"},
                   fila_enlace("proyectos")]);
     return CLAVES_DUDA.map(function(c){
@@ -636,6 +645,8 @@ pt:{
         '<span class="nom"></span><span class="val"></span>';
       b.querySelector(".nom").textContent = x.n;
       b.querySelector(".val").textContent = x.val;
+      if (typeof x.pct === "number")
+        b.querySelector(".val").style.color = color(x.pct);
       b.addEventListener("mouseenter", function(){ sel = i; marca(); });
       b.addEventListener("focus", function(){ sel = i; marca(); });
       b.addEventListener("click", function(){ sel = i; elige(); });
@@ -674,8 +685,11 @@ pt:{
     }
     if (x.d){
       var p = Math.round(x.h / x.d * 100), n = Math.max(1, Math.round(p / 100 * 16)), s = "";
+      var c = color(p);
       for (var i = 0; i < 16; i++)
-        s += '<i class="' + (i < n ? "on" + (x.ok ? " ok" : "") : "") + '"></i>';
+        s += i < n
+          ? '<i style="background:' + c + ';border-color:' + c + '"></i>'
+          : '<i></i>';
       html += '<div class="medida"><span>' + (x.ok ? t.completo : x.h + " / " + x.d) +
               '</span><span class="tiras">' + s + '</span></div>';
     }
@@ -814,6 +828,16 @@ pt:{
     if (e.target.closest && e.target.closest("a")) return;
     cierra();
   });
+
+  /* La chapa de arriba lleva el total del JUEGO ENTERO, no solo el de la
+     lista, y lo escribe actualizar_web.py. Aqui solo se le pone el color.
+     Va con un decimal a proposito: redondeada a entero parecia que no subia
+     nunca, porque cada avance mueve menos de un punto. */
+  (function(){
+    var ch = document.getElementById("chapa");
+    var p = parseFloat((ch.textContent || "0").replace(",", "."));
+    if (!isNaN(p)){ ch.style.color = color(p); ch.style.borderColor = color(p); }
+  })();
 
   pintaEntrada();
   cambia(idi);
