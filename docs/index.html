@@ -223,7 +223,6 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
   width:36px;height:24px;flex:none;display:block;
   border:2px solid #000;box-shadow:0 0 0 1px #4A6FA8;
 }
-.banderas .cod{margin-left:auto;color:var(--gris);font-size:9px}
 @media (prefers-reduced-motion:reduce){
   #entrada .marca,#entrada .rotulo,.banderas button{opacity:1;animation:none}
 }
@@ -677,10 +676,8 @@ pt:{
       var b = document.createElement("button");
       b.type = "button";
       b.setAttribute("lang", l.lang);
-      b.innerHTML = svgBandera(l.id) +
-        '<span class="nom"></span><span class="cod"></span>';
+      b.innerHTML = svgBandera(l.id) + '<span class="nom"></span>';
       b.querySelector(".nom").textContent = NOMBRE_IDIOMA[l.id];
-      b.querySelector(".cod").textContent = l.et;
       b.addEventListener("click", function(){ eligeIdioma(l.id); });
       rejilla.appendChild(b);
     });
