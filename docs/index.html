@@ -6,19 +6,21 @@
 
 <style>
 /* ── OpenWorld2003 ────────────────────────────────────────────────────────
-   Mundo: la placa de suelo del juego. Azul empapado, rejilla de 8 px, cuatro
-   puntos en la esquina, cantos vivos. Un solo mundo: oscuro, porque esto se
-   mira de noche y porque es el color del sitio del que habla.
-   Ni una imagen del juego: todo se dibuja con CSS. */
+   El mundo sale del propio juego, no de una imagen suya: suelo de teselas
+   azules con juntas y puntos, ventanas con las esquinas cortadas, corchetes
+   en las esquinas para señalar lo elegido, y el dorado como contrapunto al
+   azul. Todo dibujado con CSS. Un solo mundo, oscuro. */
 
 :root{
-  --hondo:#04101F;
-  --placa:#0A1E3A; --placa-alta:#0E2A4E; --placa-honda:#071A31;
-  --junta:#17416E; --junta-tenue:#0F2E51;
-  --tinta:#DCEBFB; --tinta-2:#8FB2D6; --tinta-3:#5D82AB;
-  --senal:#57E0FF; --senal-honda:#0B3E5C;
-  --lleno:#43E3A5;
-  --reja:rgba(87,224,255,.055); --reja-fuerte:rgba(87,224,255,.10);
+  --hondo:#050E1E;
+  --tesela:#0B1D3C; --tesela-2:#0E2650; --junta:#1B4076; --junta-2:#122C55;
+  --tinta:#E2EDFA; --tinta-2:#93B4DA; --tinta-3:#5F80AC;
+  --senal:#5FDCFF; --senal-honda:#0C3D5D;
+  --oro:#E8C170;
+  --lleno:#57E3A8;
+  --papel:#DCEEF2; --papel-2:#B4D8E2; --papel-tinta:#0B2438;
+  --punto:rgba(95,220,255,.12);
+  --corte:9px;                    /* el bisel de las esquinas */
   color-scheme:dark;
 }
 
@@ -26,169 +28,189 @@
 html{scrollbar-color:var(--junta) var(--hondo)}
 body{
   margin:0;color:var(--tinta);
+  /* el suelo: teselas de 44 px con junta, y un punto tenue en cada esquina */
   background:
-    linear-gradient(var(--reja) 1px,transparent 1px) 0 0/8px 8px,
-    linear-gradient(90deg,var(--reja) 1px,transparent 1px) 0 0/8px 8px,
-    radial-gradient(120% 80% at 50% 0%,#0A2242 0%,var(--hondo) 62%);
+    radial-gradient(circle at 2px 2px,var(--punto) 1px,transparent 1.6px) 0 0/22px 22px,
+    linear-gradient(var(--junta-2) 1px,transparent 1px) 0 0/44px 44px,
+    linear-gradient(90deg,var(--junta-2) 1px,transparent 1px) 0 0/44px 44px,
+    radial-gradient(130% 90% at 50% -10%,#123055 0%,var(--hondo) 60%);
   background-attachment:fixed;
   font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
   caret-color:var(--senal);
 }
 ::selection{background:var(--senal-honda);color:var(--tinta)}
-::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar{width:12px;height:12px}
 ::-webkit-scrollbar-track{background:var(--hondo)}
-::-webkit-scrollbar-thumb{background:var(--junta);border:2px solid var(--hondo)}
+::-webkit-scrollbar-thumb{background:var(--junta);border:3px solid var(--hondo)}
 ::-webkit-scrollbar-thumb:hover{background:var(--senal-honda)}
 :focus-visible{outline:2px solid var(--senal);outline-offset:3px}
 
-.caja{max-width:1000px;margin:0 auto;padding:0 22px}
+.caja{max-width:1010px;margin:0 auto;padding:0 22px}
+
+/* esquina cortada arriba-izquierda y abajo-derecha, como las ventanas del juego */
+.bisel{
+  clip-path:polygon(var(--corte) 0,100% 0,100% calc(100% - var(--corte)),
+                    calc(100% - var(--corte)) 100%,0 100%,0 var(--corte));
+}
 
 /* ── entrada ──────────────────────────────────────────────────────────── */
-header .caja{padding:clamp(48px,9vw,92px) 22px clamp(30px,5vw,44px)}
+header .caja{padding:clamp(46px,8vw,86px) 22px clamp(26px,4vw,40px)}
 h1{
   font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
-  font-size:clamp(40px,9.5vw,88px);line-height:.92;letter-spacing:-.025em;
+  font-size:clamp(38px,9vw,84px);line-height:.92;letter-spacing:-.03em;
   margin:0;text-wrap:balance;
 }
 h1 em{font-style:normal;color:var(--senal);display:block}
-.lema{
-  margin:20px 0 0;color:var(--tinta-2);font-size:clamp(16px,2.3vw,19px);
-  max-width:38ch;
-}
+.lema{margin:18px 0 0;color:var(--tinta-2);font-size:clamp(16px,2.2vw,19px);max-width:40ch}
 
-/* el contador general: la unica cifra grande de la pagina */
+/* el marcador: ventana con bisel y un filete dorado, como los paneles del juego */
 .marcador{
-  margin-top:clamp(28px,5vw,42px);
-  display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;
+  margin-top:clamp(26px,4.5vw,40px);border:1px solid var(--senal-honda);
+  background:linear-gradient(180deg,var(--tesela-2),var(--tesela));
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  padding:16px 20px;position:relative;
 }
-.marcador .cifra{
+.marcador::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--oro);
+}
+.cifra{
   font-family:"Chakra Petch",sans-serif;font-weight:700;
-  font-size:clamp(46px,9vw,78px);line-height:.85;letter-spacing:-.04em;
+  font-size:clamp(42px,8vw,70px);line-height:.85;letter-spacing:-.045em;
   color:var(--senal);font-variant-numeric:tabular-nums;
 }
-.marcador .cifra span{font-size:.42em;color:var(--tinta-3);letter-spacing:0}
-.marcador .rotulo{color:var(--tinta-2);font-size:15px;padding-bottom:6px;max-width:26ch}
+.cifra i{font-style:normal;font-size:.4em;color:var(--tinta-3);letter-spacing:0}
+.marcador p{margin:0;color:var(--tinta-2);font-size:15px;max-width:30ch}
+.marcador b{color:var(--tinta);font-weight:600}
+
+/* ── barra de seccion, como la cabecera de las pantallas del juego ────── */
+.barra{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:linear-gradient(180deg,#173A6B,#102A50);
+  border:1px solid var(--junta);border-bottom:0;
+  padding:9px 14px;
+}
+.barra h2{
+  font-family:"Chakra Petch",sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:clamp(15px,2.2vw,18px);letter-spacing:.02em;margin:0;color:#fff;
+}
+.barra span{
+  font-family:"Chakra Petch",sans-serif;font-size:13px;color:var(--oro);
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
 
 /* ── el mosaico ───────────────────────────────────────────────────────── */
-main{padding-bottom:clamp(40px,7vw,70px)}
-h2{
-  font-family:"Chakra Petch",sans-serif;font-weight:600;text-transform:uppercase;
-  font-size:clamp(19px,2.7vw,25px);letter-spacing:-.01em;
-  margin:0 0 4px;
-}
-.guia{margin:0 0 22px;color:var(--tinta-3);font-size:14.5px}
+.marco{border:1px solid var(--junta);background:rgba(6,18,38,.55);padding:7px}
+.mosaico{display:grid;gap:7px;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr))}
 
-.mosaico{
-  display:grid;gap:6px;
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,168px),1fr));
-  border:1px solid var(--junta-tenue);padding:6px;background:var(--placa-honda);
-}
 .placa{
-  --relleno:0%;
   appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;
-  border:1px solid var(--junta-tenue);background:var(--placa);
+  border:1px solid var(--junta-2);background:linear-gradient(180deg,var(--tesela-2),var(--tesela));
   padding:0;position:relative;overflow:hidden;
-  transition:background .16s ease,border-color .16s ease;
+  transition:border-color .16s ease,filter .16s ease;
 }
 .placa.ancha{grid-column:span 2}
-@media (max-width:430px){.placa.ancha{grid-column:span 1}}
+@media (max-width:440px){.placa.ancha{grid-column:span 1}}
 
-/* la rejilla fina de la propia placa y sus cuatro puntos */
-.placa::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    linear-gradient(var(--reja) 1px,transparent 1px) 0 0/8px 8px,
-    linear-gradient(90deg,var(--reja) 1px,transparent 1px) 0 0/8px 8px;
-}
-.placa::after{
-  content:"";position:absolute;top:10px;right:10px;width:2px;height:2px;
-  background:var(--senal);opacity:.35;
-  box-shadow:5px 0 0 var(--senal),0 5px 0 var(--senal),5px 5px 0 var(--senal);
-  transition:opacity .16s ease;
-}
-.placa:hover,.placa:focus-visible{background:var(--placa-alta);border-color:var(--junta)}
-.placa:hover::after,.placa:focus-visible::after{opacity:1}
-.placa[aria-expanded="true"]{background:var(--placa-alta);border-color:var(--senal)}
-
-/* el relleno: se pinta como una capa que sube desde abajo, no como barra */
+/* el relleno sube desde abajo: es el nivel de la placa */
 .nivel{
-  position:absolute;left:0;right:0;bottom:0;height:var(--relleno);
-  background:linear-gradient(180deg,var(--senal-honda) 0%,rgba(11,62,92,.35) 100%);
+  position:absolute;left:0;right:0;bottom:0;height:0;
+  background:linear-gradient(180deg,rgba(95,220,255,.20),rgba(95,220,255,.05));
   border-top:1px solid var(--senal);
-  transition:height .9s cubic-bezier(.16,1,.3,1);
-  pointer-events:none;
+  transition:height .95s cubic-bezier(.16,1,.3,1);pointer-events:none;
 }
 .placa.listo .nivel{
-  background:linear-gradient(180deg,rgba(67,227,165,.22) 0%,rgba(67,227,165,.06) 100%);
+  background:linear-gradient(180deg,rgba(87,227,168,.20),rgba(87,227,168,.05));
   border-top-color:var(--lleno);
 }
-.cara{position:relative;padding:14px 14px 12px;display:grid;gap:14px;min-height:104px}
+/* corchetes en las esquinas: la marca de "esto es lo elegido" del juego */
+.esq{position:absolute;width:9px;height:9px;border:2px solid var(--oro);opacity:0;
+  transition:opacity .16s ease;pointer-events:none}
+.esq.a{top:5px;left:5px;border-right:0;border-bottom:0}
+.esq.b{top:5px;right:5px;border-left:0;border-bottom:0}
+.esq.c{bottom:5px;left:5px;border-right:0;border-top:0}
+.esq.d{bottom:5px;right:5px;border-left:0;border-top:0}
+.placa:hover .esq,.placa:focus-visible .esq{opacity:.55}
+.placa[aria-expanded="true"] .esq{opacity:1}
+.placa:hover,.placa:focus-visible{border-color:var(--junta)}
+.placa[aria-expanded="true"]{border-color:var(--oro)}
+
+.cara{position:relative;padding:14px 14px 12px;display:grid;gap:16px;min-height:106px}
 .nombre{
   font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:16.5px;
   text-transform:uppercase;letter-spacing:-.005em;line-height:1.1;
 }
 .lectura{
-  align-self:end;display:flex;justify-content:space-between;align-items:baseline;
+  align-self:end;display:flex;justify-content:space-between;align-items:flex-end;
   gap:10px;font-size:12.5px;color:var(--tinta-3);font-variant-numeric:tabular-nums;
 }
+/* la cifra en su marquito, como los valores del juego */
 .lectura b{
-  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:19px;
-  color:var(--senal);letter-spacing:-.02em;
+  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:15px;
+  color:var(--senal);letter-spacing:-.01em;border:1px solid var(--senal-honda);
+  padding:1px 6px;background:rgba(12,61,93,.5);
 }
-.placa.listo .lectura b{color:var(--lleno)}
+.placa.listo .lectura b{color:var(--lleno);border-color:rgba(87,227,168,.4)}
 
-.detalle{
-  position:relative;display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1);
-}
+.detalle{position:relative;display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1)}
 .placa[aria-expanded="true"] .detalle{grid-template-rows:1fr}
-.detalle>div{overflow:hidden}
+.detalle>span{overflow:hidden;display:block}
 .detalle .texto{
   display:block;padding:12px 14px 14px;font-size:14px;line-height:1.5;
-  color:var(--tinta-2);border-top:1px solid var(--junta-tenue);
+  color:var(--tinta-2);border-top:1px solid var(--junta-2);
 }
 .detalle b{color:var(--tinta);font-weight:600}
 
-/* ── preguntas ────────────────────────────────────────────────────────── */
-.dudas{margin-top:clamp(38px,6vw,64px)}
-.lista{border:1px solid var(--junta-tenue);background:var(--placa)}
-.fila+.fila{border-top:1px solid var(--junta-tenue)}
+/* ── preguntas: la respuesta sale en un cuadro de dialogo del juego ───── */
+.dudas{margin-top:clamp(36px,5.5vw,60px)}
+.lista{border:1px solid var(--junta);border-top:0;background:rgba(6,18,38,.55);padding:7px;display:grid;gap:7px}
+.fila{position:relative}
 .q{
   appearance:none;width:100%;text-align:left;font:inherit;color:var(--tinta);
-  background:none;border:0;cursor:pointer;padding:16px 16px;
-  display:flex;justify-content:space-between;align-items:center;gap:16px;
-  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:16px;
-  letter-spacing:-.005em;transition:background .14s ease,color .14s ease;
+  border:1px solid var(--junta-2);background:linear-gradient(180deg,var(--tesela-2),var(--tesela));
+  cursor:pointer;padding:13px 14px;display:flex;justify-content:space-between;
+  align-items:center;gap:16px;font-family:"Chakra Petch",sans-serif;font-weight:600;
+  font-size:15.5px;letter-spacing:-.005em;transition:border-color .14s ease,color .14s ease;
 }
-.q:hover,.q:focus-visible{background:var(--placa-alta);color:var(--senal)}
-.q:focus-visible{outline-offset:-3px}
-.cruz{flex:none;width:12px;height:12px;position:relative;transition:transform .34s cubic-bezier(.16,1,.3,1)}
-.cruz::before,.cruz::after{content:"";position:absolute;background:var(--senal)}
-.cruz::before{left:0;right:0;top:5px;height:2px}
-.cruz::after{top:0;bottom:0;left:5px;width:2px}
-.q[aria-expanded="true"] .cruz{transform:rotate(135deg)}
+.q:hover,.q:focus-visible{border-color:var(--oro);color:var(--senal)}
+.punta{
+  flex:none;width:0;height:0;border-left:7px solid var(--oro);
+  border-top:5px solid transparent;border-bottom:5px solid transparent;
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.q[aria-expanded="true"] .punta{transform:rotate(90deg)}
 .r{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1)}
 .q[aria-expanded="true"]+.r{grid-template-rows:1fr}
 .r>div{overflow:hidden}
-.r p{margin:0;padding:0 16px 16px;font-size:15px;color:var(--tinta-2);max-width:68ch}
-.r p:first-child{padding-top:2px}
-.r p+p{padding-top:10px}
-.r b{color:var(--tinta);font-weight:600}
+.ventana{
+  margin:7px 0 0;background:linear-gradient(180deg,var(--papel),var(--papel-2));
+  border:1px solid #7FB4C4;color:var(--papel-tinta);padding:14px 16px 15px;
+  position:relative;
+}
+.ventana p{margin:0;font-size:15px;line-height:1.5;max-width:66ch}
+.ventana p+p{margin-top:9px}
+.ventana b{font-weight:600;color:#06304C}
+/* la flechita de "continuar" de las ventanas de texto */
+.ventana::after{
+  content:"";position:absolute;right:11px;bottom:9px;width:0;height:0;
+  border-top:7px solid var(--oro);border-left:5px solid transparent;
+  border-right:5px solid transparent;opacity:.85;
+}
 
 /* ── pie ──────────────────────────────────────────────────────────────── */
-footer{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--junta-tenue)}
-footer .caja{padding:20px 22px 46px;color:var(--tinta-3);font-size:13px}
-footer a{color:var(--senal)}
+footer{margin-top:clamp(38px,5.5vw,66px);border-top:1px solid var(--junta-2)}
+footer .caja{padding:18px 22px 44px;color:var(--tinta-3);font-size:13px}
+footer a{color:var(--oro)}
 
-/* ── el momento: el mosaico se enciende como una consola ──────────────── */
+/* ── el momento: la pantalla se enciende y el mosaico se llena ────────── */
 .barrido{
   position:fixed;inset:0;pointer-events:none;z-index:9;
-  background:linear-gradient(180deg,transparent 0%,rgba(87,224,255,.10) 48%,transparent 60%);
+  background:linear-gradient(180deg,transparent 0,rgba(95,220,255,.11) 46%,transparent 58%);
   transform:translateY(-100%);
 }
-body.arranca .barrido{animation:barre 1.15s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes barre{to{transform:translateY(110%)}}
+body.arranca .barrido{animation:barre 1.2s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes barre{to{transform:translateY(112%)}}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -201,23 +223,19 @@ body.arranca .barrido{animation:barre 1.15s cubic-bezier(.16,1,.3,1) forwards}
     <h1>Digimon World 3<em>en tu PC</em></h1>
     <p class="lema">Sin emulador, sin BIOS y sin disco. Ya se juega. Esto es lo que
       falta para poder cambiarlo por dentro.</p>
-    <div class="marcador">
-      <div class="cifra" id="cifra">14<span>%</span></div>
-      <p class="rotulo">del juego reescrito y comprobado pieza a pieza:
-        <b id="hechas">869</b> de 6.214</p>
+    <div class="marcador bisel">
+      <div class="cifra">14<i>%</i></div>
+      <p>del juego reescrito y comprobado pieza a pieza: <b>869</b> de 6.214</p>
     </div>
   </div>
 </header>
 
 <main class="caja">
-  <h2>El mosaico</h2>
-  <p class="guia">Cada placa es una parte del juego. Toca una para ver qué se
-    desbloquea cuando se llene.</p>
-  <div class="mosaico" id="mosaico"></div>
+  <div class="barra bisel"><h2>El mosaico</h2><span id="cuenta"></span></div>
+  <div class="marco"><div class="mosaico" id="mosaico"></div></div>
 
   <div class="dudas">
-    <h2>Lo que suelen preguntar</h2>
-    <p class="guia">Seis respuestas cortas.</p>
+    <div class="barra bisel"><h2>Lo que suelen preguntar</h2><span>6</span></div>
     <div class="lista" id="preguntas"></div>
   </div>
 </main>
@@ -232,23 +250,22 @@ body.arranca .barrido{animation:barre 1.15s cubic-bezier(.16,1,.3,1) forwards}
 <div class="barrido" aria-hidden="true"></div>
 
 <script>
-/* Un solo sitio para los datos: cambiar aqui y la pagina se recoloca sola. */
 var SISTEMAS = [
-  {n:"Guardado",      h:1,   d:1,    listo:true, ancha:false,
+  {n:"Guardado",      h:1,   d:1,    listo:true,
    t:"<b>Terminado.</b> La partida vive en ficheros de PC y carga en 0,21 s en vez de 18,7."},
-  {n:"Arranque",      h:1,   d:1,    listo:true, ancha:false,
+  {n:"Arranque",      h:1,   d:1,    listo:true,
    t:"<b>Terminado.</b> El juego abre sin la BIOS de la consola. No hace falta nada suyo."},
   {n:"Combate",       h:110, d:502,  ancha:true,
    t:"Cuando se llene, <b>añadir un Digimon nuevo será añadir una fila</b>. Sus datos y sus 245 modelos ya están abiertos."},
-  {n:"Entrenamiento", h:73,  d:173,  ancha:false,
+  {n:"Entrenamiento", h:73,  d:173,
    t:"Subir estadísticas. Es la parte más avanzada, y sirve de patrón para las demás."},
-  {n:"Tienda",        h:44,  d:121,  ancha:false,
+  {n:"Tienda",        h:44,  d:121,
    t:"Comprar y vender. Al llenarse se podrán cambiar precios y existencias sin tocar el original."},
   {n:"Cartas",        h:91,  d:881,  ancha:true,
    t:"Las 316 cartas ya se leen con sus dibujos y sus efectos. Falta que <b>el juego juegue con nuestro código</b> para poder añadir cartas nuevas."},
-  {n:"Campo",         h:15,  d:349,  ancha:false,
+  {n:"Campo",         h:15,  d:349,
    t:"Moverse por el mundo y hablar con la gente. De aquí depende <b>añadir un idioma nuevo</b>."},
-  {n:"Pantallas",     h:44,  d:303,  ancha:false,
+  {n:"Pantallas",     h:44,  d:303,
    t:"Menús, estado y fichas. Ya escriben el alfabeto entero, acentos incluidos."},
   {n:"Núcleo",        h:225, d:1073, ancha:true,
    t:"El código que comparten todas las partes. Es el que más ha crecido y el que sostiene a los demás."}
@@ -275,21 +292,23 @@ var PREGUNTAS = [
 ];
 
 (function(){
-  var mosaico = document.getElementById("mosaico");
-  var niveles = [];
+  var mosaico = document.getElementById("mosaico"), pendientes = [], listas = 0;
 
   SISTEMAS.forEach(function(s){
     var pct = Math.round(s.h / s.d * 100);
+    if (s.listo) listas++;
     var b = document.createElement("button");
     b.type = "button";
-    b.className = "placa" + (s.ancha ? " ancha" : "") + (s.listo ? " listo" : "");
+    b.className = "placa bisel" + (s.ancha ? " ancha" : "") + (s.listo ? " listo" : "");
     b.setAttribute("aria-expanded", "false");
     b.innerHTML =
       '<span class="nivel"></span>' +
+      '<span class="esq a"></span><span class="esq b"></span>' +
+      '<span class="esq c"></span><span class="esq d"></span>' +
       '<span class="cara">' +
         '<span class="nombre">' + s.n + '</span>' +
-        '<span class="lectura"><span>' + (s.listo ? "completo" : s.h + " de " + s.d) + '</span>' +
-        '<b>' + pct + '%</b></span>' +
+        '<span class="lectura"><span>' + (s.listo ? "completo" : s.h + " de " + s.d) +
+        '</span><b>' + pct + '%</b></span>' +
       '</span>' +
       '<span class="detalle"><span><span class="texto">' + s.t + '</span></span></span>';
     b.addEventListener("click", function(){
@@ -297,18 +316,20 @@ var PREGUNTAS = [
         b.getAttribute("aria-expanded") === "true" ? "false" : "true");
     });
     mosaico.appendChild(b);
-    niveles.push([b, Math.max(pct, 3)]);
+    pendientes.push([b.querySelector(".nivel"), Math.max(pct, 4)]);
   });
+  document.getElementById("cuenta").textContent = listas + " / " + SISTEMAS.length;
 
   var lista = document.getElementById("preguntas");
   PREGUNTAS.forEach(function(x, i){
     var f = document.createElement("div");
     f.className = "fila";
     f.innerHTML =
-      '<button class="q" type="button" aria-expanded="false" aria-controls="r' + i + '">' +
-        '<span>' + x.q + '</span><span class="cruz" aria-hidden="true"></span></button>' +
-      '<div class="r" id="r' + i + '"><div>' +
-        x.r.map(function(t){ return "<p>" + t + "</p>"; }).join("") + '</div></div>';
+      '<button class="q bisel" type="button" aria-expanded="false" aria-controls="r' + i + '">' +
+        '<span>' + x.q + '</span><span class="punta" aria-hidden="true"></span></button>' +
+      '<div class="r" id="r' + i + '"><div><div class="ventana bisel">' +
+        x.r.map(function(t){ return "<p>" + t + "</p>"; }).join("") +
+      '</div></div></div>';
     var boton = f.querySelector(".q");
     boton.addEventListener("click", function(){
       boton.setAttribute("aria-expanded",
@@ -317,17 +338,13 @@ var PREGUNTAS = [
     lista.appendChild(f);
   });
 
-  /* El momento: un barrido de luz recorre la pantalla y, a su paso, cada placa
-     se llena hasta su nivel. Ocurre una vez, al abrir, y nada mas se mueve. */
   var quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (quieto) {
-    niveles.forEach(function(p){ p[0].querySelector(".nivel").style.height = p[1] + "%"; });
+    pendientes.forEach(function(p){ p[0].style.height = p[1] + "%"; });
   } else {
     document.body.classList.add("arranca");
-    niveles.forEach(function(p, i){
-      setTimeout(function(){
-        p[0].querySelector(".nivel").style.height = p[1] + "%";
-      }, 190 + i * 62);
+    pendientes.forEach(function(p, i){
+      setTimeout(function(){ p[0].style.height = p[1] + "%"; }, 200 + i * 64);
     });
   }
 })();
