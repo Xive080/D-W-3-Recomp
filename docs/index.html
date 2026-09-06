@@ -1,351 +1,490 @@
 <title>OpenWorld2003</title>
-<meta name="description" content="Cuánto queda para que Digimon World 3 sea un juego de PC de verdad. Toca una placa.">
+<meta name="description" content="Cuánto queda para que Digimon World 3 sea un juego de PC de verdad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap">
 
 <style>
 /* ── OpenWorld2003 ────────────────────────────────────────────────────────
-   El mundo sale del propio juego, no de una imagen suya: suelo de teselas
-   azules con juntas y puntos, ventanas con las esquinas cortadas, corchetes
-   en las esquinas para señalar lo elegido, y el dorado como contrapunto al
-   azul. Todo dibujado con CSS. Un solo mundo, oscuro. */
+   Pantalla de menu. El suelo de teselas es teselas.png, arte propio del
+   usuario. Ningun recurso del juego entra aqui. */
 
 :root{
-  --hondo:#050E1E;
-  --tesela:#0B1D3C; --tesela-2:#0E2650; --junta:#1B4076; --junta-2:#122C55;
-  --tinta:#E2EDFA; --tinta-2:#93B4DA; --tinta-3:#5F80AC;
-  --senal:#5FDCFF; --senal-honda:#0C3D5D;
-  --oro:#E8C170;
-  --lleno:#57E3A8;
-  --papel:#DCEEF2; --papel-2:#B4D8E2; --papel-tinta:#0B2438;
-  --punto:rgba(95,220,255,.12);
-  --corte:9px;                    /* el bisel de las esquinas */
-  color-scheme:dark;
+  --negro:#04070F;
+  --caja:#070C22; --borde:#2F6BEE; --borde-2:#1A3E8C;
+  --blanco:#FFFFFF; --gris:#9FB6D8;
+  --oro:#F2C94C; --verde:#5BE39C; --cian:#5FDCFF;
+  --linea:#1E4AA8;
+  --tinta:#16255C;
+  --pixel:"Press Start 2P",monospace;
 }
+html[lang="ja"]{ --pixel:"Noto Sans JP",system-ui,sans-serif }
 
 *{box-sizing:border-box}
-html{scrollbar-color:var(--junta) var(--hondo)}
+html,body{height:100%}
 body{
-  margin:0;color:var(--tinta);
-  /* el suelo: teselas de 44 px con junta, y un punto tenue en cada esquina */
+  margin:0;color:var(--blanco);background:var(--negro);
+  font-family:Silkscreen,ui-monospace,monospace;
+  font-size:16px;line-height:1.7;
+  display:flex;flex-direction:column;align-items:center;
+  padding:clamp(16px,4vw,44px) 16px 40px;
+  position:relative;isolation:isolate;
+}
+html[lang="ja"] body{font-family:"Noto Sans JP",system-ui,sans-serif}
+
+/* el mosaico: tus teselas, fijas, con una veladura para que se lea el texto */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:var(--negro) url("teselas.png") 0 0 repeat;
+  background-size:288px 288px;
+  image-rendering:pixelated;
+  animation:mosaico 90s linear infinite;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(circle at 2px 2px,var(--punto) 1px,transparent 1.6px) 0 0/22px 22px,
-    linear-gradient(var(--junta-2) 1px,transparent 1px) 0 0/44px 44px,
-    linear-gradient(90deg,var(--junta-2) 1px,transparent 1px) 0 0/44px 44px,
-    radial-gradient(130% 90% at 50% -10%,#123055 0%,var(--hondo) 60%);
-  background-attachment:fixed;
-  font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
-  caret-color:var(--senal);
+    radial-gradient(ellipse at 50% 30%, rgba(4,7,15,.35), rgba(4,7,15,.88) 70%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 2px, transparent 2px 4px);
 }
-::selection{background:var(--senal-honda);color:var(--tinta)}
-::-webkit-scrollbar{width:12px;height:12px}
-::-webkit-scrollbar-track{background:var(--hondo)}
-::-webkit-scrollbar-thumb{background:var(--junta);border:3px solid var(--hondo)}
-::-webkit-scrollbar-thumb:hover{background:var(--senal-honda)}
-:focus-visible{outline:2px solid var(--senal);outline-offset:3px}
+@keyframes mosaico{ to{ background-position:288px 576px } }
 
-.caja{max-width:1010px;margin:0 auto;padding:0 22px}
+::selection{background:var(--borde);color:#fff}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
 
-/* esquina cortada arriba-izquierda y abajo-derecha, como las ventanas del juego */
-.bisel{
-  clip-path:polygon(var(--corte) 0,100% 0,100% calc(100% - var(--corte)),
-                    calc(100% - var(--corte)) 100%,0 100%,0 var(--corte));
+/* ── barra de arriba ──────────────────────────────────────────────────── */
+.arriba{
+  width:100%;max-width:760px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin-bottom:clamp(14px,3vw,26px);
 }
-
-/* ── entrada ──────────────────────────────────────────────────────────── */
-header .caja{padding:clamp(46px,8vw,86px) 22px clamp(26px,4vw,40px)}
 h1{
-  font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
-  font-size:clamp(38px,9vw,84px);line-height:.92;letter-spacing:-.03em;
-  margin:0;text-wrap:balance;
+  font-family:var(--pixel);font-size:clamp(11px,2.2vw,16px);
+  margin:0;line-height:1.5;letter-spacing:.02em;text-shadow:0 2px 0 #000;
 }
-h1 em{font-style:normal;color:var(--senal);display:block}
-.lema{margin:18px 0 0;color:var(--tinta-2);font-size:clamp(16px,2.2vw,19px);max-width:40ch}
-
-/* el marcador: ventana con bisel y un filete dorado, como los paneles del juego */
-.marcador{
-  margin-top:clamp(26px,4.5vw,40px);border:1px solid var(--senal-honda);
-  background:linear-gradient(180deg,var(--tesela-2),var(--tesela));
-  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
-  padding:16px 20px;position:relative;
-}
-.marcador::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--oro);
-}
-.cifra{
-  font-family:"Chakra Petch",sans-serif;font-weight:700;
-  font-size:clamp(42px,8vw,70px);line-height:.85;letter-spacing:-.045em;
-  color:var(--senal);font-variant-numeric:tabular-nums;
-}
-.cifra i{font-style:normal;font-size:.4em;color:var(--tinta-3);letter-spacing:0}
-.marcador p{margin:0;color:var(--tinta-2);font-size:15px;max-width:30ch}
-.marcador b{color:var(--tinta);font-weight:600}
-
-/* ── barra de seccion, como la cabecera de las pantallas del juego ────── */
-.barra{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  background:linear-gradient(180deg,#173A6B,#102A50);
-  border:1px solid var(--junta);border-bottom:0;
-  padding:9px 14px;
-}
-.barra h2{
-  font-family:"Chakra Petch",sans-serif;font-weight:600;text-transform:uppercase;
-  font-size:clamp(15px,2.2vw,18px);letter-spacing:.02em;margin:0;color:#fff;
-}
-.barra span{
-  font-family:"Chakra Petch",sans-serif;font-size:13px;color:var(--oro);
-  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gris)}
+.chapa{
+  font-family:var(--pixel);font-size:11px;color:var(--oro);
+  border:2px solid var(--oro);background:rgba(4,7,15,.85);
+  padding:9px 11px;white-space:nowrap;line-height:1;
 }
 
-/* ── el mosaico ───────────────────────────────────────────────────────── */
-.marco{border:1px solid var(--junta);background:rgba(6,18,38,.55);padding:7px}
-.mosaico{display:grid;gap:7px;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr))}
+/* ── idiomas ──────────────────────────────────────────────────────────── */
+.idiomas{
+  width:100%;max-width:760px;display:flex;gap:6px;flex-wrap:wrap;
+  margin-bottom:clamp(12px,2.4vw,18px);
+}
+.idiomas button{
+  font-family:var(--pixel);font-size:10px;line-height:1;
+  color:var(--gris);background:rgba(7,12,34,.82);
+  border:2px solid var(--borde-2);padding:8px 9px;cursor:pointer;
+  transition:color .1s steps(2),border-color .1s steps(2),transform .1s steps(2);
+}
+.idiomas button:hover{color:var(--cian);border-color:var(--borde);transform:translateY(-2px)}
+.idiomas button[aria-pressed="true"]{color:var(--negro);background:var(--cian);border-color:var(--cian)}
 
-.placa{
-  appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;
-  border:1px solid var(--junta-2);background:linear-gradient(180deg,var(--tesela-2),var(--tesela));
-  padding:0;position:relative;overflow:hidden;
-  transition:border-color .16s ease,filter .16s ease;
+/* ── el cuadro ────────────────────────────────────────────────────────── */
+.cuadro{
+  width:100%;max-width:760px;background:rgba(7,12,34,.92);
+  border:3px solid var(--borde);border-radius:12px;
+  padding:14px 10px;box-shadow:0 0 0 3px #000, 0 10px 0 rgba(0,0,0,.35);
 }
-.placa.ancha{grid-column:span 2}
-@media (max-width:440px){.placa.ancha{grid-column:span 1}}
+.cuadro + .cuadro{margin-top:clamp(14px,3vw,22px)}
 
-/* el relleno sube desde abajo: es el nivel de la placa */
-.nivel{
-  position:absolute;left:0;right:0;bottom:0;height:0;
-  background:linear-gradient(180deg,rgba(95,220,255,.20),rgba(95,220,255,.05));
-  border-top:1px solid var(--senal);
-  transition:height .95s cubic-bezier(.16,1,.3,1);pointer-events:none;
-}
-.placa.listo .nivel{
-  background:linear-gradient(180deg,rgba(87,227,168,.20),rgba(87,227,168,.05));
-  border-top-color:var(--lleno);
-}
-/* corchetes en las esquinas: la marca de "esto es lo elegido" del juego */
-.esq{position:absolute;width:9px;height:9px;border:2px solid var(--oro);opacity:0;
-  transition:opacity .16s ease;pointer-events:none}
-.esq.a{top:5px;left:5px;border-right:0;border-bottom:0}
-.esq.b{top:5px;right:5px;border-left:0;border-bottom:0}
-.esq.c{bottom:5px;left:5px;border-right:0;border-top:0}
-.esq.d{bottom:5px;right:5px;border-left:0;border-top:0}
-.placa:hover .esq,.placa:focus-visible .esq{opacity:.55}
-.placa[aria-expanded="true"] .esq{opacity:1}
-.placa:hover,.placa:focus-visible{border-color:var(--junta)}
-.placa[aria-expanded="true"]{border-color:var(--oro)}
-
-.cara{position:relative;padding:14px 14px 12px;display:grid;gap:16px;min-height:106px}
-.nombre{
-  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:16.5px;
-  text-transform:uppercase;letter-spacing:-.005em;line-height:1.1;
-}
-.lectura{
-  align-self:end;display:flex;justify-content:space-between;align-items:flex-end;
-  gap:10px;font-size:12.5px;color:var(--tinta-3);font-variant-numeric:tabular-nums;
-}
-/* la cifra en su marquito, como los valores del juego */
-.lectura b{
-  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:15px;
-  color:var(--senal);letter-spacing:-.01em;border:1px solid var(--senal-honda);
-  padding:1px 6px;background:rgba(12,61,93,.5);
-}
-.placa.listo .lectura b{color:var(--lleno);border-color:rgba(87,227,168,.4)}
-
-.detalle{position:relative;display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1)}
-.placa[aria-expanded="true"] .detalle{grid-template-rows:1fr}
-.detalle>span{overflow:hidden;display:block}
-.detalle .texto{
-  display:block;padding:12px 14px 14px;font-size:14px;line-height:1.5;
-  color:var(--tinta-2);border-top:1px solid var(--junta-2);
-}
-.detalle b{color:var(--tinta);font-weight:600}
-
-/* ── preguntas: la respuesta sale en un cuadro de dialogo del juego ───── */
-.dudas{margin-top:clamp(36px,5.5vw,60px)}
-.lista{border:1px solid var(--junta);border-top:0;background:rgba(6,18,38,.55);padding:7px;display:grid;gap:7px}
-.fila{position:relative}
-.q{
-  appearance:none;width:100%;text-align:left;font:inherit;color:var(--tinta);
-  border:1px solid var(--junta-2);background:linear-gradient(180deg,var(--tesela-2),var(--tesela));
-  cursor:pointer;padding:13px 14px;display:flex;justify-content:space-between;
-  align-items:center;gap:16px;font-family:"Chakra Petch",sans-serif;font-weight:600;
-  font-size:15.5px;letter-spacing:-.005em;transition:border-color .14s ease,color .14s ease;
-}
-.q:hover,.q:focus-visible{border-color:var(--oro);color:var(--senal)}
-.punta{
-  flex:none;width:0;height:0;border-left:7px solid var(--oro);
-  border-top:5px solid transparent;border-bottom:5px solid transparent;
-  transition:transform .3s cubic-bezier(.16,1,.3,1);
-}
-.q[aria-expanded="true"] .punta{transform:rotate(90deg)}
-.r{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1)}
-.q[aria-expanded="true"]+.r{grid-template-rows:1fr}
-.r>div{overflow:hidden}
-.ventana{
-  margin:7px 0 0;background:linear-gradient(180deg,var(--papel),var(--papel-2));
-  border:1px solid #7FB4C4;color:var(--papel-tinta);padding:14px 16px 15px;
-  position:relative;
-}
-.ventana p{margin:0;font-size:15px;line-height:1.5;max-width:66ch}
-.ventana p+p{margin-top:9px}
-.ventana b{font-weight:600;color:#06304C}
-/* la flechita de "continuar" de las ventanas de texto */
-.ventana::after{
-  content:"";position:absolute;right:11px;bottom:9px;width:0;height:0;
-  border-top:7px solid var(--oro);border-left:5px solid transparent;
-  border-right:5px solid transparent;opacity:.85;
+.titulo{
+  font-family:var(--pixel);font-size:11px;color:var(--gris);
+  padding:2px 12px 12px;letter-spacing:.06em;
 }
 
-/* ── pie ──────────────────────────────────────────────────────────────── */
-footer{margin-top:clamp(38px,5.5vw,66px);border-top:1px solid var(--junta-2)}
-footer .caja{padding:18px 22px 44px;color:var(--tinta-3);font-size:13px}
+/* filas del menu */
+.fila{
+  width:100%;display:flex;align-items:center;gap:12px;
+  background:none;border:0;border-bottom:1px solid var(--linea);
+  color:var(--blanco);font:inherit;cursor:pointer;text-align:left;
+  padding:13px 12px 12px 34px;position:relative;
+  font-family:var(--pixel);font-size:clamp(10px,1.8vw,13px);
+  letter-spacing:.04em;line-height:1.4;
+  transition:color .1s steps(2),background .1s steps(2);
+}
+.fila:last-child{border-bottom:0}
+.fila .flecha{
+  position:absolute;left:11px;top:50%;width:0;height:0;
+  border-left:11px solid var(--blanco);
+  border-top:7px solid transparent;border-bottom:7px solid transparent;
+  transform:translateY(-50%) scaleX(0);transform-origin:left center;
+  transition:transform .12s steps(3);
+}
+.fila:hover,.fila:focus-visible,.fila.sel{color:var(--cian);background:rgba(47,107,238,.10)}
+.fila:hover .flecha,.fila:focus-visible .flecha,.fila.sel .flecha{transform:translateY(-50%) scaleX(1)}
+.fila .nom{flex:1}
+.fila .val{color:var(--oro);font-size:.85em;white-space:nowrap}
+.fila.hecho .val{color:var(--verde)}
+
+/* ── el cuadro de dialogo: tal como sale en el juego ──────────────────── */
+.dialogo{
+  display:none;position:relative;
+  width:100%;max-width:760px;
+  margin-top:clamp(16px,3vw,24px);
+  padding:22px 20px 34px;
+  color:var(--tinta);
+  background:linear-gradient(180deg,#F4F9FF 0%,#DCE9FB 46%,#BFD5F2 100%);
+  border:2px solid var(--tinta);
+  border-radius:4px;
+  box-shadow:
+    inset 0 0 0 2px #FFFFFF,
+    inset 0 0 0 4px #8FB2E0,
+    0 0 0 2px #000,
+    0 8px 0 rgba(0,0,0,.45);
+}
+.dialogo.abierto{display:block;animation:abre .16s steps(4)}
+@keyframes abre{
+  from{transform:scaleY(.15);opacity:.3}
+  to{transform:scaleY(1);opacity:1}
+}
+/* la pestaña con el nombre, encajada en el borde de arriba */
+.dialogo .quien{
+  position:absolute;top:-13px;left:16px;
+  font-family:var(--pixel);font-size:10px;line-height:1;
+  color:#1B3E8C;background:#F7FBFF;
+  border:2px solid var(--tinta);border-radius:3px;
+  padding:6px 9px;letter-spacing:.05em;
+  box-shadow:0 0 0 2px #000;
+  max-width:calc(100% - 32px);
+}
+.dialogo p{margin:0;font-size:15px;color:var(--tinta);max-width:60ch}
+.dialogo p + p{margin-top:11px}
+.dialogo b{color:#0C57C4;font-weight:700}
+/* la flechita naranja de "sigue", abajo a la derecha */
+.dialogo .sigue{
+  position:absolute;right:14px;bottom:12px;width:0;height:0;
+  border-left:8px solid transparent;border-right:8px solid transparent;
+  border-top:10px solid #E8791F;
+  filter:drop-shadow(0 1px 0 #7A3300);
+  animation:late .8s steps(1) infinite;
+}
+@keyframes late{ 50%{opacity:0} }
+
+.medida{
+  margin:16px 0 2px;display:flex;align-items:center;gap:10px;
+  font-family:var(--pixel);font-size:10px;color:#33528F;
+}
+.tiras{display:flex;gap:3px;flex:1}
+.tiras i{flex:1;height:12px;background:#AEC4E4;border:1px solid #33528F}
+.tiras i.on{background:#1B6FE0;border-color:#0C3B85}
+.tiras i.on.ok{background:#17A05E;border-color:#0A5231}
+.cerrar{
+  margin:14px 0 0;font-family:var(--pixel);font-size:10px;
+  color:#33528F;background:none;border:0;cursor:pointer;padding:6px 0;
+}
+.cerrar:hover{color:#0C57C4;text-decoration:underline}
+
+footer{
+  max-width:760px;margin-top:clamp(18px,3vw,28px);
+  font-size:13px;color:var(--gris);text-align:center;line-height:1.8;
+}
 footer a{color:var(--oro)}
 
-/* ── el momento: la pantalla se enciende y el mosaico se llena ────────── */
-.barrido{
-  position:fixed;inset:0;pointer-events:none;z-index:9;
-  background:linear-gradient(180deg,transparent 0,rgba(95,220,255,.11) 46%,transparent 58%);
-  transform:translateY(-100%);
-}
-body.arranca .barrido{animation:barre 1.2s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes barre{to{transform:translateY(112%)}}
-
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .barrido{display:none}
-}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
-<header>
-  <div class="caja">
-    <h1>Digimon World 3<em>en tu PC</em></h1>
-    <p class="lema">Sin emulador, sin BIOS y sin disco. Ya se juega. Esto es lo que
-      falta para poder cambiarlo por dentro.</p>
-    <div class="marcador bisel">
-      <div class="cifra">14<i>%</i></div>
-      <p>del juego reescrito y comprobado pieza a pieza: <b>869</b> de 6.214</p>
-    </div>
-  </div>
-</header>
+<div class="arriba">
+  <h1>OpenWorld2003<b id="sub">Digimon World 3 en tu PC</b></h1>
+  <div class="chapa">14%</div>
+</div>
 
-<main class="caja">
-  <div class="barra bisel"><h2>El mosaico</h2><span id="cuenta"></span></div>
-  <div class="marco"><div class="mosaico" id="mosaico"></div></div>
+<nav class="idiomas" id="idiomas" aria-label="Idioma"></nav>
 
-  <div class="dudas">
-    <div class="barra bisel"><h2>Lo que suelen preguntar</h2><span>6</span></div>
-    <div class="lista" id="preguntas"></div>
-  </div>
-</main>
+<div class="cuadro" id="menu"></div>
+<div class="dialogo" id="dialogo"></div>
 
 <footer>
-  <div class="caja">
-    Los números los pone la comprobación automática, nunca una persona ·
-    <a href="https://github.com/Xive080/D-W-3-Recomp">código y avances</a>
-  </div>
+  <span id="pie"></span><br>
+  <a href="https://github.com/Xive080/D-W-3-Recomp" id="enlace">Código y avances</a>
 </footer>
 
-<div class="barrido" aria-hidden="true"></div>
-
 <script>
-var SISTEMAS = [
-  {n:"Guardado",      h:1,   d:1,    listo:true,
-   t:"<b>Terminado.</b> La partida vive en ficheros de PC y carga en 0,21 s en vez de 18,7."},
-  {n:"Arranque",      h:1,   d:1,    listo:true,
-   t:"<b>Terminado.</b> El juego abre sin la BIOS de la consola. No hace falta nada suyo."},
-  {n:"Combate",       h:110, d:502,  ancha:true,
-   t:"Cuando se llene, <b>añadir un Digimon nuevo será añadir una fila</b>. Sus datos y sus 245 modelos ya están abiertos."},
-  {n:"Entrenamiento", h:73,  d:173,
-   t:"Subir estadísticas. Es la parte más avanzada, y sirve de patrón para las demás."},
-  {n:"Tienda",        h:44,  d:121,
-   t:"Comprar y vender. Al llenarse se podrán cambiar precios y existencias sin tocar el original."},
-  {n:"Cartas",        h:91,  d:881,  ancha:true,
-   t:"Las 316 cartas ya se leen con sus dibujos y sus efectos. Falta que <b>el juego juegue con nuestro código</b> para poder añadir cartas nuevas."},
-  {n:"Campo",         h:15,  d:349,
-   t:"Moverse por el mundo y hablar con la gente. De aquí depende <b>añadir un idioma nuevo</b>."},
-  {n:"Pantallas",     h:44,  d:303,
-   t:"Menús, estado y fichas. Ya escriben el alfabeto entero, acentos incluidos."},
-  {n:"Núcleo",        h:225, d:1073, ancha:true,
-   t:"El código que comparten todas las partes. Es el que más ha crecido y el que sostiene a los demás."}
+/* Los numeros son los mismos en todos los idiomas: los pone la comparacion. */
+var CIFRAS = [
+  {c:"guardado", h:1, d:1, ok:true},
+  {c:"arranque", h:1, d:1, ok:true},
+  {c:"combate", h:110, d:502},
+  {c:"entrenamiento", h:73, d:173},
+  {c:"tienda", h:44, d:121},
+  {c:"cartas", h:91, d:881},
+  {c:"campo", h:15, d:349},
+  {c:"pantallas", h:44, d:303},
+  {c:"nucleo", h:225, d:1073}
+];
+var CLAVES_DUDA = ["jugar","tarda","bloques","graficos"];
+
+var IDIOMAS = [
+  {id:"es", lang:"es", et:"ESP"},
+  {id:"en", lang:"en", et:"ENG"},
+  {id:"fr", lang:"fr", et:"FRA"},
+  {id:"de", lang:"de", et:"GER"},
+  {id:"it", lang:"it", et:"ITA"},
+  {id:"ja", lang:"ja", et:"JPN"}
 ];
 
-var PREGUNTAS = [
-  {q:"¿Puedo jugar ya?",
-   r:["<b>Sí.</b> Se instala y se juega como cualquier juego de PC: sin emulador, sin la BIOS de la consola, sin imagen de disco y sin tarjeta de memoria."]},
-  {q:"¿Cuándo podréis añadir un Digimon nuevo?",
-   r:["Sus datos ya están abiertos: fichas, técnicas, evoluciones y los 245 modelos se leen y se vuelven a escribir sin perder un byte.",
-      "Falta que el juego los use <b>pasando por nuestro código</b>, y eso es el combate. Cuando esa placa se llene, un Digimon nuevo es una fila más."]},
-  {q:"¿Y más idiomas?",
-   r:["Los seis que ya trae se leen y se escriben enteros, así que <b>traducirlos se puede hoy</b>.",
-      "Uno nuevo espera al campo: los diálogos no salen de los ficheros de idioma, salen de los guiones de cada pantalla."]},
-  {q:"¿Se podrán cambiar los gráficos?",
-   r:["A medias y comprobado: una pieza del escenario ya se saca del juego y <b>la dibujamos nosotros</b>. Falta hacerlo con todas.",
-      "De paso cae un límite de la consola, que sólo podía tener doce piezas de escenario a la vez."]},
-  {q:"¿Por qué casi todo depende de lo mismo?",
-   r:["Porque hay una llave. El juego no tiene todo su código a la vez: lo va trayendo del disco por bloques, según dónde estés.",
-      "Hoy esos bloques van <b>por el camino lento</b> y no usan lo que ya tenemos escrito. Es tener el motor nuevo montado en el banco y el coche andando aún con el viejo."]},
-  {q:"¿Cómo se mide todo esto?",
-   r:["Reescribimos cada pieza y la comparamos con el original <b>byte a byte</b>. Sólo cuenta si sale idéntica; si falla uno, no cuenta.",
-      "Es transcribir una partitura y luego tocarla para ver si suena igual."]}
-];
+var T = {
+
+es:{
+  sub:"Digimon World 3 en tu PC",
+  partes:"PARTES DEL JUEGO", dudas:"DUDAS", verDudas:"DUDAS", volver:"VOLVER",
+  cerrar:"CERRAR", completo:"COMPLETO", idioma:"IDIOMA",
+  pie:"Sin emulador, sin BIOS y sin disco. Ya se juega.", enlace:"Código y avances",
+  s:{
+    guardado:{n:"GUARDADO", t:["<b>Terminado.</b> La partida se guarda en ficheros normales de PC, no en una tarjeta de memoria de consola.","Cargarla tarda <b>0,21 segundos</b> en vez de 18,7, y el contenido sale idéntico al original."]},
+    arranque:{n:"ARRANQUE", t:["<b>Terminado.</b> El juego abre sin la BIOS de la consola: no hace falta ningún fichero de Sony."]},
+    combate:{n:"COMBATE", t:["Cuando se llene, <b>añadir un Digimon nuevo será añadir una fila</b>.","Sus datos ya están abiertos: fichas, técnicas, evoluciones y los 245 modelos."]},
+    entrenamiento:{n:"ENTRENAMIENTO", t:["Subir estadísticas. Es la parte más avanzada del juego y sirve de patrón para las demás."]},
+    tienda:{n:"TIENDA", t:["Comprar y vender. Al llenarse se podrán cambiar precios y existencias sin tocar el original."]},
+    cartas:{n:"CARTAS", t:["Las 316 cartas ya se leen con sus dibujos y sus 60 efectos.","Falta que <b>el juego juegue con nuestro código</b> para poder añadir cartas nuevas."]},
+    campo:{n:"CAMPO", t:["Moverse por el mundo y hablar con la gente.","De aquí depende <b>añadir un idioma nuevo</b>: los diálogos salen de los guiones de cada pantalla, no de los ficheros de idioma."]},
+    pantallas:{n:"PANTALLAS", t:["Menús, estado y fichas. Ya escriben el alfabeto entero, acentos incluidos."]},
+    nucleo:{n:"NUCLEO", t:["El código que comparten todas las partes. Es el que más ha crecido y el que sostiene a los demás."]}
+  },
+  d:{
+    jugar:{n:"¿PUEDO JUGAR YA?", t:["<b>Sí.</b> Se instala y se juega como cualquier juego de PC: sin emulador, sin BIOS, sin imagen de disco y sin tarjeta de memoria."]},
+    tarda:{n:"¿POR QUE TARDA?", t:["Cada pieza se reescribe y se compara con el original <b>byte a byte</b>. Sólo cuenta si sale idéntica; si falla uno, no cuenta.","Es transcribir una partitura y luego tocarla para ver si suena igual."]},
+    bloques:{n:"¿POR QUE TODO DEPENDE DE LO MISMO?", t:["El juego no tiene todo su código a la vez: lo trae del disco por bloques, según dónde estés.","Hoy esos bloques van <b>por el camino lento</b> y no usan lo que ya tenemos escrito."]},
+    graficos:{n:"¿GRAFICOS NUEVOS?", t:["A medias y comprobado: una pieza del escenario ya se saca del juego y <b>la dibujamos nosotros</b>.","De paso cae un límite de la consola, que sólo podía tener doce piezas a la vez."]}
+  }
+},
+
+en:{
+  sub:"Digimon World 3 on your PC",
+  partes:"PARTS OF THE GAME", dudas:"QUESTIONS", verDudas:"QUESTIONS", volver:"BACK",
+  cerrar:"CLOSE", completo:"COMPLETE", idioma:"LANGUAGE",
+  pie:"No emulator, no BIOS, no disc. Already playable.", enlace:"Code and progress",
+  s:{
+    guardado:{n:"SAVING", t:["<b>Done.</b> The game saves to ordinary PC files, not to a console memory card.","Loading takes <b>0.21 seconds</b> instead of 18.7, and the contents come out identical to the original."]},
+    arranque:{n:"BOOT", t:["<b>Done.</b> The game starts without the console BIOS: no Sony file is needed."]},
+    combate:{n:"BATTLE", t:["Once this fills up, <b>adding a new Digimon means adding a row</b>.","The data is already open: stats, techniques, evolutions and all 245 models."]},
+    entrenamiento:{n:"TRAINING", t:["Raising stats. It is the most advanced part of the game and sets the pattern for the rest."]},
+    tienda:{n:"SHOP", t:["Buying and selling. Once full, prices and stock can be changed without touching the original."]},
+    cartas:{n:"CARDS", t:["All 316 cards are already readable, with their artwork and their 60 effects.","What is missing is <b>the game playing through our code</b>, so new cards can be added."]},
+    campo:{n:"FIELD", t:["Walking the world and talking to people.","<b>Adding a new language</b> depends on this: dialogue comes from each screen's script, not from the language files."]},
+    pantallas:{n:"SCREENS", t:["Menus, status and profiles. They already write the whole alphabet, accents included."]},
+    nucleo:{n:"CORE", t:["The code every part shares. It has grown the most and holds up all the others."]}
+  },
+  d:{
+    jugar:{n:"CAN I PLAY IT YET?", t:["<b>Yes.</b> It installs and plays like any PC game: no emulator, no BIOS, no disc image and no memory card."]},
+    tarda:{n:"WHY IS IT SLOW GOING?", t:["Every piece is rewritten and compared to the original <b>byte by byte</b>. It only counts if it comes out identical; one wrong byte and it does not count.","It is like transcribing a score and then playing it to check it sounds the same."]},
+    bloques:{n:"WHY DOES EVERYTHING DEPEND ON ONE THING?", t:["The game does not hold all its code at once: it pulls it off the disc in blocks, depending where you are.","Today those blocks run <b>the slow way</b> and never reach the code we have already written."]},
+    graficos:{n:"NEW GRAPHICS?", t:["Half done and verified: a piece of scenery is already pulled out of the game and <b>we draw it ourselves</b>.","That also removes a console limit of only twelve pieces in memory at once."]}
+  }
+},
+
+fr:{
+  sub:"Digimon World 3 sur votre PC",
+  partes:"PARTIES DU JEU", dudas:"QUESTIONS", verDudas:"QUESTIONS", volver:"RETOUR",
+  cerrar:"FERMER", completo:"COMPLET", idioma:"LANGUE",
+  pie:"Sans émulateur, sans BIOS, sans disque. Déjà jouable.", enlace:"Code et avancement",
+  s:{
+    guardado:{n:"SAUVEGARDE", t:["<b>Terminé.</b> La partie est enregistrée dans des fichiers PC ordinaires, pas sur une carte mémoire de console.","Le chargement prend <b>0,21 seconde</b> au lieu de 18,7, et le contenu est identique à l'original."]},
+    arranque:{n:"DEMARRAGE", t:["<b>Terminé.</b> Le jeu démarre sans le BIOS de la console : aucun fichier de Sony n'est nécessaire."]},
+    combate:{n:"COMBAT", t:["Une fois rempli, <b>ajouter un Digimon reviendra à ajouter une ligne</b>.","Les données sont déjà ouvertes : fiches, techniques, évolutions et les 245 modèles."]},
+    entrenamiento:{n:"ENTRAINEMENT", t:["Monter les statistiques. C'est la partie la plus avancée du jeu et elle sert de modèle aux autres."]},
+    tienda:{n:"BOUTIQUE", t:["Acheter et vendre. Une fois remplie, on pourra changer prix et stocks sans toucher à l'original."]},
+    cartas:{n:"CARTES", t:["Les 316 cartes se lisent déjà, avec leurs dessins et leurs 60 effets.","Il manque que <b>le jeu joue avec notre code</b> pour pouvoir ajouter des cartes."]},
+    campo:{n:"TERRAIN", t:["Se déplacer dans le monde et parler aux gens.","<b>Ajouter une langue</b> en dépend : les dialogues viennent des scripts de chaque écran, pas des fichiers de langue."]},
+    pantallas:{n:"ECRANS", t:["Menus, état et fiches. Ils écrivent déjà tout l'alphabet, accents compris."]},
+    nucleo:{n:"NOYAU", t:["Le code partagé par toutes les parties. C'est celui qui a le plus grandi et qui soutient les autres."]}
+  },
+  d:{
+    jugar:{n:"PUIS-JE Y JOUER ?", t:["<b>Oui.</b> Il s'installe et se joue comme n'importe quel jeu PC : sans émulateur, sans BIOS, sans image de disque et sans carte mémoire."]},
+    tarda:{n:"POURQUOI EST-CE SI LONG ?", t:["Chaque morceau est réécrit puis comparé à l'original <b>octet par octet</b>. Il ne compte que s'il sort identique ; un seul octet faux et il ne compte pas.","C'est comme recopier une partition puis la jouer pour vérifier qu'elle sonne pareil."]},
+    bloques:{n:"POURQUOI TOUT DEPEND DE LA MEME CHOSE ?", t:["Le jeu n'a pas tout son code en mémoire : il le charge du disque par blocs, selon l'endroit où vous êtes.","Aujourd'hui ces blocs passent <b>par le chemin lent</b> et n'utilisent pas ce que nous avons écrit."]},
+    graficos:{n:"DE NOUVEAUX GRAPHISMES ?", t:["A moitié fait et vérifié : un morceau de décor est déjà extrait du jeu et <b>c'est nous qui le dessinons</b>.","Au passage tombe une limite de la console : douze morceaux en mémoire à la fois."]}
+  }
+},
+
+de:{
+  sub:"Digimon World 3 auf deinem PC",
+  partes:"TEILE DES SPIELS", dudas:"FRAGEN", verDudas:"FRAGEN", volver:"ZURUECK",
+  cerrar:"SCHLIESSEN", completo:"FERTIG", idioma:"SPRACHE",
+  pie:"Ohne Emulator, ohne BIOS, ohne Disc. Schon spielbar.", enlace:"Code und Fortschritt",
+  s:{
+    guardado:{n:"SPEICHERN", t:["<b>Fertig.</b> Der Spielstand liegt in normalen PC-Dateien, nicht auf einer Memory Card.","Das Laden dauert <b>0,21 Sekunden</b> statt 18,7, und der Inhalt ist identisch mit dem Original."]},
+    arranque:{n:"START", t:["<b>Fertig.</b> Das Spiel startet ohne das BIOS der Konsole: keine Datei von Sony nötig."]},
+    combate:{n:"KAMPF", t:["Wenn das voll ist, heisst <b>ein neuer Digimon einfach eine Zeile mehr</b>.","Die Daten sind schon offen: Werte, Techniken, Digitationen und alle 245 Modelle."]},
+    entrenamiento:{n:"TRAINING", t:["Werte steigern. Der am weitesten fortgeschrittene Teil und Vorlage für alle anderen."]},
+    tienda:{n:"LADEN", t:["Kaufen und verkaufen. Wenn er voll ist, lassen sich Preise und Bestand ändern, ohne das Original anzufassen."]},
+    cartas:{n:"KARTEN", t:["Alle 316 Karten werden bereits gelesen, mit Bildern und ihren 60 Effekten.","Es fehlt, dass <b>das Spiel über unseren Code spielt</b>, damit neue Karten möglich werden."]},
+    campo:{n:"FELD", t:["Durch die Welt laufen und mit Leuten reden.","Davon hängt <b>eine neue Sprache</b> ab: die Dialoge stammen aus den Skripten jedes Bildschirms, nicht aus den Sprachdateien."]},
+    pantallas:{n:"BILDSCHIRME", t:["Menüs, Status und Profile. Sie schreiben schon das ganze Alphabet samt Akzenten."]},
+    nucleo:{n:"KERN", t:["Der Code, den alle Teile teilen. Er ist am stärksten gewachsen und trägt die übrigen."]}
+  },
+  d:{
+    jugar:{n:"KANN ICH SCHON SPIELEN?", t:["<b>Ja.</b> Es installiert und spielt sich wie jedes PC-Spiel: ohne Emulator, ohne BIOS, ohne Disc-Image und ohne Memory Card."]},
+    tarda:{n:"WARUM DAUERT DAS SO?", t:["Jedes Stück wird neu geschrieben und <b>Byte für Byte</b> mit dem Original verglichen. Es zählt nur, wenn es identisch ist; ein falsches Byte, und es zählt nicht.","Wie eine Partitur abschreiben und dann spielen, um zu hören, ob es gleich klingt."]},
+    bloques:{n:"WARUM HAENGT ALLES AM SELBEN?", t:["Das Spiel hält nicht allen Code gleichzeitig: es holt ihn blockweise von der Disc, je nachdem, wo du bist.","Heute laufen diese Blöcke <b>den langsamen Weg</b> und erreichen unseren Code nie."]},
+    graficos:{n:"NEUE GRAFIK?", t:["Halb fertig und geprüft: ein Stück Kulisse wird schon aus dem Spiel geholt und <b>wir zeichnen es selbst</b>.","Damit fällt auch ein Konsolenlimit von nur zwölf Stücken im Speicher."]}
+  }
+},
+
+it:{
+  sub:"Digimon World 3 sul tuo PC",
+  partes:"PARTI DEL GIOCO", dudas:"DOMANDE", verDudas:"DOMANDE", volver:"INDIETRO",
+  cerrar:"CHIUDI", completo:"COMPLETO", idioma:"LINGUA",
+  pie:"Senza emulatore, senza BIOS, senza disco. Si gioca già.", enlace:"Codice e avanzamento",
+  s:{
+    guardado:{n:"SALVATAGGIO", t:["<b>Finito.</b> La partita si salva in normali file di PC, non su una memory card.","Caricarla richiede <b>0,21 secondi</b> invece di 18,7, e il contenuto è identico all'originale."]},
+    arranque:{n:"AVVIO", t:["<b>Finito.</b> Il gioco parte senza il BIOS della console: non serve nessun file di Sony."]},
+    combate:{n:"COMBATTIMENTO", t:["Quando sarà pieno, <b>aggiungere un Digimon sarà aggiungere una riga</b>.","I dati sono già aperti: schede, tecniche, evoluzioni e tutti i 245 modelli."]},
+    entrenamiento:{n:"ALLENAMENTO", t:["Aumentare le statistiche. È la parte più avanzata del gioco e fa da modello alle altre."]},
+    tienda:{n:"NEGOZIO", t:["Comprare e vendere. Una volta pieno si potranno cambiare prezzi e scorte senza toccare l'originale."]},
+    cartas:{n:"CARTE", t:["Le 316 carte si leggono già, con i disegni e i loro 60 effetti.","Manca che <b>il gioco giochi con il nostro codice</b> per poterne aggiungere di nuove."]},
+    campo:{n:"CAMPO", t:["Muoversi nel mondo e parlare con la gente.","Da qui dipende <b>aggiungere una lingua</b>: i dialoghi escono dagli script di ogni schermata, non dai file di lingua."]},
+    pantallas:{n:"SCHERMATE", t:["Menu, stato e schede. Scrivono già tutto l'alfabeto, accenti compresi."]},
+    nucleo:{n:"NUCLEO", t:["Il codice che tutte le parti condividono. È quello cresciuto di più e regge gli altri."]}
+  },
+  d:{
+    jugar:{n:"POSSO GIA GIOCARCI?", t:["<b>Sì.</b> Si installa e si gioca come qualsiasi gioco per PC: senza emulatore, senza BIOS, senza immagine del disco e senza memory card."]},
+    tarda:{n:"PERCHE CI VUOLE TANTO?", t:["Ogni pezzo si riscrive e si confronta con l'originale <b>byte per byte</b>. Vale solo se esce identico; un byte sbagliato e non vale.","È come ricopiare uno spartito e poi suonarlo per sentire se suona uguale."]},
+    bloques:{n:"PERCHE DIPENDE TUTTO DALLA STESSA COSA?", t:["Il gioco non tiene tutto il codice insieme: lo prende dal disco a blocchi, a seconda di dove sei.","Oggi quei blocchi vanno <b>per la strada lenta</b> e non usano quello che abbiamo già scritto."]},
+    graficos:{n:"GRAFICA NUOVA?", t:["A metà e verificato: un pezzo di scenario si estrae già dal gioco e <b>lo disegniamo noi</b>.","Così cade anche un limite della console: solo dodici pezzi in memoria alla volta."]}
+  }
+},
+
+ja:{
+  sub:"デジモンワールド3をPCで",
+  partes:"ゲームの各部", dudas:"よくある質問", verDudas:"よくある質問", volver:"もどる",
+  cerrar:"とじる", completo:"完了", idioma:"言語",
+  pie:"エミュレータもBIOSもディスクも不要。すでに遊べます。", enlace:"コードと進捗",
+  s:{
+    guardado:{n:"セーブ", t:["<b>完了。</b>セーブデータはメモリーカードではなく、普通のPCファイルに保存されます。","読み込みは18.7秒ではなく<b>0.21秒</b>。中身は原作と完全に同じです。"]},
+    arranque:{n:"起動", t:["<b>完了。</b>本体のBIOSなしで起動します。ソニーのファイルは一切必要ありません。"]},
+    combate:{n:"バトル", t:["ここが埋まれば、<b>デジモンの追加は行を1つ足すだけ</b>になります。","データはすでに開いています。ステータス、技、進化、245体のモデル。"]},
+    entrenamiento:{n:"トレーニング", t:["ステータス上げ。最も進んでいる部分で、他の部分の手本になっています。"]},
+    tienda:{n:"ショップ", t:["売買。埋まれば、原作に触れずに価格や在庫を変えられます。"]},
+    cartas:{n:"カード", t:["316枚のカードは絵と60種の効果ごとすでに読めます。","足りないのは<b>ゲームが私たちのコードで動くこと</b>。それができれば新カードを追加できます。"]},
+    campo:{n:"フィールド", t:["世界を歩き、人と話す部分です。","<b>新しい言語の追加</b>はここ次第。会話は言語ファイルではなく各画面のスクリプトから出ています。"]},
+    pantallas:{n:"画面", t:["メニュー、ステータス、図鑑。アクセント記号を含む全アルファベットをすでに描画します。"]},
+    nucleo:{n:"コア", t:["すべての部分が共有するコード。最も伸びており、他をすべて支えています。"]}
+  },
+  d:{
+    jugar:{n:"もう遊べますか？", t:["<b>はい。</b>普通のPCゲームと同じようにインストールして遊べます。エミュレータもBIOSもディスクイメージもメモリーカードも不要です。"]},
+    tarda:{n:"なぜ時間がかかるの？", t:["各部分を書き直し、原作と<b>1バイトずつ</b>比較します。完全一致した時だけ数えます。1バイトでも違えば数えません。","楽譜を書き写して、実際に弾いて同じ音か確かめるようなものです。"]},
+    bloques:{n:"なぜ全部が同じ所に依存するの？", t:["ゲームは全コードを同時に持ちません。今いる場所に応じてディスクからブロック単位で読み込みます。","今のところそのブロックは<b>遅い経路</b>を通り、書き終えたコードに届いていません。"]},
+    graficos:{n:"グラフィックの差し替えは？", t:["半分は検証済みです。背景の一部はすでに取り出して<b>こちらで描画</b>しています。","同時に、メモリ上に12枚までという本体の制限もなくなります。"]}
+  }
+}
+
+};
 
 (function(){
-  var mosaico = document.getElementById("mosaico"), pendientes = [], listas = 0;
+  var menu = document.getElementById("menu");
+  var dial = document.getElementById("dialogo");
+  var barra = document.getElementById("idiomas");
+  var pantalla = "sistemas", sel = 0, idi = "es", abierto = null;
 
-  SISTEMAS.forEach(function(s){
-    var pct = Math.round(s.h / s.d * 100);
-    if (s.listo) listas++;
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "placa bisel" + (s.ancha ? " ancha" : "") + (s.listo ? " listo" : "");
-    b.setAttribute("aria-expanded", "false");
-    b.innerHTML =
-      '<span class="nivel"></span>' +
-      '<span class="esq a"></span><span class="esq b"></span>' +
-      '<span class="esq c"></span><span class="esq d"></span>' +
-      '<span class="cara">' +
-        '<span class="nombre">' + s.n + '</span>' +
-        '<span class="lectura"><span>' + (s.listo ? "completo" : s.h + " de " + s.d) +
-        '</span><b>' + pct + '%</b></span>' +
-      '</span>' +
-      '<span class="detalle"><span><span class="texto">' + s.t + '</span></span></span>';
-    b.addEventListener("click", function(){
-      b.setAttribute("aria-expanded",
-        b.getAttribute("aria-expanded") === "true" ? "false" : "true");
-    });
-    mosaico.appendChild(b);
-    pendientes.push([b.querySelector(".nivel"), Math.max(pct, 4)]);
-  });
-  document.getElementById("cuenta").textContent = listas + " / " + SISTEMAS.length;
+  /* si el navegador esta en uno de los idiomas del juego, se abre en ese */
+  var nav = (navigator.language || "es").slice(0,2).toLowerCase();
+  for (var k = 0; k < IDIOMAS.length; k++) if (IDIOMAS[k].id === nav) idi = nav;
 
-  var lista = document.getElementById("preguntas");
-  PREGUNTAS.forEach(function(x, i){
-    var f = document.createElement("div");
-    f.className = "fila";
-    f.innerHTML =
-      '<button class="q bisel" type="button" aria-expanded="false" aria-controls="r' + i + '">' +
-        '<span>' + x.q + '</span><span class="punta" aria-hidden="true"></span></button>' +
-      '<div class="r" id="r' + i + '"><div><div class="ventana bisel">' +
-        x.r.map(function(t){ return "<p>" + t + "</p>"; }).join("") +
-      '</div></div></div>';
-    var boton = f.querySelector(".q");
-    boton.addEventListener("click", function(){
-      boton.setAttribute("aria-expanded",
-        boton.getAttribute("aria-expanded") === "true" ? "false" : "true");
-    });
-    lista.appendChild(f);
-  });
+  function tt(){ return T[idi]; }
 
-  var quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (quieto) {
-    pendientes.forEach(function(p){ p[0].style.height = p[1] + "%"; });
-  } else {
-    document.body.classList.add("arranca");
-    pendientes.forEach(function(p, i){
-      setTimeout(function(){ p[0].style.height = p[1] + "%"; }, 200 + i * 64);
+  function filas(){
+    var t = tt();
+    if (pantalla === "sistemas")
+      return CIFRAS.map(function(s){
+        var p = Math.round(s.h / s.d * 100), x = t.s[s.c];
+        return {n:x.n, val:(s.ok ? "100%" : p + "%"), ok:s.ok, txt:x.t, h:s.h, d:s.d};
+      }).concat([{n:t.verDudas, val:"▸", ir:"dudas"}]);
+    return CLAVES_DUDA.map(function(c){
+      var x = t.d[c]; return {n:x.n, val:"", txt:x.t};
+    }).concat([{n:t.volver, val:"◂", ir:"sistemas"}]);
+  }
+
+  function pinta(){
+    var t = tt();
+    menu.innerHTML = '<div class="titulo">' +
+      (pantalla === "sistemas" ? t.partes : t.dudas) + '</div>';
+    filas().forEach(function(x, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "fila" + (x.ok ? " hecho" : "") + (i === sel ? " sel" : "");
+      b.innerHTML = '<span class="flecha" aria-hidden="true"></span>' +
+        '<span class="nom"></span><span class="val"></span>';
+      b.querySelector(".nom").textContent = x.n;
+      b.querySelector(".val").textContent = x.val;
+      b.addEventListener("mouseenter", function(){ sel = i; marca(); });
+      b.addEventListener("focus", function(){ sel = i; marca(); });
+      b.addEventListener("click", function(){ sel = i; elige(); });
+      menu.appendChild(b);
     });
   }
+
+  function marca(){
+    var b = menu.querySelectorAll(".fila");
+    for (var i = 0; i < b.length; i++) b[i].classList.toggle("sel", i === sel);
+  }
+
+  function elige(){
+    var x = filas()[sel];
+    if (x.ir){ pantalla = x.ir; sel = 0; cierra(); pinta(); return; }
+    abierto = {p:pantalla, i:sel};
+    abre(x);
+  }
+
+  function abre(x){
+    var t = tt(), html = '<div class="quien">' + x.n + '</div>';
+    html += x.txt.map(function(s){ return "<p>" + s + "</p>"; }).join("");
+    if (x.d){
+      var p = Math.round(x.h / x.d * 100), n = Math.max(1, Math.round(p / 100 * 16)), s = "";
+      for (var i = 0; i < 16; i++)
+        s += '<i class="' + (i < n ? "on" + (x.ok ? " ok" : "") : "") + '"></i>';
+      html += '<div class="medida"><span>' + (x.ok ? t.completo : x.h + " / " + x.d) +
+              '</span><span class="tiras">' + s + '</span></div>';
+    }
+    html += '<button class="cerrar" type="button">▸ ' + t.cerrar + '</button>';
+    html += '<span class="sigue" aria-hidden="true"></span>';
+    dial.innerHTML = html;
+    dial.classList.add("abierto");
+    dial.querySelector(".cerrar").addEventListener("click", cierra);
+  }
+
+  function cierra(){ abierto = null; dial.classList.remove("abierto"); dial.innerHTML = ""; }
+
+  function pintaIdiomas(){
+    barra.setAttribute("aria-label", tt().idioma);
+    barra.innerHTML = "";
+    IDIOMAS.forEach(function(l){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = l.et;
+      b.setAttribute("aria-pressed", l.id === idi ? "true" : "false");
+      b.setAttribute("lang", l.lang);
+      b.addEventListener("click", function(){ cambia(l.id); });
+      barra.appendChild(b);
+    });
+  }
+
+  function cambia(nuevo){
+    idi = nuevo;
+    document.documentElement.lang = nuevo;
+    var t = tt();
+    document.getElementById("sub").textContent = t.sub;
+    document.getElementById("pie").textContent = t.pie;
+    document.getElementById("enlace").textContent = t.enlace;
+    pintaIdiomas();
+    pinta();
+    /* si habia un dialogo abierto, se vuelve a abrir en el idioma nuevo */
+    if (abierto && abierto.p === pantalla) abre(filas()[abierto.i]);
+  }
+
+  document.addEventListener("keydown", function(e){
+    var n = filas().length;
+    if (e.key === "ArrowDown"){ sel = (sel + 1) % n; marca(); e.preventDefault(); }
+    else if (e.key === "ArrowUp"){ sel = (sel + n - 1) % n; marca(); e.preventDefault(); }
+    else if (e.key === "Enter" || e.key === " "){
+      if (document.activeElement && document.activeElement.classList.contains("fila")) return;
+      elige(); e.preventDefault();
+    }
+    else if (e.key === "Escape") cierra();
+  });
+
+  cambia(idi);
 })();
 </script>
