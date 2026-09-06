@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenWorld2003</title>
 <meta name="description" content="Cuánto queda para que Digimon World 3 sea un juego de PC de verdad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +23,9 @@
 html[lang="ja"]{ --pixel:"Noto Sans JP",system-ui,sans-serif }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{height:100%;max-width:100%}
+html{overflow-x:hidden}
+img,svg{max-width:100%}
 body{
   margin:0;color:var(--blanco);background:var(--negro);
   font-family:Silkscreen,ui-monospace,monospace;
@@ -115,7 +119,7 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 }
 .fila:hover,.fila:focus-visible,.fila.sel{color:var(--cian);background:rgba(47,107,238,.10)}
 .fila:hover .flecha,.fila:focus-visible .flecha,.fila.sel .flecha{transform:translateY(-50%) scaleX(1)}
-.fila .nom{flex:1}
+.fila .nom{flex:1;min-width:0;overflow-wrap:anywhere}
 .fila .val{color:var(--oro);font-size:.85em;white-space:nowrap;
   transition:color .2s ease}
 .fila.hecho .val{color:var(--verde)}
@@ -294,6 +298,39 @@ footer{
   font-size:13px;color:var(--gris);text-align:center;line-height:1.8;
 }
 footer a{color:var(--oro)}
+
+/* ── moviles y pantallas estrechas ────────────────────────────────────── */
+@media (max-width:560px){
+  body{padding:14px 10px 28px;font-size:15px}
+  .arriba{gap:8px;margin-bottom:14px}
+  h1{font-size:12px}
+  .chapa{font-size:10px;padding:7px 8px}
+  .cuadro{padding:10px 4px;border-width:2px}
+  .titulo{font-size:10px;padding:2px 8px 10px}
+  .fila{padding:11px 8px 10px 28px;font-size:10px;gap:8px}
+  .fila .flecha{left:8px;border-left-width:9px;border-top-width:6px;border-bottom-width:6px}
+  .dialogo{margin:14px 2px 12px;padding:20px 14px 30px}
+  .dialogo .quien{
+    position:static;display:inline-block;margin:-30px 0 10px;
+    max-width:100%;font-size:9px;
+  }
+  .dialogo p{font-size:14px}
+  .medida{flex-direction:column;align-items:flex-start;gap:6px}
+  .tiras{width:100%}
+  .banderas{max-width:100%}
+  .banderas button{font-size:9px;gap:10px;padding:9px 10px}
+  .banderas svg{width:44px;height:29px}
+  #entrada .marca{font-size:15px}
+  #aviso .marca{font-size:15px}
+  footer{font-size:12px}
+}
+
+/* pantallas muy estrechas: que los nombres largos sigan cabiendo */
+@media (max-width:380px){
+  .fila{font-size:9px;padding-left:24px}
+  .banderas button{font-size:8px}
+  .banderas svg{width:38px;height:25px}
+}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
