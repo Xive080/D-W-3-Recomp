@@ -198,14 +198,14 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
   opacity:0;animation:entra .4s ease .5s forwards;
 }
 .banderas{
-  display:grid;gap:10px;width:100%;max-width:640px;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  display:flex;flex-direction:column;gap:8px;
+  width:100%;max-width:420px;
 }
 .banderas button{
-  display:flex;align-items:center;gap:11px;
-  background:rgba(7,12,34,.9);border:2px solid var(--borde-2);
-  color:var(--blanco);font-family:var(--pixel);font-size:clamp(8px,1.9vw,10px);
-  line-height:1.4;padding:11px 12px;cursor:pointer;text-align:left;
+  display:flex;align-items:center;gap:14px;width:100%;
+  background:rgba(7,12,34,.9);border:2px solid transparent;
+  color:var(--blanco);font-family:var(--pixel);font-size:clamp(9px,2.1vw,12px);
+  line-height:1.4;padding:8px 12px;cursor:pointer;text-align:left;
   opacity:0;animation:entra .35s ease forwards;
   transition:border-color .1s steps(2),background .1s steps(2),transform .1s steps(2);
 }
@@ -216,13 +216,15 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 .banderas button:nth-child(5){animation-delay:1.15s}
 .banderas button:nth-child(6){animation-delay:1.25s}
 .banderas button:nth-child(7){animation-delay:1.35s}
-.banderas button:hover,.banderas button:focus-visible{
-  border-color:var(--cian);background:rgba(47,107,238,.18);transform:translateY(-2px);
+.banderas button:hover,.banderas button:focus-visible,.banderas button.sel{
+  border-color:var(--oro);background:rgba(242,201,76,.14);
+  box-shadow:inset 0 0 0 1px rgba(242,201,76,.5);
 }
+.banderas button:hover .nom,.banderas button.sel .nom{color:#FFF0B8}
 .banderas .nom{min-width:0;overflow-wrap:anywhere;letter-spacing:0}
 .banderas svg{
-  width:36px;height:24px;flex:none;display:block;
-  border:2px solid #000;box-shadow:0 0 0 1px #4A6FA8;
+  width:54px;height:36px;flex:none;display:block;
+  border:2px solid #000;box-shadow:0 0 0 1px #6D8FC4;
 }
 @media (prefers-reduced-motion:reduce){
   #entrada .marca,#entrada .rotulo,.banderas button{opacity:1;animation:none}
@@ -279,7 +281,7 @@ footer a{color:var(--oro)}
 
 <div id="entrada" role="dialog" aria-modal="true" aria-label="Language">
   <div class="marca">OpenWorld2003</div>
-  <div class="rotulo">LANGUAGE</div>
+  <div class="rotulo">SELECT LANGUAGE</div>
   <div class="banderas" id="banderas"></div>
 </div>
 
@@ -535,6 +537,7 @@ pt:{
   var aviso = document.getElementById("aviso");
   var entrada = document.getElementById("entrada");
   var rejilla = document.getElementById("banderas");
+  var selIdi = 0;
   var pantalla = "sistemas", sel = 0, idi = "es", abierto = null;
 
   /* si el navegador esta en uno de los idiomas del juego, se abre en ese */
@@ -652,8 +655,14 @@ pt:{
   }
 
   document.addEventListener("keydown", function(e){
-    /* mientras se elige idioma, el teclado no toca el menu de detras */
-    if (!entrada.hasAttribute("hidden") && !entrada.classList.contains("fuera")) return;
+    /* mientras se elige idioma, el teclado recorre las banderas */
+    if (!entrada.hasAttribute("hidden") && !entrada.classList.contains("fuera")){
+      var m = IDIOMAS.length;
+      if (e.key === "ArrowDown"){ selIdi = (selIdi + 1) % m; marcaIdi(); e.preventDefault(); }
+      else if (e.key === "ArrowUp"){ selIdi = (selIdi + m - 1) % m; marcaIdi(); e.preventDefault(); }
+      else if (e.key === "Enter" || e.key === " "){ eligeIdioma(IDIOMAS[selIdi].id); e.preventDefault(); }
+      return;
+    }
     if (pasa()){ e.preventDefault(); return; }
     var n = filas().length;
     if (e.key === "ArrowDown"){ sel = (sel + 1) % n; marca(); e.preventDefault(); }
@@ -673,15 +682,22 @@ pt:{
 
   function pintaEntrada(){
     rejilla.innerHTML = "";
-    IDIOMAS.forEach(function(l){
+    IDIOMAS.forEach(function(l, i){
       var b = document.createElement("button");
       b.type = "button";
       b.setAttribute("lang", l.lang);
       b.innerHTML = svgBandera(l.id) + '<span class="nom"></span>';
       b.querySelector(".nom").textContent = NOMBRE_IDIOMA[l.id];
       b.addEventListener("click", function(){ eligeIdioma(l.id); });
+      b.addEventListener("mouseenter", function(){ selIdi = i; marcaIdi(); });
       rejilla.appendChild(b);
     });
+    marcaIdi();
+  }
+
+  function marcaIdi(){
+    var b = rejilla.querySelectorAll("button");
+    for (var i = 0; i < b.length; i++) b[i].classList.toggle("sel", i === selIdi);
   }
 
   function eligeIdioma(id){
