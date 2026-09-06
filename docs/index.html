@@ -716,6 +716,9 @@ pt:{
   }
   aviso.addEventListener("click", pasa);
 
+  /* pulsar el propio cuadro lo cierra, como al pasar un dialogo del juego */
+  dial.addEventListener("click", function(){ cierra(); });
+
   pintaEntrada();
   cambia(idi);
 })();
