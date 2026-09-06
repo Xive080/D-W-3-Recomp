@@ -224,7 +224,8 @@ var IDIOMAS = [
   {id:"fr", lang:"fr", et:"FRA"},
   {id:"de", lang:"de", et:"GER"},
   {id:"it", lang:"it", et:"ITA"},
-  {id:"ja", lang:"ja", et:"JPN"}
+  {id:"ja", lang:"ja", et:"JPN"},
+  {id:"pt", lang:"pt", et:"POR"}
 ];
 
 var T = {
@@ -371,6 +372,30 @@ ja:{
     bloques:{n:"なぜ全部が同じ所に依存するの？", t:["ゲームは全コードを同時に持ちません。今いる場所に応じてディスクからブロック単位で読み込みます。","今のところそのブロックは<b>遅い経路</b>を通り、書き終えたコードに届いていません。"]},
     graficos:{n:"グラフィックの差し替えは？", t:["半分は検証済みです。背景の一部はすでに取り出して<b>こちらで描画</b>しています。","同時に、メモリ上に12枚までという本体の制限もなくなります。"]}
   }
+},
+
+pt:{
+  sub:"Digimon World 3 no seu PC",
+  partes:"PROJETO", dudas:"PERGUNTAS", verDudas:"PERGUNTAS", volver:"VOLTAR",
+  cerrar:"FECHAR", completo:"COMPLETO", idioma:"IDIOMA",
+  pie:"Sem emulador, sem BIOS e sem disco. Já dá para jogar.", enlace:"Código e progresso",
+  s:{
+    guardado:{n:"SALVAR", t:["<b>Pronto.</b> O jogo salva em arquivos normais de PC, não em um cartão de memória de console.","Carregar leva <b>0,21 segundo</b> em vez de 18,7, e o conteúdo sai idêntico ao original."]},
+    arranque:{n:"INICIALIZAÇÃO", t:["<b>Pronto.</b> O jogo abre sem a BIOS do console: nenhum arquivo da Sony é necessário."]},
+    combate:{n:"BATALHA", t:["Quando isto encher, <b>adicionar um Digimon novo será adicionar uma linha</b>.","Os dados já estão abertos: fichas, técnicas, evoluções e os 245 modelos."]},
+    entrenamiento:{n:"TREINO", t:["Subir atributos. É a parte mais avançada do jogo e serve de modelo para as outras."]},
+    tienda:{n:"LOJA", t:["Comprar e vender. Quando encher, dará para mudar preços e estoque sem tocar no original."]},
+    cartas:{n:"CARTAS", t:["As 316 cartas já são lidas, com suas artes e seus 60 efeitos.","Falta <b>o jogo jogar com o nosso código</b> para poder adicionar cartas novas."]},
+    campo:{n:"CAMPO", t:["Andar pelo mundo e falar com as pessoas.","<b>Adicionar um idioma novo</b> depende daqui: os diálogos saem dos scripts de cada tela, não dos arquivos de idioma."]},
+    pantallas:{n:"TELAS", t:["Menus, status e fichas. Já escrevem todo o alfabeto, acentos incluídos."]},
+    nucleo:{n:"NÚCLEO", t:["O código que todas as partes compartilham. É o que mais cresceu e sustenta os demais."]}
+  },
+  d:{
+    jugar:{n:"JÁ DÁ PARA JOGAR?", t:["<b>Sim.</b> Instala e roda como qualquer jogo de PC: sem emulador, sem BIOS, sem imagem de disco e sem cartão de memória."]},
+    tarda:{n:"POR QUE DEMORA TANTO?", t:["Cada peça é reescrita e comparada com o original <b>byte a byte</b>. Só conta se sair idêntica; um byte errado e não conta.","É como copiar uma partitura e depois tocá-la para ver se soa igual."]},
+    bloques:{n:"POR QUE TUDO DEPENDE DA MESMA COISA?", t:["O jogo não tem todo o código de uma vez: ele traz do disco em blocos, conforme onde você está.","Hoje esses blocos vão <b>pelo caminho lento</b> e não usam o que já escrevemos."]},
+    graficos:{n:"GRÁFICOS NOVOS?", t:["Pela metade e verificado: um pedaço de cenário já sai do jogo e <b>nós o desenhamos</b>.","De quebra cai um limite do console, que só podia ter doze pedaços na memória."]}
+  }
 }
 
 };
@@ -427,6 +452,9 @@ ja:{
   function elige(){
     var x = filas()[sel];
     if (x.ir){ pantalla = x.ir; sel = 0; cierra(); pinta(); return; }
+    /* si ya estaba abierta esa misma fila, se cierra */
+    if (abierto && abierto.p === pantalla && abierto.i === sel){ cierra(); return; }
+    cierra();
     abierto = {p:pantalla, i:sel};
     abre(x);
   }
