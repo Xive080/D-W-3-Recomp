@@ -602,16 +602,20 @@ pt:{
 
   function tt(){ return T[idi]; }
 
+  function fila_enlace(c){
+    var l, x = tt().e[c];
+    for (var i = 0; i < ENLACES.length; i++) if (ENLACES[i].c === c) l = ENLACES[i];
+    return {n:x.n, val:"▸", txt:x.t, enlace:l, boton:x.boton};
+  }
+
   function filas(){
     var t = tt();
     if (pantalla === "sistemas")
-      return ENLACES.map(function(l){
-        var x = t.e[l.c];
-        return {n:x.n, val:"▸", txt:x.t, enlace:l, boton:x.boton};
-      }).concat(CIFRAS.map(function(s){
+      return [fila_enlace("discord")].concat(CIFRAS.map(function(s){
         var p = Math.round(s.h / s.d * 100), x = t.s[s.c];
         return {n:x.n, val:(s.ok ? "100%" : p + "%"), ok:s.ok, txt:x.t, h:s.h, d:s.d};
-      })).concat([{n:t.verDudas, val:"▸", ir:"dudas"}]);
+      })).concat([{n:t.verDudas, val:"▸", ir:"dudas"},
+                  fila_enlace("proyectos")]);
     return CLAVES_DUDA.map(function(c){
       var x = t.d[c]; return {n:x.n, val:"", txt:x.t};
     }).concat([{n:t.volver, val:"◂", ir:"sistemas"}]);
