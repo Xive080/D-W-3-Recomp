@@ -179,6 +179,46 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 }
 .cerrar:hover{color:#0C57C4;text-decoration:underline}
 
+/* ── pantalla de entrada: el aviso legal ──────────────────────────────── */
+#aviso{
+  position:fixed;inset:0;z-index:20;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:28px 22px;text-align:center;
+  background:rgba(4,7,15,.94);
+  transition:opacity .5s ease, visibility .5s;
+}
+#aviso.fuera{opacity:0;visibility:hidden}
+#aviso .marca{
+  font-family:var(--pixel);font-size:clamp(13px,3.4vw,22px);color:var(--cian);
+  text-shadow:0 3px 0 #000;letter-spacing:.04em;
+  opacity:0;animation:entra .5s ease .1s forwards;
+}
+#aviso p{
+  margin:0;max-width:54ch;font-size:clamp(13px,2.4vw,15px);
+  color:var(--gris);line-height:1.75;
+  opacity:0;animation:entra .5s ease forwards;
+}
+#aviso p:nth-of-type(1){animation-delay:.5s}
+#aviso p:nth-of-type(2){animation-delay:.9s}
+#aviso p:nth-of-type(3){animation-delay:1.3s}
+#aviso p:nth-of-type(4){animation-delay:1.7s;color:#C8D8F2}
+#aviso .raya{
+  width:min(320px,70%);height:2px;background:var(--borde-2);
+  opacity:0;animation:entra .4s ease 2.1s forwards;
+}
+#aviso button{
+  font-family:var(--pixel);font-size:11px;line-height:1;
+  color:var(--negro);background:var(--oro);border:2px solid #000;
+  padding:12px 16px;cursor:pointer;
+  opacity:0;animation:entra .4s ease 2.4s forwards, pulso 1.4s steps(2) 2.8s infinite;
+}
+#aviso button:hover{background:#FFE38A}
+@keyframes entra{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+@keyframes pulso{ 50%{transform:translateY(-3px)} }
+@media (prefers-reduced-motion:reduce){
+  #aviso .marca,#aviso p,#aviso .raya,#aviso button{opacity:1;animation:none}
+}
+
 footer{
   max-width:760px;margin-top:clamp(18px,3vw,28px);
   font-size:13px;color:var(--gris);text-align:center;line-height:1.8;
@@ -187,6 +227,13 @@ footer a{color:var(--oro)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+
+<div id="aviso" role="dialog" aria-modal="true">
+  <div class="marca">OpenWorld2003</div>
+  <p></p><p></p><p></p><p></p>
+  <div class="raya"></div>
+  <button type="button">CONTINUAR</button>
+</div>
 
 <div class="arriba">
   <h1>OpenWorld2003<b id="sub">Digimon World 3 en tu PC</b></h1>
@@ -231,6 +278,7 @@ var IDIOMAS = [
 var T = {
 
 es:{
+  aviso:["Proyecto de fans, para fans.", "Sin relación con Bandai, con Toei ni con ningún propietario de Digimon.", "No hay intención de infringir los derechos de nadie.", "No se distribuye ningún archivo del juego original."], entrar:"CONTINUAR",
   sub:"Digimon World 3 en tu PC",
   partes:"PROYECTO", dudas:"DUDAS", verDudas:"DUDAS", volver:"VOLVER",
   cerrar:"CERRAR", completo:"COMPLETO", idioma:"IDIOMA",
@@ -255,6 +303,7 @@ es:{
 },
 
 en:{
+  aviso:["A fan project, made for fans.", "Not affiliated with Bandai, Toei or any Digimon rights holder.", "There is no intent to infringe anyone's rights.", "No file from the original game is distributed."], entrar:"CONTINUE",
   sub:"Digimon World 3 on your PC",
   partes:"PROJECT", dudas:"QUESTIONS", verDudas:"QUESTIONS", volver:"BACK",
   cerrar:"CLOSE", completo:"COMPLETE", idioma:"LANGUAGE",
@@ -279,6 +328,7 @@ en:{
 },
 
 fr:{
+  aviso:["Un projet de fans, pour les fans.", "Sans lien avec Bandai, Toei ni aucun ayant droit de Digimon.", "Il n'y a aucune intention d'enfreindre les droits de qui que ce soit.", "Aucun fichier du jeu original n'est distribué."], entrar:"CONTINUER",
   sub:"Digimon World 3 sur votre PC",
   partes:"PROJET", dudas:"QUESTIONS", verDudas:"QUESTIONS", volver:"RETOUR",
   cerrar:"FERMER", completo:"COMPLET", idioma:"LANGUE",
@@ -303,6 +353,7 @@ fr:{
 },
 
 de:{
+  aviso:["Ein Fanprojekt, für Fans gemacht.", "Keine Verbindung zu Bandai, Toei oder einem Rechteinhaber von Digimon.", "Es besteht keine Absicht, Rechte zu verletzen.", "Es wird keine Datei des Originalspiels verbreitet."], entrar:"WEITER",
   sub:"Digimon World 3 auf deinem PC",
   partes:"PROJEKT", dudas:"FRAGEN", verDudas:"FRAGEN", volver:"ZURUECK",
   cerrar:"SCHLIESSEN", completo:"FERTIG", idioma:"SPRACHE",
@@ -327,6 +378,7 @@ de:{
 },
 
 it:{
+  aviso:["Un progetto di fan, per i fan.", "Nessun legame con Bandai, Toei o alcun titolare dei diritti di Digimon.", "Non c'è alcuna intenzione di violare i diritti di nessuno.", "Non viene distribuito alcun file del gioco originale."], entrar:"CONTINUA",
   sub:"Digimon World 3 sul tuo PC",
   partes:"PROGETTO", dudas:"DOMANDE", verDudas:"DOMANDE", volver:"INDIETRO",
   cerrar:"CHIUDI", completo:"COMPLETO", idioma:"LINGUA",
@@ -351,6 +403,7 @@ it:{
 },
 
 ja:{
+  aviso:["ファンによる、ファンのためのプロジェクトです。", "バンダイ、東映、その他デジモンの権利者とは一切関係ありません。", "いかなる権利も侵害する意図はありません。", "原作ゲームのファイルは一切配布していません。"], entrar:"つづける",
   sub:"デジモンワールド3をPCで",
   partes:"プロジェクト", dudas:"よくある質問", verDudas:"よくある質問", volver:"もどる",
   cerrar:"とじる", completo:"完了", idioma:"言語",
@@ -375,6 +428,7 @@ ja:{
 },
 
 pt:{
+  aviso:["Um projeto de fãs, feito para fãs.", "Sem vínculo com a Bandai, a Toei ou qualquer detentor dos direitos de Digimon.", "Não há intenção de infringir os direitos de ninguém.", "Nenhum arquivo do jogo original é distribuído."], entrar:"CONTINUAR",
   sub:"Digimon World 3 no seu PC",
   partes:"PROJETO", dudas:"PERGUNTAS", verDudas:"PERGUNTAS", volver:"VOLTAR",
   cerrar:"FECHAR", completo:"COMPLETO", idioma:"IDIOMA",
@@ -404,6 +458,7 @@ pt:{
   var menu = document.getElementById("menu");
   var dial = document.getElementById("dialogo");
   var barra = document.getElementById("idiomas");
+  var aviso = document.getElementById("aviso");
   var pantalla = "sistemas", sel = 0, idi = "es", abierto = null;
 
   /* si el navegador esta en uno de los idiomas del juego, se abre en ese */
@@ -511,6 +566,9 @@ pt:{
     document.getElementById("sub").textContent = t.sub;
     document.getElementById("pie").textContent = t.pie;
     document.getElementById("enlace").textContent = t.enlace;
+    var pa = aviso.querySelectorAll("p");
+    for (var j = 0; j < pa.length; j++) pa[j].textContent = t.aviso[j] || "";
+    aviso.querySelector("button").textContent = t.entrar;
     pintaIdiomas();
     pinta();
     /* si habia un dialogo abierto, se vuelve a abrir en el idioma nuevo */
@@ -518,6 +576,7 @@ pt:{
   }
 
   document.addEventListener("keydown", function(e){
+    if (pasa()){ e.preventDefault(); return; }
     var n = filas().length;
     if (e.key === "ArrowDown"){ sel = (sel + 1) % n; marca(); e.preventDefault(); }
     else if (e.key === "ArrowUp"){ sel = (sel + n - 1) % n; marca(); e.preventDefault(); }
@@ -527,6 +586,14 @@ pt:{
     }
     else if (e.key === "Escape") cierra();
   });
+
+  function pasa(){
+    if (aviso.classList.contains("fuera")) return false;
+    aviso.classList.add("fuera");
+    setTimeout(function(){ aviso.setAttribute("hidden", ""); }, 520);
+    return true;
+  }
+  aviso.addEventListener("click", pasa);
 
   cambia(idi);
 })();
