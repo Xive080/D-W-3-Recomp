@@ -1,285 +1,262 @@
 <title>OpenWorld2003</title>
-<meta name="description" content="Cuánto queda para que Digimon World 3 sea un juego de PC de verdad. Toca una placa para verlo.">
+<meta name="description" content="Cuánto queda para que Digimon World 3 sea un juego de PC de verdad. Toca una placa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 
 <style>
 /* ── OpenWorld2003 ────────────────────────────────────────────────────────
-   El mosaico ES la interfaz. Cada placa es un sistema del juego: se toca y
-   se abre. La paleta, la rejilla de 8 px y los puntos de las esquinas salen
-   de una tesela del juego; aqui no se usa ninguna imagen suya, todo es CSS. */
+   Mundo: la placa de suelo del juego. Azul empapado, rejilla de 8 px, cuatro
+   puntos en la esquina, cantos vivos. Un solo mundo: oscuro, porque esto se
+   mira de noche y porque es el color del sitio del que habla.
+   Ni una imagen del juego: todo se dibuja con CSS. */
 
 :root{
-  --fondo:#050912; --placa:#0C1530; --placa2:#111C3B; --placa3:#16234A;
-  --tinta:#E3EAFF; --tinta2:#94A5D2; --tinta3:#6577A6;
-  --linea:#1E2E58; --linea2:#152140;
-  --acento:#5CD2FF; --acento2:#2A7FA8;
-  --ok:#4FD69C; --medio:#EFB553; --lejos:#7285B4;
-  --reja:rgba(92,210,255,.06); --junta:rgba(92,210,255,.11);
+  --hondo:#04101F;
+  --placa:#0A1E3A; --placa-alta:#0E2A4E; --placa-honda:#071A31;
+  --junta:#17416E; --junta-tenue:#0F2E51;
+  --tinta:#DCEBFB; --tinta-2:#8FB2D6; --tinta-3:#5D82AB;
+  --senal:#57E0FF; --senal-honda:#0B3E5C;
+  --lleno:#43E3A5;
+  --reja:rgba(87,224,255,.055); --reja-fuerte:rgba(87,224,255,.10);
   color-scheme:dark;
-}
-@media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]){
-    --fondo:#E9EEF8; --placa:#FFFFFF; --placa2:#F3F6FC; --placa3:#E7EEF8;
-    --tinta:#081026; --tinta2:#42506F; --tinta3:#6D7A98;
-    --linea:#C9D4EA; --linea2:#DFE7F4;
-    --acento:#0B6FA0; --acento2:#7FC4E4;
-    --ok:#1C7A52; --medio:#8A5E0F; --lejos:#5A6785;
-    --reja:rgba(11,111,160,.07); --junta:rgba(11,111,160,.13);
-    color-scheme:light;
-  }
-}
-:root[data-theme="light"]{
-  --fondo:#E9EEF8; --placa:#FFFFFF; --placa2:#F3F6FC; --placa3:#E7EEF8;
-  --tinta:#081026; --tinta2:#42506F; --tinta3:#6D7A98;
-  --linea:#C9D4EA; --linea2:#DFE7F4;
-  --acento:#0B6FA0; --acento2:#7FC4E4;
-  --ok:#1C7A52; --medio:#8A5E0F; --lejos:#5A6785;
-  --reja:rgba(11,111,160,.07); --junta:rgba(11,111,160,.13);
-  color-scheme:light;
 }
 
 *{box-sizing:border-box}
+html{scrollbar-color:var(--junta) var(--hondo)}
 body{
   margin:0;color:var(--tinta);
   background:
     linear-gradient(var(--reja) 1px,transparent 1px) 0 0/8px 8px,
     linear-gradient(90deg,var(--reja) 1px,transparent 1px) 0 0/8px 8px,
-    var(--fondo);
-  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    radial-gradient(120% 80% at 50% 0%,#0A2242 0%,var(--hondo) 62%);
+  background-attachment:fixed;
+  font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  caret-color:var(--senal);
 }
-.caja{max-width:940px;margin:0 auto;padding:0 20px}
+::selection{background:var(--senal-honda);color:var(--tinta)}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--hondo)}
+::-webkit-scrollbar-thumb{background:var(--junta);border:2px solid var(--hondo)}
+::-webkit-scrollbar-thumb:hover{background:var(--senal-honda)}
+:focus-visible{outline:2px solid var(--senal);outline-offset:3px}
 
-/* ── portada ── */
-header{
-  border-bottom:1px solid var(--linea);
-  background:
-    linear-gradient(var(--junta) 1px,transparent 1px) 0 0/72px 72px,
-    linear-gradient(90deg,var(--junta) 1px,transparent 1px) 0 0/72px 72px,
-    linear-gradient(var(--reja) 1px,transparent 1px) 0 0/8px 8px,
-    linear-gradient(90deg,var(--reja) 1px,transparent 1px) 0 0/8px 8px,
-    var(--placa);
-}
-header .caja{padding-top:56px;padding-bottom:40px}
-.marca{
-  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--acento);display:flex;align-items:center;gap:12px;
-}
-.marca::before{
-  content:"";width:3px;height:3px;flex:none;background:var(--acento);
-  box-shadow:7px 0 0 var(--acento),0 7px 0 var(--acento),7px 7px 0 var(--acento);
-  margin-bottom:7px;
-}
+.caja{max-width:1000px;margin:0 auto;padding:0 22px}
+
+/* ── entrada ──────────────────────────────────────────────────────────── */
+header .caja{padding:clamp(48px,9vw,92px) 22px clamp(30px,5vw,44px)}
 h1{
   font-family:"Chakra Petch",sans-serif;font-weight:700;text-transform:uppercase;
-  font-size:clamp(38px,8vw,74px);line-height:.98;letter-spacing:.01em;
-  margin:20px 0 0;text-wrap:balance;
+  font-size:clamp(40px,9.5vw,88px);line-height:.92;letter-spacing:-.025em;
+  margin:0;text-wrap:balance;
 }
-.lema{margin:14px 0 0;color:var(--tinta2);font-size:17px;max-width:44ch}
+h1 em{font-style:normal;color:var(--senal);display:block}
+.lema{
+  margin:20px 0 0;color:var(--tinta-2);font-size:clamp(16px,2.3vw,19px);
+  max-width:38ch;
+}
 
-/* barra de progreso general */
-.total{margin-top:30px;display:grid;gap:9px}
-.total-cab{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--tinta3);
-  letter-spacing:.08em;text-transform:uppercase;
+/* el contador general: la unica cifra grande de la pagina */
+.marcador{
+  margin-top:clamp(28px,5vw,42px);
+  display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;
 }
-.total-cab b{color:var(--acento);font-size:15px;letter-spacing:0}
-.reglilla{
-  height:16px;border:1px solid var(--linea);background:var(--placa2);
-  position:relative;overflow:hidden;
+.marcador .cifra{
+  font-family:"Chakra Petch",sans-serif;font-weight:700;
+  font-size:clamp(46px,9vw,78px);line-height:.85;letter-spacing:-.04em;
+  color:var(--senal);font-variant-numeric:tabular-nums;
 }
-.reglilla i{
-  position:absolute;inset:0 auto 0 0;width:var(--p);
-  background:repeating-linear-gradient(90deg,var(--acento) 0 6px,transparent 6px 9px);
-  animation:cargar 1.1s cubic-bezier(.2,.8,.2,1);
-}
-@keyframes cargar{from{width:0}}
+.marcador .cifra span{font-size:.42em;color:var(--tinta-3);letter-spacing:0}
+.marcador .rotulo{color:var(--tinta-2);font-size:15px;padding-bottom:6px;max-width:26ch}
 
-/* ── mosaico ── */
-main{padding:44px 0 10px}
-.titulillo{
-  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--tinta3);margin:0 0 4px;
-}
+/* ── el mosaico ───────────────────────────────────────────────────────── */
+main{padding-bottom:clamp(40px,7vw,70px)}
 h2{
   font-family:"Chakra Petch",sans-serif;font-weight:600;text-transform:uppercase;
-  font-size:clamp(21px,3.4vw,27px);margin:0 0 6px;letter-spacing:.02em;
+  font-size:clamp(19px,2.7vw,25px);letter-spacing:-.01em;
+  margin:0 0 4px;
 }
-.pista{margin:0 0 20px;color:var(--tinta3);font-size:14px}
+.guia{margin:0 0 22px;color:var(--tinta-3);font-size:14.5px}
 
 .mosaico{
-  display:grid;gap:10px;
-  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  display:grid;gap:6px;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,168px),1fr));
+  border:1px solid var(--junta-tenue);padding:6px;background:var(--placa-honda);
 }
 .placa{
-  appearance:none;text-align:left;font:inherit;color:inherit;cursor:pointer;
-  background:var(--placa);border:1px solid var(--linea);padding:0;
-  position:relative;overflow:hidden;
-  transition:border-color .18s ease,transform .18s ease,background .18s ease;
-  animation:surge .5s cubic-bezier(.2,.8,.2,1) backwards;
+  --relleno:0%;
+  appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  border:1px solid var(--junta-tenue);background:var(--placa);
+  padding:0;position:relative;overflow:hidden;
+  transition:background .16s ease,border-color .16s ease;
 }
-.placa::after{  /* los cuatro puntos de la tesela */
-  content:"";position:absolute;top:9px;right:9px;width:2px;height:2px;
-  background:var(--acento);opacity:.5;
-  box-shadow:5px 0 0 var(--acento),0 5px 0 var(--acento),5px 5px 0 var(--acento);
-  transition:opacity .18s ease;
+.placa.ancha{grid-column:span 2}
+@media (max-width:430px){.placa.ancha{grid-column:span 1}}
+
+/* la rejilla fina de la propia placa y sus cuatro puntos */
+.placa::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(var(--reja) 1px,transparent 1px) 0 0/8px 8px,
+    linear-gradient(90deg,var(--reja) 1px,transparent 1px) 0 0/8px 8px;
 }
-.placa:hover,.placa:focus-visible{
-  border-color:var(--acento);background:var(--placa2);transform:translateY(-2px);
+.placa::after{
+  content:"";position:absolute;top:10px;right:10px;width:2px;height:2px;
+  background:var(--senal);opacity:.35;
+  box-shadow:5px 0 0 var(--senal),0 5px 0 var(--senal),5px 5px 0 var(--senal);
+  transition:opacity .16s ease;
 }
+.placa:hover,.placa:focus-visible{background:var(--placa-alta);border-color:var(--junta)}
 .placa:hover::after,.placa:focus-visible::after{opacity:1}
-.placa:focus-visible{outline:2px solid var(--acento);outline-offset:2px}
-.placa[aria-expanded="true"]{border-color:var(--acento);background:var(--placa2)}
-@keyframes surge{from{opacity:.25;transform:translateY(8px)}}
+.placa[aria-expanded="true"]{background:var(--placa-alta);border-color:var(--senal)}
 
-.cara{padding:15px 16px 14px;display:grid;gap:11px}
+/* el relleno: se pinta como una capa que sube desde abajo, no como barra */
+.nivel{
+  position:absolute;left:0;right:0;bottom:0;height:var(--relleno);
+  background:linear-gradient(180deg,var(--senal-honda) 0%,rgba(11,62,92,.35) 100%);
+  border-top:1px solid var(--senal);
+  transition:height .9s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+}
+.placa.listo .nivel{
+  background:linear-gradient(180deg,rgba(67,227,165,.22) 0%,rgba(67,227,165,.06) 100%);
+  border-top-color:var(--lleno);
+}
+.cara{position:relative;padding:14px 14px 12px;display:grid;gap:14px;min-height:104px}
 .nombre{
-  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:17px;
-  letter-spacing:.02em;text-transform:uppercase;line-height:1.15;
+  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:16.5px;
+  text-transform:uppercase;letter-spacing:-.005em;line-height:1.1;
 }
-.celdas{display:flex;gap:2px;height:9px}
-.celdas span{flex:1;background:var(--linea2);border:0}
-.celdas span.on{background:var(--acento)}
-.celdas span.on.ok{background:var(--ok)}
-.pie{
-  display:flex;justify-content:space-between;gap:8px;align-items:baseline;
-  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tinta3);
-  font-variant-numeric:tabular-nums;
+.lectura{
+  align-self:end;display:flex;justify-content:space-between;align-items:baseline;
+  gap:10px;font-size:12.5px;color:var(--tinta-3);font-variant-numeric:tabular-nums;
 }
-.pct{color:var(--acento);font-weight:500}
-.pct.ok{color:var(--ok)}
+.lectura b{
+  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:19px;
+  color:var(--senal);letter-spacing:-.02em;
+}
+.placa.listo .lectura b{color:var(--lleno)}
 
-/* detalle que se despliega dentro de la placa */
 .detalle{
-  display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1);
+  position:relative;display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1);
 }
 .placa[aria-expanded="true"] .detalle{grid-template-rows:1fr}
 .detalle>div{overflow:hidden}
-.detalle p{
-  margin:0;padding:0 16px 15px;font-size:14px;color:var(--tinta2);
-  border-top:1px dashed var(--linea);padding-top:12px;
+.detalle .texto{
+  display:block;padding:12px 14px 14px;font-size:14px;line-height:1.5;
+  color:var(--tinta-2);border-top:1px solid var(--junta-tenue);
 }
-.detalle b{color:var(--tinta)}
+.detalle b{color:var(--tinta);font-weight:600}
 
-/* ── preguntas ── */
-.preguntas{margin-top:14px;border:1px solid var(--linea);background:var(--placa)}
-.pregunta+.pregunta{border-top:1px solid var(--linea2)}
+/* ── preguntas ────────────────────────────────────────────────────────── */
+.dudas{margin-top:clamp(38px,6vw,64px)}
+.lista{border:1px solid var(--junta-tenue);background:var(--placa)}
+.fila+.fila{border-top:1px solid var(--junta-tenue)}
 .q{
   appearance:none;width:100%;text-align:left;font:inherit;color:var(--tinta);
-  background:none;border:0;cursor:pointer;padding:15px 16px;
-  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  background:none;border:0;cursor:pointer;padding:16px 16px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
   font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:16px;
-  letter-spacing:.01em;transition:background .16s ease,color .16s ease;
+  letter-spacing:-.005em;transition:background .14s ease,color .14s ease;
 }
-.q:hover,.q:focus-visible{background:var(--placa2);color:var(--acento)}
-.q:focus-visible{outline:2px solid var(--acento);outline-offset:-2px}
-.mas{
-  flex:none;width:13px;height:13px;position:relative;
-  transition:transform .28s cubic-bezier(.2,.8,.2,1);
-}
-.mas::before,.mas::after{
-  content:"";position:absolute;background:var(--acento);
-}
-.mas::before{inset:6px 0 6px 0;height:1px}
-.mas::after{inset:0 6px 0 6px;width:1px}
-.q[aria-expanded="true"] .mas{transform:rotate(135deg)}
-.r{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1)}
+.q:hover,.q:focus-visible{background:var(--placa-alta);color:var(--senal)}
+.q:focus-visible{outline-offset:-3px}
+.cruz{flex:none;width:12px;height:12px;position:relative;transition:transform .34s cubic-bezier(.16,1,.3,1)}
+.cruz::before,.cruz::after{content:"";position:absolute;background:var(--senal)}
+.cruz::before{left:0;right:0;top:5px;height:2px}
+.cruz::after{top:0;bottom:0;left:5px;width:2px}
+.q[aria-expanded="true"] .cruz{transform:rotate(135deg)}
+.r{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.16,1,.3,1)}
 .q[aria-expanded="true"]+.r{grid-template-rows:1fr}
 .r>div{overflow:hidden}
-.r p{margin:0;padding:0 16px 16px;font-size:14.5px;color:var(--tinta2);max-width:66ch}
+.r p{margin:0;padding:0 16px 16px;font-size:15px;color:var(--tinta-2);max-width:68ch}
+.r p:first-child{padding-top:2px}
 .r p+p{padding-top:10px}
-.r b{color:var(--tinta)}
+.r b{color:var(--tinta);font-weight:600}
 
-/* ── pie ── */
-footer{
-  margin-top:44px;border-top:1px solid var(--linea);background:var(--placa);
-  padding:22px 0 40px;
+/* ── pie ──────────────────────────────────────────────────────────────── */
+footer{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--junta-tenue)}
+footer .caja{padding:20px 22px 46px;color:var(--tinta-3);font-size:13px}
+footer a{color:var(--senal)}
+
+/* ── el momento: el mosaico se enciende como una consola ──────────────── */
+.barrido{
+  position:fixed;inset:0;pointer-events:none;z-index:9;
+  background:linear-gradient(180deg,transparent 0%,rgba(87,224,255,.10) 48%,transparent 60%);
+  transform:translateY(-100%);
 }
-footer .caja{
-  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;
-  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tinta3);
-}
-footer a{color:var(--acento)}
-.tema{
-  appearance:none;background:none;border:1px solid var(--linea);color:var(--tinta3);
-  font:inherit;font-size:11.5px;padding:4px 10px;cursor:pointer;
-  transition:border-color .16s ease,color .16s ease;
-}
-.tema:hover{border-color:var(--acento);color:var(--acento)}
+body.arranca .barrido{animation:barre 1.15s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes barre{to{transform:translateY(110%)}}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
+  .barrido{display:none}
 }
 </style>
 
 <header>
   <div class="caja">
-    <p class="marca">OpenWorld2003</p>
-    <h1>Digimon World 3,<br>jugable en PC</h1>
-    <p class="lema">Sin emulador, sin BIOS y sin disco. Esto es cuánto queda para
-      que además se pueda cambiar por dentro.</p>
-
-    <div class="total">
-      <div class="total-cab">
-        <span>Piezas del juego reescritas y comprobadas</span>
-        <span><b>869</b> / 6.214</span>
-      </div>
-      <div class="reglilla" role="img" aria-label="869 de 6.214 piezas, un 14 por ciento">
-        <i style="--p:14%"></i>
-      </div>
+    <h1>Digimon World 3<em>en tu PC</em></h1>
+    <p class="lema">Sin emulador, sin BIOS y sin disco. Ya se juega. Esto es lo que
+      falta para poder cambiarlo por dentro.</p>
+    <div class="marcador">
+      <div class="cifra" id="cifra">14<span>%</span></div>
+      <p class="rotulo">del juego reescrito y comprobado pieza a pieza:
+        <b id="hechas">869</b> de 6.214</p>
     </div>
   </div>
 </header>
 
 <main class="caja">
-  <p class="titulillo">El mosaico</p>
-  <h2>Cada placa, una parte del juego</h2>
-  <p class="pista">Toca una para ver qué se desbloquea cuando esté llena.</p>
-
+  <h2>El mosaico</h2>
+  <p class="guia">Cada placa es una parte del juego. Toca una para ver qué se
+    desbloquea cuando se llene.</p>
   <div class="mosaico" id="mosaico"></div>
 
-  <p class="titulillo" style="margin-top:44px">Dudas</p>
-  <h2>Lo que suelen preguntar</h2>
-  <div class="preguntas" id="preguntas"></div>
+  <div class="dudas">
+    <h2>Lo que suelen preguntar</h2>
+    <p class="guia">Seis respuestas cortas.</p>
+    <div class="lista" id="preguntas"></div>
+  </div>
 </main>
 
 <footer>
   <div class="caja">
-    <span>Los números los pone la comprobación automática, nunca una persona.</span>
-    <button class="tema" id="tema" type="button">Cambiar tema</button>
+    Los números los pone la comprobación automática, nunca una persona ·
+    <a href="https://github.com/Xive080/D-W-3-Recomp">código y avances</a>
   </div>
 </footer>
 
+<div class="barrido" aria-hidden="true"></div>
+
 <script>
-/* Los datos en un sitio: cambiar aqui y la pagina entera se actualiza. */
+/* Un solo sitio para los datos: cambiar aqui y la pagina se recoloca sola. */
 var SISTEMAS = [
-  {n:"Guardado",      hecho:1,    de:1,    ok:true,
-   d:"<b>Terminado.</b> La partida se guarda en ficheros de PC y carga en 0,21 s en vez de 18,7."},
-  {n:"Arranque",      hecho:1,    de:1,    ok:true,
-   d:"<b>Terminado.</b> El juego abre sin la BIOS de la consola: no hace falta nada suyo."},
-  {n:"Combate",       hecho:110,  de:502,
-   d:"Cuando esté llena, <b>añadir un Digimon nuevo será añadir una fila</b>. Sus datos y sus 245 modelos ya están abiertos."},
-  {n:"Entrenamiento", hecho:73,   de:173,
-   d:"Subir estadísticas. Es la parte más avanzada del juego y sirve de patrón para las demás."},
-  {n:"Tienda",        hecho:44,   de:121,
-   d:"Comprar y vender. Cuando esté llena se podrán cambiar precios y existencias sin tocar el original."},
-  {n:"Cartas",        hecho:91,   de:881,
-   d:"Las 316 cartas ya se leen con sus dibujos y efectos. Falta que <b>el juego juegue con nuestro código</b> para poder añadir cartas nuevas."},
-  {n:"Campo",         hecho:15,   de:349,
-   d:"Moverse por el mundo y los diálogos. De aquí depende poder <b>añadir un idioma nuevo</b>."},
-  {n:"Pantallas",     hecho:44,   de:303,
-   d:"Menús, estado y fichas. Ya escriben el alfabeto entero, acentos incluidos."},
-  {n:"Núcleo",        hecho:225,  de:1073,
-   d:"El código común a todo. Es el que más ha crecido y el que sostiene a los demás."}
+  {n:"Guardado",      h:1,   d:1,    listo:true, ancha:false,
+   t:"<b>Terminado.</b> La partida vive en ficheros de PC y carga en 0,21 s en vez de 18,7."},
+  {n:"Arranque",      h:1,   d:1,    listo:true, ancha:false,
+   t:"<b>Terminado.</b> El juego abre sin la BIOS de la consola. No hace falta nada suyo."},
+  {n:"Combate",       h:110, d:502,  ancha:true,
+   t:"Cuando se llene, <b>añadir un Digimon nuevo será añadir una fila</b>. Sus datos y sus 245 modelos ya están abiertos."},
+  {n:"Entrenamiento", h:73,  d:173,  ancha:false,
+   t:"Subir estadísticas. Es la parte más avanzada, y sirve de patrón para las demás."},
+  {n:"Tienda",        h:44,  d:121,  ancha:false,
+   t:"Comprar y vender. Al llenarse se podrán cambiar precios y existencias sin tocar el original."},
+  {n:"Cartas",        h:91,  d:881,  ancha:true,
+   t:"Las 316 cartas ya se leen con sus dibujos y sus efectos. Falta que <b>el juego juegue con nuestro código</b> para poder añadir cartas nuevas."},
+  {n:"Campo",         h:15,  d:349,  ancha:false,
+   t:"Moverse por el mundo y hablar con la gente. De aquí depende <b>añadir un idioma nuevo</b>."},
+  {n:"Pantallas",     h:44,  d:303,  ancha:false,
+   t:"Menús, estado y fichas. Ya escriben el alfabeto entero, acentos incluidos."},
+  {n:"Núcleo",        h:225, d:1073, ancha:true,
+   t:"El código que comparten todas las partes. Es el que más ha crecido y el que sostiene a los demás."}
 ];
 
 var PREGUNTAS = [
   {q:"¿Puedo jugar ya?",
-   r:["<b>Sí.</b> Se instala y se juega como cualquier juego de PC. No hace falta emulador, ni la BIOS de la consola, ni imagen de disco, ni tarjeta de memoria."]},
+   r:["<b>Sí.</b> Se instala y se juega como cualquier juego de PC: sin emulador, sin la BIOS de la consola, sin imagen de disco y sin tarjeta de memoria."]},
   {q:"¿Cuándo podréis añadir un Digimon nuevo?",
    r:["Sus datos ya están abiertos: fichas, técnicas, evoluciones y los 245 modelos se leen y se vuelven a escribir sin perder un byte.",
       "Falta que el juego los use <b>pasando por nuestro código</b>, y eso es el combate. Cuando esa placa se llene, un Digimon nuevo es una fila más."]},
@@ -288,73 +265,70 @@ var PREGUNTAS = [
       "Uno nuevo espera al campo: los diálogos no salen de los ficheros de idioma, salen de los guiones de cada pantalla."]},
   {q:"¿Se podrán cambiar los gráficos?",
    r:["A medias y comprobado: una pieza del escenario ya se saca del juego y <b>la dibujamos nosotros</b>. Falta hacerlo con todas.",
-      "De paso desaparece un límite de la consola: sólo podía tener doce piezas de escenario a la vez."]},
+      "De paso cae un límite de la consola, que sólo podía tener doce piezas de escenario a la vez."]},
   {q:"¿Por qué casi todo depende de lo mismo?",
-   r:["Porque hay una llave. El juego no tiene todo su código a la vez: lo trae del disco por bloques, según dónde estés.",
-      "Hoy esos bloques van <b>por el camino lento</b> y no usan lo que ya tenemos escrito. Es tener el motor nuevo montado en el banco y el coche andando todavía con el viejo."]},
+   r:["Porque hay una llave. El juego no tiene todo su código a la vez: lo va trayendo del disco por bloques, según dónde estés.",
+      "Hoy esos bloques van <b>por el camino lento</b> y no usan lo que ya tenemos escrito. Es tener el motor nuevo montado en el banco y el coche andando aún con el viejo."]},
   {q:"¿Cómo se mide todo esto?",
-   r:["Reescribimos cada pieza y luego la comparamos con el original <b>byte a byte</b>. Sólo cuenta si sale idéntica; si falla uno, no cuenta.",
-      "Es transcribir una partitura y tocarla para ver si suena igual. Ningún número de esta página lo pone una persona."]}
+   r:["Reescribimos cada pieza y la comparamos con el original <b>byte a byte</b>. Sólo cuenta si sale idéntica; si falla uno, no cuenta.",
+      "Es transcribir una partitura y luego tocarla para ver si suena igual."]}
 ];
 
 (function(){
-  var CELDAS = 12;
+  var mosaico = document.getElementById("mosaico");
+  var niveles = [];
 
-  function placa(s, i){
-    var pct = Math.round(s.hecho / s.de * 100);
-    var llenas = Math.max(s.ok ? CELDAS : 1, Math.round(pct / 100 * CELDAS));
+  SISTEMAS.forEach(function(s){
+    var pct = Math.round(s.h / s.d * 100);
     var b = document.createElement("button");
     b.type = "button";
-    b.className = "placa";
+    b.className = "placa" + (s.ancha ? " ancha" : "") + (s.listo ? " listo" : "");
     b.setAttribute("aria-expanded", "false");
-    b.style.animationDelay = (i * 45) + "ms";
-    var celdas = "";
-    for (var c = 0; c < CELDAS; c++)
-      celdas += '<span class="' + (c < llenas ? "on" + (s.ok ? " ok" : "") : "") + '"></span>';
     b.innerHTML =
+      '<span class="nivel"></span>' +
       '<span class="cara">' +
         '<span class="nombre">' + s.n + '</span>' +
-        '<span class="celdas" role="img" aria-label="' + pct + ' por ciento">' + celdas + '</span>' +
-        '<span class="pie"><span>' + (s.ok ? "listo" : s.hecho + " de " + s.de) + '</span>' +
-        '<span class="pct' + (s.ok ? " ok" : "") + '">' + (s.ok ? "100%" : pct + "%") + '</span></span>' +
+        '<span class="lectura"><span>' + (s.listo ? "completo" : s.h + " de " + s.d) + '</span>' +
+        '<b>' + pct + '%</b></span>' +
       '</span>' +
-      '<span class="detalle"><span><p>' + s.d + '</p></span></span>';
+      '<span class="detalle"><span><span class="texto">' + s.t + '</span></span></span>';
     b.addEventListener("click", function(){
-      var abierta = b.getAttribute("aria-expanded") === "true";
-      b.setAttribute("aria-expanded", abierta ? "false" : "true");
+      b.setAttribute("aria-expanded",
+        b.getAttribute("aria-expanded") === "true" ? "false" : "true");
     });
-    return b;
-  }
+    mosaico.appendChild(b);
+    niveles.push([b, Math.max(pct, 3)]);
+  });
 
-  var m = document.getElementById("mosaico");
-  SISTEMAS.forEach(function(s, i){ m.appendChild(placa(s, i)); });
-
-  var p = document.getElementById("preguntas");
+  var lista = document.getElementById("preguntas");
   PREGUNTAS.forEach(function(x, i){
-    var d = document.createElement("div");
-    d.className = "pregunta";
-    var id = "r" + i;
-    d.innerHTML =
-      '<button class="q" type="button" aria-expanded="false" aria-controls="' + id + '">' +
-        '<span>' + x.q + '</span><span class="mas" aria-hidden="true"></span>' +
-      '</button>' +
-      '<div class="r" id="' + id + '"><div>' +
-        x.r.map(function(t){ return "<p>" + t + "</p>"; }).join("") +
-      '</div></div>';
-    var boton = d.querySelector(".q");
+    var f = document.createElement("div");
+    f.className = "fila";
+    f.innerHTML =
+      '<button class="q" type="button" aria-expanded="false" aria-controls="r' + i + '">' +
+        '<span>' + x.q + '</span><span class="cruz" aria-hidden="true"></span></button>' +
+      '<div class="r" id="r' + i + '"><div>' +
+        x.r.map(function(t){ return "<p>" + t + "</p>"; }).join("") + '</div></div>';
+    var boton = f.querySelector(".q");
     boton.addEventListener("click", function(){
-      var abierta = boton.getAttribute("aria-expanded") === "true";
-      boton.setAttribute("aria-expanded", abierta ? "false" : "true");
+      boton.setAttribute("aria-expanded",
+        boton.getAttribute("aria-expanded") === "true" ? "false" : "true");
     });
-    p.appendChild(d);
+    lista.appendChild(f);
   });
 
-  document.getElementById("tema").addEventListener("click", function(){
-    var r = document.documentElement;
-    var oscuro = r.getAttribute("data-theme") === "dark" ||
-      (!r.getAttribute("data-theme") &&
-        !window.matchMedia("(prefers-color-scheme: light)").matches);
-    r.setAttribute("data-theme", oscuro ? "light" : "dark");
-  });
+  /* El momento: un barrido de luz recorre la pantalla y, a su paso, cada placa
+     se llena hasta su nivel. Ocurre una vez, al abrir, y nada mas se mueve. */
+  var quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (quieto) {
+    niveles.forEach(function(p){ p[0].querySelector(".nivel").style.height = p[1] + "%"; });
+  } else {
+    document.body.classList.add("arranca");
+    niveles.forEach(function(p, i){
+      setTimeout(function(){
+        p[0].querySelector(".nivel").style.height = p[1] + "%";
+      }, 190 + i * 62);
+    });
+  }
 })();
 </script>
