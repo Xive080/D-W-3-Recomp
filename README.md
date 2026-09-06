@@ -1,4 +1,11 @@
 # Project Architecture & Reverse-Engineering Status
+
+### 📊 [**Estado del port, en directo → xive080.github.io/D-W-3-Recomp**](https://xive080.github.io/D-W-3-Recomp/)
+
+*Qué hay hecho de cada parte del juego, con preguntas frecuentes para quien llega
+de nuevo. Se actualiza con el proyecto. / What is done in each part of the game,
+with an FAQ for newcomers. Updated along with the project.*
+
 ### Documentación Técnica e Informe de Estado (Bilingüe / Bilingual)
 
 > **Nota / Note:**
