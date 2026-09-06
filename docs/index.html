@@ -118,12 +118,14 @@ h1 b{font-weight:400;display:block;font-size:.72em;margin-top:6px;color:var(--gr
 .fila .nom{flex:1}
 .fila .val{color:var(--oro);font-size:.85em;white-space:nowrap}
 .fila.hecho .val{color:var(--verde)}
+/* la fila abierta se queda marcada mientras habla */
+.fila.hablando{color:var(--cian);background:rgba(47,107,238,.16);border-bottom-color:transparent}
 
 /* ── el cuadro de dialogo: tal como sale en el juego ──────────────────── */
 .dialogo{
   display:none;position:relative;
-  width:100%;max-width:760px;
-  margin-top:clamp(16px,3vw,24px);
+  width:auto;
+  margin:16px 6px 14px;
   padding:22px 20px 34px;
   color:var(--tinta);
   background:linear-gradient(180deg,#F4F9FF 0%,#DCE9FB 46%,#BFD5F2 100%);
@@ -399,6 +401,7 @@ ja:{
 
   function pinta(){
     var t = tt();
+    if (dial.parentNode === menu) document.body.appendChild(dial);
     menu.innerHTML = '<div class="titulo">' +
       (pantalla === "sistemas" ? t.partes : t.dudas) + '</div>';
     filas().forEach(function(x, i){
@@ -441,11 +444,23 @@ ja:{
     html += '<button class="cerrar" type="button">▸ ' + t.cerrar + '</button>';
     html += '<span class="sigue" aria-hidden="true"></span>';
     dial.innerHTML = html;
+    var b = menu.querySelectorAll(".fila")[sel];
+    if (b){
+      b.classList.add("hablando");
+      b.insertAdjacentElement("afterend", dial);
+    }
     dial.classList.add("abierto");
     dial.querySelector(".cerrar").addEventListener("click", cierra);
   }
 
-  function cierra(){ abierto = null; dial.classList.remove("abierto"); dial.innerHTML = ""; }
+  function cierra(){
+    abierto = null;
+    dial.classList.remove("abierto");
+    dial.innerHTML = "";
+    var m = menu.querySelector(".fila.hablando");
+    if (m) m.classList.remove("hablando");
+    document.body.appendChild(dial);
+  }
 
   function pintaIdiomas(){
     barra.setAttribute("aria-label", tt().idioma);
@@ -471,7 +486,7 @@ ja:{
     pintaIdiomas();
     pinta();
     /* si habia un dialogo abierto, se vuelve a abrir en el idioma nuevo */
-    if (abierto && abierto.p === pantalla) abre(filas()[abierto.i]);
+    if (abierto && abierto.p === pantalla){ sel = abierto.i; marca(); abre(filas()[sel]); }
   }
 
   document.addEventListener("keydown", function(e){
