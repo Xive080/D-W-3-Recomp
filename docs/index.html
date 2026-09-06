@@ -1,0 +1,990 @@
+<title>Mapa OpenWorld2003</title>
+<meta name="description" content="Qué hay hecho de cada parte del port nativo de PC, medido de las dos maneras que cuentan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ── OpenWorld2003 ─────────────────────────────────────────────────────────
+   La paleta y la trama salen de una tesela del propio juego: placa azul
+   marino, rejilla de un pixel en azul mas claro y puntos palidos en las
+   esquinas. Aqui no se copia ninguna imagen suya: se toma la IDEA —rejilla
+   de 8 px, cantos duros, un solo acento cian— y se construye de cero.
+   Mundo oscuro por defecto, con version clara completa para quien la pida. */
+
+:root{
+  /* la placa */
+  --papel:#060A16; --sup:#0D1630; --sup2:#121D3C;
+  --tinta:#DEE7FF; --tinta2:#9CACD6; --tinta3:#6C7DAA;
+  --linea:#1D2C55; --linea2:#16223F;
+  /* el punto palido de la esquina de la tesela: el unico acento */
+  --acento:#5CD2FF; --acento-suave:#102743;
+  /* estado: color semantico, aparte del acento */
+  --hecho:#4FD69C; --hecho-f:#0B2A21;
+  --medio:#EFB553; --medio-f:#2B2211;
+  --pend:#8492BE;  --pend-f:#161F38;
+  --riesgo:#FF7A70; --riesgo-f:#2E1418;
+  --reja:rgba(92,210,255,.06);
+  --reja2:rgba(92,210,255,.10);
+  color-scheme:dark;
+}
+
+/* Quien tenga el sistema en claro, o lo pida a mano, ve la version clara.
+   El mundo de esta pagina es el oscuro, asi que ese es el `:root` pelado. */
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --papel:#EBEFF7; --sup:#FFFFFF; --sup2:#F4F7FC;
+    --tinta:#0A1124; --tinta2:#3E4B69; --tinta3:#6A7794;
+    --linea:#CBD5EA; --linea2:#E1E8F4;
+    --acento:#0A6E9E; --acento-suave:#E2F0F8;
+    --hecho:#1F7A54; --hecho-f:#E2F2EA;
+    --medio:#8A5E0F; --medio-f:#F7EEDA;
+    --pend:#5A6785;  --pend-f:#EAEEF6;
+    --riesgo:#A6372F; --riesgo-f:#F8E7E5;
+    --reja:rgba(10,110,158,.07);
+    --reja2:rgba(10,110,158,.12);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --papel:#EBEFF7; --sup:#FFFFFF; --sup2:#F4F7FC;
+  --tinta:#0A1124; --tinta2:#3E4B69; --tinta3:#6A7794;
+  --linea:#CBD5EA; --linea2:#E1E8F4;
+  --acento:#0A6E9E; --acento-suave:#E2F0F8;
+  --hecho:#1F7A54; --hecho-f:#E2F2EA;
+  --medio:#8A5E0F; --medio-f:#F7EEDA;
+  --pend:#5A6785;  --pend-f:#EAEEF6;
+  --riesgo:#A6372F; --riesgo-f:#F8E7E5;
+  --reja:rgba(10,110,158,.07);
+  --reja2:rgba(10,110,158,.12);
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--tinta);
+  background:
+    linear-gradient(var(--reja) 1px, transparent 1px) 0 0/8px 8px,
+    linear-gradient(90deg, var(--reja) 1px, transparent 1px) 0 0/8px 8px,
+    var(--papel);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.envoltura{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* La portada lleva la trama al doble: 8 px de rejilla fina y 64 px de
+   junta, que es como se ven las teselas puestas una al lado de otra. */
+.portada{
+  border-bottom:1px solid var(--linea);
+  background:
+    linear-gradient(var(--reja2) 1px, transparent 1px) 0 0/64px 64px,
+    linear-gradient(90deg, var(--reja2) 1px, transparent 1px) 0 0/64px 64px,
+    linear-gradient(var(--reja) 1px, transparent 1px) 0 0/8px 8px,
+    linear-gradient(90deg, var(--reja) 1px, transparent 1px) 0 0/8px 8px,
+    var(--sup);
+}
+.portada .envoltura{padding-top:52px;padding-bottom:40px}
+
+/* Los cuatro puntos de la esquina de la tesela, hechos con sombras. */
+.sello{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--acento);display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+}
+.sello::before{
+  content:"";width:3px;height:3px;display:inline-block;flex:none;
+  background:var(--acento);
+  box-shadow:7px 0 0 var(--acento), 0 7px 0 var(--acento), 7px 7px 0 var(--acento);
+  margin:0 4px 7px 0;
+}
+h1{
+  font-family:"Chakra Petch","IBM Plex Sans",sans-serif;
+  font-weight:700;letter-spacing:.005em;line-height:1.02;
+  font-size:clamp(36px,6.4vw,66px);margin:18px 0 0;text-wrap:balance;
+  text-transform:uppercase;
+}
+.bajada{max-width:62ch;margin:16px 0 0;color:var(--tinta2);font-size:17px}
+.fecha{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--tinta3);margin-top:22px}
+
+.cifras{
+  display:grid;gap:1px;background:var(--linea);
+  grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+  border:1px solid var(--linea);margin-top:34px;
+}
+.cifra{background:var(--sup);padding:16px 18px}
+.cifra dt{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--tinta3);margin:0 0 6px;
+}
+.cifra dd{
+  margin:0;font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:29px;
+  letter-spacing:0;font-variant-numeric:tabular-nums;color:var(--tinta);
+}
+.cifra .pie{
+  display:block;font-family:"IBM Plex Sans",sans-serif;font-weight:400;
+  font-size:12.5px;color:var(--tinta3);letter-spacing:0;margin-top:2px;
+}
+
+section{padding:56px 0}
+section + section{border-top:1px solid var(--linea2)}
+.rotulo{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tinta3);margin:0 0 8px;
+}
+h2{
+  font-family:"Chakra Petch",sans-serif;font-weight:600;letter-spacing:.01em;
+  font-size:clamp(24px,3vw,31px);margin:0 0 10px;text-wrap:balance;
+}
+.intro{max-width:68ch;color:var(--tinta2);margin:0 0 28px}
+
+.barra{display:flex;height:26px;border:1px solid var(--linea);overflow:hidden;margin:6px 0 12px}
+.barra span{display:block;height:100%}
+.leyenda{
+  display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--tinta2);
+  font-family:"IBM Plex Mono",monospace;
+}
+.leyenda i{width:10px;height:10px;display:inline-block;margin-right:7px;vertical-align:baseline}
+
+.sistemas{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.sis{
+  background:var(--sup);border:1px solid var(--linea);
+  padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;
+  border-left:3px solid var(--pend);
+}
+.sis[data-e="hecho"]{border-left-color:var(--hecho)}
+.sis[data-e="medio"]{border-left-color:var(--medio)}
+.sis[data-e="pend"]{border-left-color:var(--pend)}
+.sis-cab{display:flex;align-items:baseline;gap:10px;justify-content:space-between}
+.sis-id{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;
+  color:var(--acento);letter-spacing:.08em;
+}
+.sis h3{
+  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:18px;
+  margin:0;letter-spacing:.01em;line-height:1.25;
+}
+.sis p{margin:0;font-size:14.5px;color:var(--tinta2)}
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;padding:3px 8px;white-space:nowrap;border:1px solid currentColor;
+}
+.chip[data-e="hecho"]{color:var(--hecho);background:var(--hecho-f)}
+.chip[data-e="medio"]{color:var(--medio);background:var(--medio-f)}
+.chip[data-e="pend"]{color:var(--pend);background:var(--pend-f)}
+.meta{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--tinta3);
+  margin-top:auto;padding-top:8px;border-top:1px dashed var(--linea);
+}
+.meta b{color:var(--tinta2);font-weight:500}
+
+.cols{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.panel{background:var(--sup);border:1px solid var(--linea);padding:20px 22px}
+.panel h3{
+  font-family:"Chakra Petch",sans-serif;font-size:16px;font-weight:600;margin:0 0 14px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.01em;
+}
+.punto{width:9px;height:9px;flex:none;display:inline-block}
+.panel ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.panel li{font-size:14.5px;color:var(--tinta2);padding-left:15px;position:relative}
+.panel li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--tinta3)}
+.panel li b{color:var(--tinta);font-weight:600}
+
+.tablabox{overflow-x:auto;border:1px solid var(--linea);background:var(--sup)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--linea2);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--tinta3);background:var(--sup2);
+  border-bottom:1px solid var(--linea);font-weight:500;
+}
+tbody tr:last-child td{border-bottom:none}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.hallazgos{display:flex;flex-direction:column;gap:1px;background:var(--linea);border:1px solid var(--linea)}
+.hallazgo{background:var(--sup);padding:18px 20px;display:grid;gap:6px}
+.hallazgo .t{font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:17px;letter-spacing:.01em}
+.hallazgo p{margin:0;font-size:14.5px;color:var(--tinta2);max-width:82ch}
+.hallazgo .dato{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--acento)}
+
+.aviso{
+  border:1px solid var(--riesgo);background:var(--riesgo-f);color:var(--tinta);
+  padding:16px 20px;font-size:14.5px;display:grid;gap:5px;
+}
+.aviso .t{font-weight:600;color:var(--riesgo);font-family:"Chakra Petch",sans-serif}
+
+.herr{
+  display:grid;gap:1px;background:var(--linea);border:1px solid var(--linea);
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+}
+.h{background:var(--sup);padding:13px 16px}
+.h code{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--acento);font-weight:500;display:block}
+.h span{font-size:13px;color:var(--tinta3);display:block;margin-top:2px}
+
+code{font-family:"IBM Plex Mono",monospace;font-size:.92em;color:var(--acento)}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+footer{
+  border-top:1px solid var(--linea);padding:30px 0 50px;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--tinta3);
+  background:var(--sup);
+}
+footer p{margin:0 0 6px;max-width:80ch}
+
+a{color:var(--acento)}
+:focus-visible{outline:2px solid var(--acento);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ── Preguntas frecuentes ──────────────────────────────────────────────────
+   El medidor es una barra segmentada de veinte celdas: cantos duros y celdas
+   sueltas, como los indicadores de aquella epoca. Se rellena con un gradiente
+   repetido, sin imagenes. */
+.faq{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.pregunta{
+  background:var(--sup);border:1px solid var(--linea);
+  padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;
+}
+.pregunta.destacada{border-color:var(--acento);grid-column:1/-1;background:var(--acento-suave)}
+.pregunta h3{
+  font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:18px;
+  margin:0;letter-spacing:.01em;line-height:1.25;color:var(--tinta);
+  display:flex;gap:9px;align-items:flex-start;
+}
+.pregunta h3::before{
+  content:"";width:3px;height:3px;flex:none;margin-top:.6em;background:var(--acento);
+  box-shadow:0 5px 0 var(--acento);
+}
+.pregunta p{margin:0;font-size:15px;color:var(--tinta2)}
+.pregunta p.nota{
+  font-size:13.5px;color:var(--tinta3);border-left:2px solid var(--linea);
+  padding-left:11px;
+}
+.pregunta b{color:var(--tinta);font-weight:600}
+
+.medidor{margin-top:auto;padding-top:12px;display:grid;gap:7px}
+.barra-seg{
+  height:14px;border:1px solid var(--linea);
+  background:
+    repeating-linear-gradient(90deg,
+      var(--acento) 0 calc(var(--celda) - 2px),
+      transparent calc(var(--celda) - 2px) var(--celda)) left/var(--relleno) 100% no-repeat,
+    repeating-linear-gradient(90deg,
+      var(--linea2) 0 calc(var(--celda) - 2px),
+      transparent calc(var(--celda) - 2px) var(--celda)) left/100% 100% no-repeat,
+    var(--sup2);
+  --celda:5%;
+}
+.medidor[data-pct="4"]  .barra-seg{--relleno:5%}
+.medidor[data-pct="10"] .barra-seg{--relleno:10%}
+.medidor[data-pct="14"] .barra-seg{--relleno:15%}
+.medidor[data-pct="22"] .barra-seg{--relleno:25%}
+.cifra-med{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--tinta3);
+  font-variant-numeric:tabular-nums;
+}
+.cifra-med b{color:var(--acento);font-weight:600}
+</style>
+
+
+<header class="portada">
+  <div class="envoltura">
+    <p class="sello">OpenWorld2003 · port nativo de PC</p>
+    <h1>Mapa del port</h1>
+    <p class="bajada">Qué hay hecho de cada parte del juego, medido de las dos
+      maneras que cuentan: el código propio que se compila, y la traducción byte
+      a byte del original. No son lo mismo y dan cifras muy distintas.</p>
+    <p class="fecha">Al día del 5 de septiembre de 2026 · versión 1.1.4f (beta)</p>
+
+    <dl class="cifras">
+      <div class="cifra"><dt>Dependencias externas</dt>
+        <dd>0<span class="pie">sin BIOS, sin imagen de disco, sin tarjeta</span></dd></div>
+      <div class="cifra"><dt>Código propio</dt>
+        <dd>91<span class="pie">módulos compilando · 43.786 líneas</span></dd></div>
+      <div class="cifra"><dt>Traducción byte a byte</dt>
+        <dd>592<span class="pie">de 6.214 con C propio · 9,5 %</span></dd></div>
+      <div class="cifra"><dt>Verificadas de fuera</dt>
+        <dd>274<span class="pie">C ajeno que sí da los bytes</span></dd></div>
+      <div class="cifra"><dt>Sistemas con trabajo</dt>
+        <dd>11 / 14<span class="pie">tres cerrados, ocho a medias</span></dd></div>
+      <div class="cifra"><dt>Carga de partida</dt>
+        <dd>0,21 s<span class="pie">desde 18,7 s</span></dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Cómo leer este mapa</p>
+    <h2>Dos formas de medir, y una engaña</h2>
+    <p class="intro">Este documento se rehízo entero el 1 de septiembre de 2026
+      porque la primera versión contaba mal. Conviene saber por qué, porque el
+      error es fácil de repetir.</p>
+
+    <div class="cols">
+      <div class="panel">
+        <h3><i class="punto" style="background:var(--hecho)"></i>Código propio · lo que de verdad corre</h3>
+        <ul>
+          <li>Módulos escritos a mano en <code>Src/</code> que están en el <code>CMakeLists</code> y por tanto <b>se compilan y se ejecutan</b>.</li>
+          <li><b>91 módulos, 43.786 líneas.</b> Es el trabajo real del port.</li>
+          <li>Se cuenta comprobando dos cosas: que el fichero no lleve la marca del traductor automático, y que esté en la lista de fuentes.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3><i class="punto" style="background:var(--medio)"></i>Traducción byte a byte · otra cosa</h3>
+        <ul>
+          <li>Cada función del original se traduce a C, se compila con la cadena de la época y <b>se comparan los bytes</b>. Sólo cuenta si salen idénticos.</li>
+          <li><b>592 de 6.214 con C propio.</b> Sirve para entender el original, no para hacerlo funcionar.</li>
+          <li>Otras <b>274</b> están verificadas pero con C de <i>otro proyecto</i>: dan los
+            bytes con nuestra cadena, pero el código no está en nuestro árbol. Se cuentan
+            aparte a propósito, y en la base cada una lleva apuntado de dónde viene.</li>
+          <li>Un sistema puede ir al 0 % aquí y estar funcionando en el juego, o al revés.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="aviso" style="margin-top:24px">
+      <span class="t">Los dos errores que costó esto</span>
+      <span>Contar sólo la traducción byte a byte llevó a decir que el combate no
+        tenía «ni una línea escrita» <b>teniendo nueve módulos propios
+        compilando</b>. Y contar ficheros y líneas a peso llevó a lo contrario:
+        249 ficheros de traducción automática volcados en <code>Src/</code> hacían
+        parecer los guiones el sistema más grande del proyecto, y no se compilaba
+        ni uno. Se archivaron el 1 de septiembre de 2026 — 268 ficheros, 9,4 MB.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">El objetivo declarado</p>
+    <h2>Que no dependa de nada externo: cumplido</h2>
+    <p class="intro">El juego arranca sin el BIOS de Sony, sin imagen de disco y
+      sin tarjeta de memoria. Desde ahí el trabajo es otro, y cambia qué tiene
+      sentido hacer: <b>dejar de imitar una PlayStation y empezar a dibujar por
+      cuenta propia</b>.</p>
+
+    <div class="cols">
+      <div class="panel">
+        <h3><i class="punto" style="background:var(--hecho)"></i>Cerrado y verificado</h3>
+        <ul>
+          <li><b>Sin BIOS.</b> El arranque por instantánea da un estado idéntico byte a byte al del BIOS real: 0 de 65.536 distintos. Quedan 1,8 KB de datos constantes que <b>sí se siguen distribuyendo</b>.</li>
+          <li><b>Sin imagen de disco.</b> 2.382 ficheros sueltos, y los sectores que se fabrican son idénticos a los del disco, corrección de errores incluida.</li>
+          <li><b>Sin tarjeta de memoria.</b> Se fabrica en memoria y se sirve desde ficheros <code>.sav</code>. Ciclo completo probado.</li>
+          <li><b>Carga de partida:</b> de 18,7 s a 0,21 s, con 0 bytes distintos frente al original.</li>
+          <li><b>Regresión:</b> ocho comprobaciones que se ejecutan de verdad, verdes hoy.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3><i class="punto" style="background:var(--medio)"></i>A medias, con el diagnóstico cerrado</h3>
+        <ul>
+          <li><b>El goteo de teselas.</b> Medido: el gestor reparte un solo objeto cargador entre las doce. Media solución construida; la otra mitad rompe el suelo y <b>no se sabe por qué</b>.</li>
+          <li><b>El dibujante propio.</b> Una tesela se saca del juego, se decodifica y <b>la pintamos nosotros</b> dentro del juego. Falta colocarla donde va.</li>
+          <li><b>El muro conocido:</b> doce celdas y ni una más, porque doce son las que caben en la memoria de vídeo de la consola.</li>
+          <li><b>Los overlays corren interpretados.</b> Media docena de sistemas van por el camino lento teniendo las piezas rápidas sin construir.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Los catorce sistemas</p>
+    <h2>Qué hay hecho de cada uno</h2>
+    <p class="intro">Ordenados por lo que hay, no por su número. «Módulos» son
+      siempre módulos propios compilando.</p>
+
+    <div class="sistemas">
+
+      <article class="sis" data-e="hecho">
+        <div class="sis-cab"><span class="sis-id">S13</span><span class="chip" data-e="hecho">Cerrado</span></div>
+        <h3>Estado del juego</h3>
+        <p>Banderas de progreso, reloj y aleatorios. Tres cosas pequeñas de las que depende todo lo demás.</p>
+        <p class="meta"><b>8 de 8</b>, verificado en marcha. Ninguna función llama de vuelta.</p>
+      </article>
+
+      <article class="sis" data-e="hecho">
+        <div class="sis-cab"><span class="sis-id">S3</span><span class="chip" data-e="hecho">Cerrado</span></div>
+        <h3>Tarjeta de memoria y guardado</h3>
+        <p>Leer y escribir la partida. Es la plantilla del proyecto: de aquí salieron las cinco lecciones que se aplican a todo lo demás.</p>
+        <p class="meta"><b>2 módulos</b> + el sustituto del motor. Formato de partida descifrado.</p>
+      </article>
+
+      <article class="sis" data-e="hecho">
+        <div class="sis-cab"><span class="sis-id">S0</span><span class="chip" data-e="hecho">Cerrado</span></div>
+        <h3>Arranque y mapa de memoria</h3>
+        <p>Pone la pila, borra las variables y prepara el montón. Unas 20 instrucciones.</p>
+        <p class="meta"><b>Resuelto de hecho:</b> el juego arranca sin BIOS.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S6</span><span class="chip" data-e="medio">15 módulos</span></div>
+        <h3>Menús e interfaz</h3>
+        <p><b>El que más trabajo propio tiene</b>: ajustes, controles táctiles, mods, música, título, fuentes y préstamo de memoria de vídeo.</p>
+        <p><b>Ya escriben el alfabeto entero</b> (2/9/2026). Había <b>tres</b> fuentes y dos recorrían el texto byte a byte, así que «menú» salía «men»: se perdía la letra, no sólo el acento. Y <code>?</code> <code>!</code> <code>¿</code> <code>¡</code> <code>(</code> <code>)</code> y el apóstrofo <b>no existían en ninguna</b>, desde siempre.</p>
+        <p><b>Pero las once pantallas DEL JUEGO siguen sin tocar.</b> Comparten un motor común; ver más abajo.</p>
+        <p class="meta">Traducidas byte a byte sí van: la pantalla de estado lleva
+          <b>44 de 303</b> funciones y la tienda <b>41 de 121</b>. Entender no es servir:
+          ninguna de las once dibuja todavía con código nuestro.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S8</span><span class="chip" data-e="medio">11 módulos</span></div>
+        <h3>Campo y guiones</h3>
+        <p>Cámara, tacto, teselas, transiciones, tarjeta de zona y temporizador. Los guiones no tienen intérprete: son datos, y los seis recorredores están localizados.</p>
+        <p class="meta"><b>Y la traza está ciega ahí</b>: 34 minutos de campo jugados, <b>ni una función del motor de campo vista</b>. Vive en un overlay, y ninguno carga compilado.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S7</span><span class="chip" data-e="medio">9 módulos</span></div>
+        <h3>Combate</h3>
+        <p>Estado, IA, plan, daño, cámara, modelos, tacto e iconos. Los 245 modelos descomprimen con nuestro descompresor: <b>245 de 245</b>, y llevan un TIM estándar dentro.</p>
+        <p><b>No está bloqueado por el formato de modelos</b>, como se repitió mucho. La lógica se puede cerrar sin tocar uno.</p>
+        <p class="meta">Y es el segundo overlay más traducido: <b>110 de 502</b> funciones
+          dan los bytes del original.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S1</span><span class="chip" data-e="medio">7 módulos</span></div>
+        <h3>Disco y carga de ficheros</h3>
+        <p>El único camino por el que entra cualquier dato al juego. Índice entero medido; tres de doce funciones de la caché hechas.</p>
+        <p class="meta"><b>Aislamiento:</b> alto. Ataca de paso la lentitud de carga.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S9</span><span class="chip" data-e="medio">4 módulos</span></div>
+        <h3>Sonido</h3>
+        <p>Cambiar la música por un fichero de PC, el tempo, los avisos, y una sonda que <b>distingue qué nota la arranca la música y cuál un efecto</b> — hacía falta para callar una sin llevarse la otra.</p>
+        <p class="meta"><b>Aislamiento:</b> el más alto del proyecto. VAB y SEQ confirmados por firma.</p>
+      </article>
+
+      <article class="sis" data-e="hecho">
+        <div class="sis-cab"><span class="sis-id">S10</span><span class="chip" data-e="hecho">Leer y escribir: cerrado</span></div>
+        <h3>Texto y localización</h3>
+        <p>El decodificador estaba roto —<b>ninguna de las 3.146 líneas de diálogo salía bien</b>— y se arregló el 1/9/2026. Pasa en <b>los seis idiomas</b>: 7.383 líneas cada uno, cero truncadas y cero distintas. Y el camino de vuelta: <b>68.346 cadenas, cero distintas</b>.</p>
+        <p><b>La sonda corrió el 2/9/2026 y tumbó la suposición.</b> Parado en el título salía perfecto —34 de 34—; jugando de verdad falla casi tres de cada cinco veces. <b>El diálogo no sale de los ficheros de idioma: sale del overlay de guiones cargado.</b></p>
+        <p class="meta">Los ficheros de <code>COUNTRY/</code> sirven menús, nombres y listas, y ahí no falla una: <b>244 de 244</b> dentro del rango de idioma. Servir diálogo propio pasa por leer el bloque de texto de cada guion, o sea que <b>va atado al problema de los overlays</b>.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S11</span><span class="chip" data-e="medio">1 módulo</span></div>
+        <h3>Vídeo</h3>
+        <p>Reproductor propio, <b>apagado de fábrica</b>. Los vídeos ya están convertidos a <code>.mp4</code> y desplegados. La imagen es nuestra; el reloj, el final y el audio siguen siendo del juego.</p>
+        <p class="meta"><b>Las dos direcciones que faltaban: verificadas en vivo</b> (1/9/2026). Escribir en ellas termina la película sin romper el juego.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S12</span><span class="chip" data-e="medio">Empezado</span></div>
+        <h3>Dibujo 2D y 3D</h3>
+        <p>Una tesela ya se saca del juego, se decodifica y se pinta con código propio, verificado con un control que la dibuja del revés.</p>
+        <p class="meta"><b>No se sustituye «en su turno»:</b> es la capa sobre la que se apoyan las demás.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S4</span><span class="chip" data-e="medio">1 módulo</span></div>
+        <h3>Estadísticas y progresión</h3>
+        <p>Tablas base de cada Digimon. Evoluciones y entrenamiento medidos, con un módulo propio de entrenamiento compilando.</p>
+        <p><b>El entrenamiento es el overlay más traducido del juego</b> (5/9/2026):
+          <b>73 de 173</b>, nueve cerradas en una sesión — el cargador del guion entero,
+          el alta de la tarea, los paneles, la pantalla con sus 28 trozos de imagen y
+          las dos máquinas de estados.</p>
+        <p class="meta"><b>Aislamiento:</b> bajo — lo toca todo. Y las evoluciones <b>escriben en la partida</b>.</p>
+      </article>
+
+      <article class="sis" data-e="medio">
+        <div class="sis-cab"><span class="sis-id">S5</span><span class="chip" data-e="medio">Datos: cerrado</span></div>
+        <h3>Cartas</h3>
+        <p><b>Los 60 guiones de efecto, recuperados y en el árbol</b> (1/9/2026): se habían perdido con la carpeta de un agente. Los 60 con prueba, cada uno cuadrando con el texto de su carta, más las dos tablas de despacho enteras.</p>
+        <p><b>Y ya hay primera pieza propia</b>: las 316 fichas, sus dibujos y sus nombres en seis idiomas. Faltan las reglas — 279 funciones y <b>136 órdenes en uso</b>, no «unas 70».</p>
+        <p class="meta">De las reglas hay <b>91 de 881 funciones traducidas byte a byte</b>, más
+          22 en los tres overlays de álbum, tienda y mazo. Sigue sin dibujarse una carta:
+          lo que hay es entendido, no funcionando.</p>
+      </article>
+
+      <article class="sis" data-e="pend">
+        <div class="sis-cab"><span class="sis-id">S2</span><span class="chip" data-e="pend">La llave</span></div>
+        <h3>Cargador de overlays</h3>
+        <p>Trae un <code>.PRO</code> del disco a una ranura y le salta. <b>La función del juego no está identificada</b>, y aparte, ninguna pieza compilada llega a cargarse.</p>
+        <p class="meta"><b>Candidato:</b> <code>0x800165AC</code>, sin verificar. Hasta que esté claro, nada se sustituye por bloques.</p>
+      </article>
+
+    </div>
+
+    <p class="intro" style="margin-top:26px;margin-bottom:0">Y aparte de los
+      catorce, <b>24 módulos más que no son del juego</b>: el lanzador (9), los
+      mods (13) y los logros (2). Son infraestructura del port.</p>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Medido el 1 de septiembre de 2026</p>
+    <h2>El motor de interfaz: por dónde se entra</h2>
+    <p class="intro">Tres mediciones independientes sobre la afirmación de que
+      «las once pantallas comparten cinco funciones». <b>La afirmación es
+      inexacta y la conclusión aguanta igual.</b></p>
+
+    <div class="cols" style="margin-bottom:26px">
+      <div class="panel">
+        <h3><i class="punto" style="background:var(--riesgo)"></i>Lo que estaba mal</h3>
+        <ul>
+          <li><b>No son cinco funciones, son ocho</b> en cinco entradas: dos de ellas son cadenas de llamadas.</li>
+          <li><b>Las once no comparten las cinco.</b> Sólo el registrador de objetos lo llaman las once; la cadena del texto, tres de once.</li>
+          <li>El mapa del mundo <b>no son 9 funciones, son 7</b>; el título <b>no son 100, son 90</b>. Ambas cifras salían de contar retornos.</li>
+          <li>La tarjeta figura como sistema cerrado, pero su overlay tiene <b>6 funciones resueltas de 43</b>. Lo cerrado es el sustituto, no el código del juego.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3><i class="punto" style="background:var(--hecho)"></i>Lo que se confirmó</h3>
+        <ul>
+          <li><b>Las ocho viven en el ejecutable principal</b>, y todo su estado también. Inmune al problema de los overlays: se puede atacar hoy.</li>
+          <li><b>Hay un solo gancho y lo ve todo.</b> Cada llamada —directa o por tabla de métodos— se convierte en un salto por el trampolín, y el trampolín pregunta por dirección física.</li>
+          <li><b>La función que traduce índice a texto no tiene ni una llamada directa</b> en todo el juego: sólo se alcanza por tabla. Confirmado por tres vías.</li>
+          <li>Es <b>pura</b>: once instrucciones, sin estado, sin tocar ninguna variable global.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hallazgos">
+      <div class="hallazgo">
+        <span class="t">Y una medición no vale si nadie la escribe</span>
+        <p>Dos fallos del mismo tipo, encontrados usándolo y no leyéndolo. La sonda del texto soltaba su parte por una vía que <b>no escribe nada fuera del volcado de diagnóstico</b>: contaba bien y tiraba el resultado. Y cerrar el juego desde el puerto de depuración llama a <code>exit(0)</code> saltándose el cierre que pide el parte, así que <b>ninguna sesión cerrada con las herramientas dejaba escrito el informe de NINGÚN módulo</b>. Los dos corregidos el 2/9/2026.</p>
+        <span class="dato">un contador de fallos a cero y una sonda que no corre se leen igual</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">La entrada barata: un gancho, no una sustitución</span>
+        <p>Como las llamadas por tabla de métodos también pasan por el trampolín,
+          <b>un gancho en esa función sirve todo el texto de todas las pantallas</b> sin
+          reimplementar el widget ni tocar una sola tabla. Sustituirla no serviría de nada
+          mientras el widget sea el original; engancharla, sí.</p>
+        <span class="dato">11 instrucciones · sin estado · una sola puerta en todo el juego</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">La altura de interceptación es el riesgo mayor</span>
+        <p>El registrador de objetos parece el sitio elegante y es la trampa: reclamarlo
+          obliga a una llamada anidada al invitado —el único riesgo estructural del
+          proyecto, que ya colgó el motor una vez— o a fabricar a mano un objeto de 372
+          bytes que el juego conserva toda la partida. Un objeto mal construido <b>no falla
+          en el gancho: falla fotogramas después y en otra pantalla</b>.</p>
+        <span class="dato">es el mismo error que se descartó en la tarjeta: el vector estaba demasiado arriba</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">Cómo se comprueba sin engañarse</span>
+        <p><b>La captura no sirve</b>: el servidor atiende la foto 728 líneas antes de que
+          se pinte lo nuestro, así que siempre retrata el fotograma anterior. Y una pantalla
+          que se ve bien es exactamente lo que produce también un gancho que nunca se
+          ejecutó. El control tiene que dar algo que el juego <b>no pueda</b> producir —
+          devolver el texto del índice siguiente: si sale corrido una entrada, los
+          caracteres son nuestros.</p>
+        <span class="dato">el mismo patrón que la tesela que se pinta del revés</span>
+      </div>
+    </div>
+
+    <div class="aviso" style="margin-top:24px">
+      <span class="t">El cable maestro que apaga todo en silencio</span>
+      <span>Los once módulos propios que ya sirven funciones del juego cuelgan de
+        un solo interruptor. Con él apagado, el gancho entero queda a cero y todo
+        lo nuestro deja de existir <b>sin un solo mensaje</b>. Cualquier prueba
+        tiene que confirmar primero, en la salida del arranque, que está puesto.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Lo descubierto entre el 26 de agosto y el 5 de septiembre</p>
+    <h2>Los hallazgos que cambian el plan</h2>
+
+    <div class="hallazgos">
+      <div class="hallazgo">
+        <span class="t">No todo el juego se compiló con las mismas opciones</span>
+        <p>Todas las herramientas daban por hecho una sola cadena. Una función del
+          entrenamiento, <b>con el mismo C sin tocar una línea</b>, pasa de 31 aciertos
+          de 115 a 68 sólo cambiando el nivel de optimización, y con el bueno la forma
+          coincide instrucción a instrucción. Otra necesita apagar una optimización
+          concreta para salir entera. La tabla de pruebas ya admite opciones por
+          función.</p>
+        <span class="dato">medido el 5/9/2026 · de 30 funciones atascadas sólo 2 mejoran así · no probarlo por costumbre</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">Lo que no cuadra es casi todo código de Sony, no del juego</span>
+        <p>Al cruzar 451 funciones de otra descompilación, 77 no dan los bytes con
+          nuestra cadena. Cruzadas con la tabla de autoría: <b>60 son librerías de
+          Sony</b> y sólo 16 son código del juego. Y las 36 que piden un compilador más
+          viejo caen casi todas en <span class="mono">libcard</span>,
+          <span class="mono">libgpu</span>, <span class="mono">libspu</span>… Sony
+          compiló sus librerías con uno anterior al que usó Bandai.</p>
+        <span class="dato">resuelve una contradicción entre dos documentos · el código de Sony no se descompila, se reconoce</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">Un global que el original relee necesita declararse como vector</span>
+        <p>El compilador de 1998 da por hecho que escribir un campo de estructura no
+          puede tocar una variable suelta, así que se la guarda en un registro y no la
+          vuelve a leer. Declarándola como vector de un elemento, la relee igual que el
+          juego. En la primera función pasó de <b>3 palabras de 29 a 27</b>.</p>
+        <span class="dato">cerró cuatro funciones el mismo día · regla 4.24 de DESCOMPILAR-TIENDA.md</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">Los overlays no se están ejecutando compilados</span>
+        <p>Media docena de sistemas —tienda, cartas, entrenamiento, estado, combate, campo—
+          corren <b>instrucción a instrucción por el intérprete</b>. La caché tiene 430
+          piezas que cubren tres regiones, y ninguna es la que el juego pide. La
+          documentación decía otra cosa y era falsa.</p>
+        <span class="dato">0 nativo · 926.474 interpretadas en pocos segundos · 36.064 compilaciones fallidas</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">La captura veía sólo la mitad del juego</span>
+        <p>El gancho que apunta qué ejecuta el juego vivía sólo en el código compilado, así
+          que todo lo interpretado era invisible. Puesto también en el intérprete, aparecen
+          237 funciones de overlay donde antes había cero, sin coste medible.</p>
+        <span class="dato">antes: 0 funciones de overlay · ahora: 237</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">El juego sólo sabía decir cuatro pantallas</span>
+        <p>Todo lo demás salía como «desconocido», y las funciones cuyo sistema no se puede
+          deducir <b>se descartaban</b>: de lo jugado en cartas no se guardaba nada. El
+          número de zona resultó ser el número de overlay, algo que la documentación ya
+          tenía verificado sin que nadie juntara las dos cosas.</p>
+        <span class="dato">de 4 pantallas reconocidas a 20 · confirmado en vivo en 4</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">Un parche que no llegaba a nadie</span>
+        <p>El paquete publicado llevaba un lanzador <b>más viejo</b> que el ya instalado, así
+          que el actualizador lo rechazaba —correctamente— y quien lo probaba seguía con una
+          versión anterior. El informe de fallo que devolvió describía otra versión.</p>
+        <span class="dato">paquete 1.0.0.0 frente a 1.1.0.0 instalado · corregido en la 1.1.4f</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">1 de septiembre de 2026</p>
+    <h2>Cuatro sistemas movidos en un día</h2>
+    <p class="intro">Todo lo de abajo está medido y verificado, y las
+      herramientas que lo generan están en el árbol. Lo que no se pudo cerrar se
+      dice.</p>
+
+    <div class="hallazgos">
+      <div class="hallazgo">
+        <span class="t">El texto: de ninguna línea bien, a todas</span>
+        <p>El decodificador leía un byte de control como si midiera uno cuando mide dos o
+          tres, y su tabla tenía <b>once entradas donde el juego usa 350</b>. Ahora la tabla
+          se genera de la medición y pasa en los seis idiomas. <b>Y se contrastó contra la
+          chuleta</b>, que es una medición independiente: <b>339 códigos en común, 339
+          coinciden, cero discrepancias</b>. De paso aparecieron tres caracteres que no
+          teníamos; dos se añadieron tras comprobarlos en contexto y el tercero se dejó
+          fuera por no tener evidencia.</p>
+        <span class="dato">7.383 líneas de diálogo × 6 idiomas · 0 truncadas · 0 distintas</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">La fuente del juego, ya como fuente de verdad</span>
+        <p>Las dos láminas y el mapa glifo a glifo se han convertido en <b>tres ficheros de
+          fuente</b> con los 56 acentuados dentro. Escribir deja de ser pegar recortes.
+          Comprobado escribiendo lo mismo por los dos caminos: <b>675 glifos, cero píxeles
+          distintos</b>. Y las paletas, que llevaban meses sin aparecer, estaban <b>dentro
+          del propio fichero de la fuente</b>, en una esquina que ningún glifo pisa.</p>
+        <span class="dato">el error era leer «(48, 232)» como dirección absoluta cuando es relativa a dónde se sube la lámina</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">Los 60 guiones de efecto de las cartas, recuperados</span>
+        <p>Estaban descifrados con prueba y <b>se habían perdido</b> con la carpeta temporal
+          de un agente. Rehechos los 60, ninguno dudoso, cada uno cuadrando con el texto de
+          su carta — incluida la discrepancia conocida de <i>Wield Aura</i>, que sirve de
+          piedra de toque. Ahora viven en el árbol con su herramienta, y se regeneran byte a
+          byte idénticos.</p>
+        <span class="dato">y son 136 órdenes en uso, no «unas 70»: el sistema cuesta casi el doble de lo que decía el documento</span>
+      </div>
+      <div class="hallazgo">
+        <span class="t">El vídeo: ya no falta medir</span>
+        <p>Las dos direcciones que permiten decirle al juego que la película terminó estaban
+          configuradas desde el 24 de agosto y <b>nadie las había comprobado en vivo</b>.
+          Ahora sí: escribir en la buena desmonta la película <b>por el camino del propio
+          juego</b> y arranca la siguiente; escribir en la de otra película no hace nada.</p>
+        <span class="dato">queda enganchar el clic del reproductor a esa escritura</span>
+      </div>
+
+      <div class="hallazgo">
+        <span class="t">El campo es invisible para la captura, y eso cambia su precio</span>
+        <p>34 minutos de campo jugados: de 485 direcciones vistas, <b>481 son del ejecutable
+          y cero del motor de campo</b>, porque vive en un overlay y ninguno carga compilado.
+          Sus 197 funciones y las 1.268 distintas de los guiones <b>no se pueden verificar en
+          marcha</b> — sólo se puede comprobar que los bytes cuadran, no que el comportamiento
+          cuadre. Y de los seis «recorredores» que daba la documentación, <b>cinco no eran
+          entradas de función</b> sino el bucle de dentro; hay un séptimo que nadie contaba.</p>
+        <span class="dato">descompilar el campo hoy es trabajar a ciegas</span>
+      </div>
+    </div>
+
+    <div class="aviso" style="margin-top:24px">
+      <span class="t">Lo que no queda en el árbol, no ha pasado</span>
+      <span>Dos veces el mismo día: los guiones de cartas, y dos herramientas de
+        la fuente que llevaban semanas rotas <b>sin que nadie lo notara</b>,
+        porque nadie las había vuelto a correr. No es descuido de nadie: la
+        carpeta de trabajo se borra y el documento que dice «esto está medido»
+        sobrevive. Queda la afirmación sin el dato. <b>Anotado como regla</b>: un
+        encargo de medir no está terminado hasta que el resultado está en el
+        árbol y hay con qué regenerarlo.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Lo que enseñó equivocarse</p>
+    <h2>Cuatro comprobaciones que no comprobaban nada</h2>
+    <p class="intro">Todas de la misma jornada, y todas del mismo tipo: una
+      medida que sale limpia y no distingue nada. Van aquí porque son más útiles
+      que los resultados.</p>
+
+    <div class="tablabox">
+      <table>
+        <thead><tr><th>Parecía</th><th>Era</th></tr></thead>
+        <tbody>
+          <tr><td><b>«Cero líneas truncadas, aprobado.»</b></td><td>El criterio no bastaba. Metiendo a propósito el fallo original salían <b>121 cadenas mal y cero truncadas</b>: en modo diálogo el decodificador no corta nunca, así que el error sale por otro lado. Ahora se exigen las dos cosas</td></tr>
+          <tr><td><b>«El menú del título sale vacío.»</b></td><td>Sale perfectamente. La captura del servidor <b>no ve lo que dibujamos nosotros</b> — atiende la foto antes— así que retrataba el fotograma anterior. Fotografiando la ventana real, el menú está ahí</td></tr>
+          <tr><td><b>«No queda ninguna referencia mal dirigida.»</b></td><td>El barrido salía vacío, y tenía que ser mentira: había seis dejadas a propósito. <b>Un barrido que no encuentra lo que sabes que está no dice «limpio», dice «roto»</b></td></tr>
+          <tr><td><b>«60 fps con y sin la traza, no cuesta nada.»</b></td><td>En esa pantalla el juego va topado a 60 y la medida <b>no puede moverse</b>. Hubo que medirlo con el gasto de procesador, que sí se mueve bajo el tope</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Los datos ya sacados del juego</p>
+    <h2>Tablas extraídas</h2>
+    <p class="intro">En <code>Development/Extraido/</code>, regenerables con
+      <code>extraer.py</code>. Antes de descifrar algo, mirar aquí: ha pasado tres
+      veces que se reescribió trabajo que ya existía.</p>
+
+    <div class="tablabox">
+      <table>
+        <thead><tr><th>Tabla</th><th>Contenido</th><th class="n">Tamaño</th></tr></thead>
+        <tbody>
+          <tr><td><b>banderas.tsv</b></td><td>Cada uso de cada bandera: guion, zona, personaje, frase, y si la lee o la escribe</td><td class="n">14.694 apuntes · 1.143 banderas</td></tr>
+          <tr><td><b>digimon</b> · <b>perfiles</b> · <b>evoluciones</b></td><td>Los Digimon, sus fichas y su árbol</td><td class="n">—</td></tr>
+          <tr><td><b>tecnicas</b> · <b>objetos</b></td><td>Técnicas y objetos</td><td class="n">—</td></tr>
+          <tr><td><b>enemigos</b> · <b>grupos</b></td><td>Enemigos y grupos de encuentro</td><td class="n">—</td></tr>
+          <tr><td><b>cartas.tsv</b></td><td>El juego de cartas y sus 60 guiones de efecto</td><td class="n">—</td></tr>
+          <tr><td><b>zonas.tsv</b> + 6 idiomas</td><td>Zonas y nombres traducidos</td><td class="n">—</td></tr>
+          <tr><td><b>recompensas.tsv</b></td><td>Experiencia y puntos de evolución</td><td class="n">334 entradas</td></tr>
+          <tr><td><b>tiendas</b> · <b>personajes</b> · <b>frases</b></td><td>Comercio, personajes del mapa y diálogo</td><td class="n">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="aviso" style="margin-top:24px">
+      <span class="t">De las 1.143 banderas, 617 siguen sin significado</span>
+      <span>Y contar banderas no mide el avance: hay un banco entero que no es
+        progreso —una se enciende al entrar en una zona y se apaga al volver—, así
+        que un «vas por el 40 %» salido de contarlas sería falso. El juego
+        <b>no tiene textos de misión</b>: se descodificaron las 41 listas y ninguna
+        contiene objetivos. Un diario de misiones hay que escribirlo a mano.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Por dónde seguir</p>
+    <h2>El orden, con lo aprendido</h2>
+    <div class="tablabox">
+      <table>
+        <thead><tr><th class="n">Orden</th><th>Qué</th><th>Por qué ahí</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td><b>El decodificador de texto</b> — <b style="color:var(--hecho)">HECHO</b></td><td>De ninguna de 3.146 líneas bien, a todas, en los seis idiomas. La tabla pasó de <b>11 entradas a 104</b> y ya no se escribe a mano: se genera de la medición. El criterio de aprobado que se puso al principio <b>no bastaba</b> — un control negativo demostró que el fallo original lo habría pasado</td></tr>
+          <tr><td class="n">2</td><td><b>Enganchar el texto</b></td><td>Once instrucciones, pura, sin estado. Un gancho ahí sirve el texto de todas las pantallas sin tocar el motor. <b>Faltan dos piezas</b>: saber qué fichero llega en el puntero, y el codificador de vuelta — que existe en la chuleta</td></tr>
+          <tr><td class="n">2b</td><td><b>Enchufar la fuente al port</b></td><td>Las tres fuentes están hechas y verificadas, y sus colores medidos. Hoy el juego sigue <b>pegando recortes</b> con una tabla de 62 caracteres y ni un acento</td></tr>
+          <tr><td class="n">3</td><td><b>El motor de interfaz</b></td><td>Empezando por la caja con marco, que sólo arrastra a la raíz. <b>Nunca</b> por el registrador de objetos</td></tr>
+          <tr><td class="n">4</td><td><b>Por qué no carga ninguna pieza de overlay</b></td><td>Destaparlo da dos cosas: la captura ve la mitad del juego que hoy es ciega, y esos sistemas dejan de ir por el camino lento</td></tr>
+          <tr><td class="n">5</td><td><b>Terminar el vídeo</b></td><td><b>Ya no falta medir.</b> Las dos direcciones estaban configuradas desde el 24/8 y se han verificado en vivo el 1/9: escribir en la buena termina la película por el camino del propio juego, y escribir en la de otra no hace nada. Queda enganchar el clic del reproductor a esa escritura</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <p class="rotulo">Con qué se trabaja</p>
+    <h2>Las herramientas</h2>
+    <p class="intro">En <code>Development/Tools/</code>. El juego se pilota entero
+      desde el servidor de depuración: capturas, mando, leer y escribir memoria.</p>
+
+    <div class="herr">
+      <div class="h"><code>verificar.py</code><span>Ocho comprobaciones de regresión</span></div>
+      <div class="h"><code>transcribir.py</code><span>Apunta qué ejecuta el juego y saca borradores de C</span></div>
+      <div class="h"><code>comparar_bytes.py</code><span>El ciclo C → compilar → comparar bytes</span></div>
+      <div class="h"><code>taller.py</code><span>Gemelas, expediente y cola</span></div>
+      <div class="h"><code>clasificar.py</code><span>Qué entrada es función y qué es un trozo</span></div>
+      <div class="h"><code>extraer.py</code><span>Saca las tablas del juego</span></div>
+      <div class="h"><code>lectores/</code><span>Trece guiones: escenarios, modelos, cartas</span></div>
+      <div class="h"><code>navegar.py</code><span>Pilota sabiendo dónde está el juego</span></div>
+      <div class="h"><code>vigilar_banderas.py</code><span>Qué bandera se enciende, quién y cuándo</span></div>
+      <div class="h"><code>desmontar_funcion.py</code><span>El MIPS original de una función</span></div>
+      <div class="h"><code>convertir_peliculas.py</code><span>Los vídeos del disco a <code>.mp4</code></span></div>
+      <div class="h"><code>publicar_beta.py</code><span>Compila, empaqueta y sube una beta</span></div>
+    </div>
+
+    <p class="rotulo" style="margin-top:34px">Nacidas el 1 de septiembre de 2026</p>
+    <div class="herr">
+      <div class="h"><code>generar_tabla_texto.py</code><span>La tabla del alfabeto, desde la medición</span></div>
+      <div class="h"><code>probar_texto.py</code><span>Prueba el decodificador contra el oráculo, sin abrir el juego</span></div>
+      <div class="h"><code>fuente.py</code><span>Abre las láminas y el mapa de la fuente</span></div>
+      <div class="h"><code>generar_fuente_ttf.py</code><span>Las tres fuentes del juego como <code>.ttf</code></span></div>
+      <div class="h"><code>comparar_fuente.py</code><span>Fuente contra recorte, píxel a píxel</span></div>
+      <div class="h"><code>paletas_fuente.py</code><span>Las 52 paletas, y las comprueba contra el juego</span></div>
+      <div class="h"><code>extraer_cartas_efectos.py</code><span>Los 60 guiones y las dos tablas de órdenes</span></div>
+      <div class="h"><code>medir_pelicula.py</code><span>Traza las direcciones del reproductor</span></div>
+      <div class="h"><code>probar_corte_pelicula.py</code><span>El experimento del corte, con su control</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section id="preguntas">
+  <div class="envoltura">
+    <p class="rotulo">Para quien llega de nuevo</p>
+    <h2>Preguntas frecuentes</h2>
+    <p class="intro">Sin tecnicismos. Cada respuesta lleva un medidor con el número
+      de hoy y el número que hace falta, para que se vea cuánto queda de verdad y no
+      haya que fiarse de una promesa.</p>
+
+    <div class="faq">
+
+      <article class="pregunta">
+        <h3>¿Qué es exactamente esto?</h3>
+        <p>Convertir Digimon World 3 en <b>un juego de PC de verdad</b>: que se instale,
+          se abra y se pueda modificar como cualquier otro juego. No es un emulador con
+          el juego dentro. Ya arranca <b>sin la BIOS de la consola, sin imagen de disco y
+          sin tarjeta de memoria</b>: nada de eso hace falta.</p>
+        <p class="nota">Un emulador imita una máquina. Un port es tuyo: se compila, se
+          entiende y se cambia.</p>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Cómo se mide lo que está hecho?</h3>
+        <p>El juego original está escrito en un idioma que sólo entiende la consola.
+          Nosotros lo volvemos a escribir en un idioma que se puede leer y cambiar, y
+          entonces hacemos la prueba dura: <b>lo compilamos y comparamos el resultado con
+          el juego original, byte a byte</b>. Sólo cuenta si sale idéntico. Si falla un
+          solo byte, no cuenta.</p>
+        <p class="nota">Es como transcribir una partitura antigua y luego tocarla para
+          comprobar que suena exactamente igual. Si suena distinto, la transcripción está
+          mal, por muy bien que se vea en el papel.</p>
+        <div class="medidor" data-pct="14">
+          <div class="barra-seg" role="img" aria-label="869 de 6.214 funciones del juego traducidas y comprobadas"></div>
+          <p class="cifra-med"><b>869</b> de <b>6.214</b> piezas del juego comprobadas</p>
+        </div>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Cuándo podréis añadir un Digimon nuevo?</h3>
+        <p>Los <b>datos</b> ya están abiertos: las fichas de los 55 Digimon, sus técnicas,
+          sus evoluciones y sus 245 modelos se leen y se vuelven a escribir sin perder un
+          byte. Eso está terminado.</p>
+        <p>Lo que falta es que <b>el juego use esos datos pasando por nuestro código</b>,
+          y eso vive en el sistema de combate. Mientras el combate siga siendo el original,
+          añadir un Digimon significa pelearse con una tabla de tamaño fijo. Cuando el
+          combate sea nuestro, añadir uno es <b>añadir una fila</b>.</p>
+        <div class="medidor" data-pct="22">
+          <div class="barra-seg" role="img" aria-label="110 de 502 piezas del combate"></div>
+          <p class="cifra-med">Combate: <b>110</b> de <b>502</b></p>
+        </div>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Cuándo habrá más idiomas?</h3>
+        <p>Los <b>seis idiomas que ya trae el juego</b> se leen y se escriben enteros, sin
+          una sola línea perdida: 68.346 textos comprobados, cero diferencias. Traducir lo
+          que ya existe es posible hoy.</p>
+        <p>Añadir un <b>séptimo idioma</b> es otra cosa, porque los diálogos no salen de los
+          ficheros de idioma: salen de los guiones de cada pantalla. Para servir texto
+          propio hay que abrir esos guiones, y eso depende de la llave que se explica más
+          abajo.</p>
+        <div class="medidor" data-pct="4">
+          <div class="barra-seg" role="img" aria-label="15 de 349 piezas del motor de campo y guiones"></div>
+          <p class="cifra-med">Campo y guiones: <b>15</b> de <b>349</b></p>
+        </div>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Y cartas nuevas para el minijuego?</h3>
+        <p>Las <b>316 cartas</b> ya están fuera con sus dibujos, sus nombres en seis idiomas
+          y los <b>60 guiones de efecto</b> descifrados uno a uno. Puedes leerlas y
+          cambiarles los datos.</p>
+        <p>Lo que falta son <b>las reglas</b>: quién gana, qué hace cada efecto en la mesa.
+          Hasta que eso sea nuestro, una carta nueva tendría datos pero no sabría jugar.</p>
+        <div class="medidor" data-pct="10">
+          <div class="barra-seg" role="img" aria-label="91 de 881 piezas del juego de cartas"></div>
+          <p class="cifra-med">Reglas de cartas: <b>91</b> de <b>881</b></p>
+        </div>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Se podrán cambiar las texturas y los gráficos?</h3>
+        <p>Ya se hace <b>a medias, y comprobado</b>: una pieza del escenario se saca del
+          juego, se descomprime y <b>la dibujamos nosotros</b> dentro del juego. Falta
+          colocarla en su sitio y hacerlo con todas.</p>
+        <p>Hay un muro conocido que no es culpa nuestra: la consola sólo puede tener
+          <b>doce piezas de escenario en memoria a la vez</b>. Dibujando por nuestra cuenta
+          ese límite desaparece, y por eso esta parte es la base de casi todo lo demás.</p>
+        <p class="nota">Los vídeos ya están convertidos y se reproducen con código propio.</p>
+      </article>
+
+      <article class="pregunta destacada">
+        <h3>¿Por qué casi todo depende de lo mismo?</h3>
+        <p>Porque hay <b>una llave</b>. El juego no tiene todo su código en memoria a la
+          vez: lo va trayendo del disco por bloques, según la pantalla en la que estés. La
+          tienda, las cartas, el combate, el campo y el entrenamiento son bloques distintos
+          que se turnan en el mismo hueco.</p>
+        <p>Hoy <b>esos bloques se ejecutan por el camino lento</b>, instrucción a
+          instrucción, y ninguno llega a usar el código rápido que ya tenemos escrito. Hasta
+          que se resuelva quién trae esos bloques y cómo, todo lo que escribimos para ellos
+          está comprobado pero no puesto.</p>
+        <p class="nota">Es tener el motor nuevo montado en el banco de trabajo y el coche
+          todavía andando con el viejo. El motor funciona; falta el momento de cambiarlo.</p>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Puedo jugar ya? ¿Necesito algo del juego original?</h3>
+        <p><b>Sí se puede jugar</b>, y no hace falta nada de la consola: ni BIOS, ni imagen
+          de disco, ni tarjeta de memoria. La partida se guarda en ficheros normales de PC
+          y cargarla tarda <b>0,21 segundos en vez de 18,7</b>.</p>
+        <p>Sí hace falta tu copia del juego para sacar los datos, como en cualquier port de
+          este tipo. Lo que no se distribuye es nada que no sea nuestro.</p>
+      </article>
+
+      <article class="pregunta">
+        <h3>¿Por qué va tan despacio?</h3>
+        <p>Porque el listón es el byte, no el parecido. Una pieza puede <i>funcionar bien</i>
+          y aun así no contar, porque no reproduce el original exactamente. Ese listón es lo
+          que evita que el juego se rompa por sitios raros meses después.</p>
+        <p>Y hay piezas que se resisten por cosas del compilador de 1998, no por no
+          entenderlas. Cuando pasa, se deja escrito <b>qué falla y qué se ha probado</b>, y
+          se sigue. Ninguna cifra de esta página la pone una persona: la pone la
+          comparación.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="envoltura">
+    <p>Los recuentos de código propio salen de cruzar <code>Src/</code> con
+      <code>CMakeLists.txt</code> el 1 de septiembre de 2026; los de traducción,
+      de <code>banco.db</code> el mismo día. El resto viene de
+      <code>Development/Documentation/</code>, donde cada documento lleva su fecha
+      de medición.</p>
+    <p>Las cifras del texto, la fuente, las cartas y el vídeo son de esa misma
+      jornada, y cada una tiene en el árbol la herramienta que la reproduce.</p>
+    <p>Lo que aquí se marca como cerrado está verificado en marcha. Lo que no se
+      ha podido determinar se dice, en vez de suponerlo.</p>
+  </div>
+</footer>
