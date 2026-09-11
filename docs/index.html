@@ -380,6 +380,7 @@ var CIFRAS = [
 ];
 /* Dos filas de enlace, antes de los sistemas. La direccion va aqui. */
 var ENLACES = [
+  {c:"descarga", url:"https://cloud.dreamsystem.es/index.php/s/o59TfeL4onXQcAB?opendetails="},
   {c:"discord", url:"https://discord.gg/YWSJ5YkCM"},
   {c:"proyectos", lista:[
     {n:"Digimon World 3: New Generation", u:"https://discord.gg/sGrHtZbEH"},
@@ -429,6 +430,7 @@ es:{
   cerrar:"CERRAR", completo:"COMPLETO", idioma:"IDIOMA",
   pie:"Sin emulador, sin BIOS y sin disco. Ya se juega.", enlace:"Código y avances",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["Descarga el port ya compilado: sin BIOS, sin imagen de disco, listo para instalar."], boton:"Descargar"},
     discord:{n:"DISCORD", t:["Grupo de Discord del port. Ahí se avisa de cada avance, se resuelven dudas y se recogen fallos."], boton:"Entrar en el Discord"},
     proyectos:{n:"OTROS PROYECTOS", t:["Otros proyectos de fans que abren juegos antiguos, incluidos los de Digimon en los que nos apoyamos."], boton:"Ver los proyectos"}
   },
@@ -460,6 +462,7 @@ en:{
   cerrar:"CLOSE", completo:"COMPLETE", idioma:"LANGUAGE",
   pie:"No emulator, no BIOS, no disc. Already playable.", enlace:"Code and progress",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["Download the already-built port: no BIOS, no disc image, ready to install."], boton:"Download"},
     discord:{n:"DISCORD", t:["The port’s Discord group. Every step forward is announced there, questions get answered and bugs get collected."], boton:"Join the Discord"},
     proyectos:{n:"OTHER PROJECTS", t:["Other fan projects opening up old games, including the Digimon ones we lean on."], boton:"See the projects"}
   },
@@ -491,6 +494,7 @@ fr:{
   cerrar:"FERMER", completo:"COMPLET", idioma:"LANGUE",
   pie:"Sans émulateur, sans BIOS, sans disque. Déjà jouable.", enlace:"Code et avancement",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["Téléchargez le port déjà compilé : sans BIOS, sans image disque, prêt à installer."], boton:"Télécharger"},
     discord:{n:"DISCORD", t:["Le groupe Discord du port. Chaque avancée y est annoncée, les questions y trouvent réponse et les bugs y sont recensés."], boton:"Rejoindre le Discord"},
     proyectos:{n:"AUTRES PROJETS", t:["D’autres projets de fans qui ouvrent de vieux jeux, dont ceux de Digimon sur lesquels nous nous appuyons."], boton:"Voir les projets"}
   },
@@ -522,6 +526,7 @@ de:{
   cerrar:"SCHLIESSEN", completo:"FERTIG", idioma:"SPRACHE",
   pie:"Ohne Emulator, ohne BIOS, ohne Disc. Schon spielbar.", enlace:"Code und Fortschritt",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["Lade den bereits kompilierten Port herunter: ohne BIOS, ohne Disc-Image, installationsbereit."], boton:"Herunterladen"},
     discord:{n:"DISCORD", t:["Die Discord-Gruppe des Ports. Dort wird jeder Fortschritt angekündigt, Fragen beantwortet und Fehler gesammelt."], boton:"Dem Discord beitreten"},
     proyectos:{n:"ANDERE PROJEKTE", t:["Andere Fanprojekte, die alte Spiele öffnen, darunter die Digimon-Projekte, auf die wir uns stützen."], boton:"Projekte ansehen"}
   },
@@ -553,6 +558,7 @@ it:{
   cerrar:"CHIUDI", completo:"COMPLETO", idioma:"LINGUA",
   pie:"Senza emulatore, senza BIOS, senza disco. Si gioca già.", enlace:"Codice e avanzamento",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["Scarica il port già compilato: senza BIOS, senza immagine disco, pronto da installare."], boton:"Scarica"},
     discord:{n:"DISCORD", t:["Il gruppo Discord del port. Lì si annuncia ogni passo avanti, si risponde ai dubbi e si raccolgono i problemi."], boton:"Entra nel Discord"},
     proyectos:{n:"ALTRI PROGETTI", t:["Altri progetti di fan che aprono giochi vecchi, compresi quelli di Digimon su cui ci appoggiamo."], boton:"Vedi i progetti"}
   },
@@ -584,6 +590,7 @@ ja:{
   cerrar:"とじる", completo:"完了", idioma:"言語",
   pie:"エミュレータもBIOSもディスクも不要。すでに遊べます。", enlace:"コードと進捗",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["ビルド済みの移植版をダウンロードできます。BIOS不要、ディスクイメージ不要、そのままインストールできます。"], boton:"ダウンロード"},
     discord:{n:"DISCORD", t:["この移植のDiscordグループです。進捗の告知、質問への回答、不具合の受付をしています。"], boton:"Discordに参加"},
     proyectos:{n:"ほかのプロジェクト", t:["古いゲームを解き明かすほかのファンプロジェクト。参考にしているデジモン関連のものも含みます。"], boton:"プロジェクトを見る"}
   },
@@ -615,6 +622,7 @@ pt:{
   cerrar:"FECHAR", completo:"COMPLETO", idioma:"IDIOMA",
   pie:"Sem emulador, sem BIOS e sem disco. Já dá para jogar.", enlace:"Código e progresso",
   e:{
+    descarga:{n:"DOWNLOAD DMW3 RECOMP", t:["Baixe o port já compilado: sem BIOS, sem imagem de disco, pronto para instalar."], boton:"Baixar"},
     discord:{n:"DISCORD", t:["Grupo de Discord do port. É lá que cada avanço é anunciado, as dúvidas são respondidas e os erros são recolhidos."], boton:"Entrar no Discord"},
     proyectos:{n:"OUTROS PROJETOS", t:["Outros projetos de fãs que abrem jogos antigos, incluindo os de Digimon em que nos apoiamos."], boton:"Ver os projetos"}
   },
@@ -673,7 +681,7 @@ pt:{
   function filas(){
     var t = tt();
     if (pantalla === "sistemas")
-      return [fila_enlace("discord")].concat(CIFRAS.map(function(s){
+      return [fila_enlace("descarga"), fila_enlace("discord")].concat(CIFRAS.map(function(s){
         var p = Math.round(s.h / s.d * 100), x = t.s[s.c];
         return {n:x.n, val:(s.ok ? "100%" : p + "%"), ok:s.ok, txt:x.t,
                 h:s.h, d:s.d, pct:(s.ok ? 100 : p)};
